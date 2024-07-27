@@ -2,9 +2,8 @@ from django.db import models
 
 
 class Server(models.Model):
-    # This model represents a discord server.
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=4096)
+    name = models.CharField(max_length=32)
+    description = models.CharField(max_length=256)
 
     def __str__(self):
         return self.name
