@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "strife.apps.servers",
+    "polymorphic",
+    "django.contrib.contenttypes",
 ]
 
 MIDDLEWARE = [

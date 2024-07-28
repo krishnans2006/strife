@@ -1,9 +1,10 @@
 from django.db import models
+from polymorphic.models import PolymorphicModel
 
 from apps.servers.models import Server
 
 
-class Channel(models.Model):
+class Channel(PolymorphicModel):
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=256)
 
@@ -19,11 +20,15 @@ class Channel(models.Model):
         abstract = True
 
 
-class TextChannel(Channel):
+class MessageableChannel(Channel):
     pass
 
 
-class ForumChannel(Channel):
+class TextChannel(MessageableChannel):
+    pass
+
+
+class ForumChannel(MessageableChannel):
     pass
 
 
