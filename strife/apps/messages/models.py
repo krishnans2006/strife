@@ -1,13 +1,13 @@
 from django.db import models
 
-from apps.channels.models import MessageableChannel
+from apps.channels.models import Messageable
 from apps.users.models import User
 
 
 class Message(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    channel = models.ForeignKey(MessageableChannel, on_delete=models.CASCADE)
+    channel = models.ForeignKey(Messageable, on_delete=models.CASCADE)
 
     content = models.CharField(max_length=2048)
 

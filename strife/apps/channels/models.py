@@ -20,15 +20,15 @@ class Channel(PolymorphicModel):
         abstract = True
 
 
-class MessageableChannel(Channel):
+class Messageable(Channel):
     pass
 
 
-class TextChannel(MessageableChannel):
+class TextChannel(Messageable):
     pass
 
 
-class ForumChannel(MessageableChannel):
+class ForumChannel(Messageable):
     pass
 
 
