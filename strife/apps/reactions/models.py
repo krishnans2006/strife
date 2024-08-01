@@ -1,8 +1,8 @@
 from django.db import models
 
-from apps.emoji.models import Emoji
-from apps.messages.models import Message
-from apps.users.models import User
+from ..emoji.models import Emoji
+from ..messages.models import Message
+from ..users.models import User
 
 
 class Reaction(models.Model):

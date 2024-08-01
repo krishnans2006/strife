@@ -1,7 +1,6 @@
 from django.db import models
 
-from apps.roles.models import Role
-from apps.users.models import User
+from ..users.models import User
 
 
 class Server(models.Model):
@@ -17,12 +16,11 @@ class Server(models.Model):
         return f"<Server: {self.name}>"
 
 
-class Member(User):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+class Member(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="member_objs")
     server = models.ForeignKey(Server, on_delete=models.CASCADE)
 
     nickname = models.CharField(max_length=32, blank=True)
-    roles = models.ManyToManyField(Role, blank=True)
 
     joined_at = models.DateTimeField(auto_now_add=True)
 

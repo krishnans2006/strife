@@ -1,7 +1,7 @@
 from django.db import models
 
-from apps.channels.models import Messageable
-from apps.users.models import User
+from ..channels.models import Messageable
+from ..users.models import User
 
 
 class Message(models.Model):

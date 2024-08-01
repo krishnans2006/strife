@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.servers.models import Server
+from ..servers.models import Server, Member
 
 
 class Role(models.Model):
@@ -9,6 +9,8 @@ class Role(models.Model):
     color = models.CharField(max_length=6)  # hex
 
     server = models.ForeignKey(Server, on_delete=models.CASCADE)
+
+    members = models.ManyToManyField(Member, related_name="roles")
 
     def __str__(self):
         return self.name

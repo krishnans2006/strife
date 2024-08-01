@@ -1,7 +1,7 @@
 from django.db import models
 from polymorphic.models import PolymorphicModel
 
-from apps.servers.models import Server
+from ..servers.models import Server
 
 
 class Channel(PolymorphicModel):
@@ -33,8 +33,8 @@ class ForumChannel(Messageable):
 
 
 class VoiceChannel(Channel):
-    raise NotImplementedError
+    pass
 
 
 class StageChannel(Channel):
-    raise NotImplementedError
+    pass

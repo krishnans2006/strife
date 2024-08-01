@@ -34,7 +34,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "strife.apps.channels",
+    "strife.apps.emoji",
+    "strife.apps.messages",
+    "strife.apps.reactions",
+    "strife.apps.roles",
     "strife.apps.servers",
+    "strife.apps.users",
     "polymorphic",
 ]
 
@@ -82,7 +88,7 @@ DATABASES = {
 
 # Authentication
 
-AUTH_USER_MODEL = "strife.apps.users.User"
+AUTH_USER_MODEL = "users.User"
 
 
 # Password validation
