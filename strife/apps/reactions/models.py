@@ -1,5 +1,6 @@
 from django.db import models
 
+from apps.emoji.models import Emoji
 from apps.messages.models import Message
 from apps.users.models import User
 
@@ -10,6 +11,7 @@ class Reaction(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     message = models.ForeignKey(Message, on_delete=models.CASCADE)
+    emoji = models.ForeignKey(Emoji, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

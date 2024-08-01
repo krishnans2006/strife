@@ -15,3 +15,4 @@ DATABASES = {
 }
 
 STATIC_ROOT = "/var/www/portal/static"
+MEDIA_ROOT = "/var/www/portal/media"
