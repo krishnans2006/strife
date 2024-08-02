@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     "strife.theme",
     "tailwind",
     "polymorphic",
-    "django_browser_reload"
+    "django_browser_reload",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
