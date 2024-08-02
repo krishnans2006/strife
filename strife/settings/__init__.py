@@ -24,6 +24,11 @@ ALLOWED_HOSTS = [
     "localhost",
 ]
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+    "localhost",
+]
+
 
 # Application definition
 
@@ -41,6 +46,8 @@ INSTALLED_APPS = [
     "strife.apps.roles",
     "strife.apps.servers",
     "strife.apps.users",
+    "strife.theme",
+    "tailwind",
     "polymorphic",
 ]
 
@@ -130,6 +137,8 @@ STATIC_ROOT = BASE_DIR / "serve"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
 MEDIA_ROOT = BASE_DIR / "media"
+
+TAILWIND_APP_NAME = "strife.theme"
 
 
 # Default primary key field type
