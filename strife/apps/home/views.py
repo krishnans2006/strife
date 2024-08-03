@@ -1,4 +1,5 @@
-from django.views.generic import TemplateView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic import TemplateView, CreateView
 from django.contrib.auth.views import LoginView as DjangoLoginView
 
 
