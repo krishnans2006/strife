@@ -1,12 +1,22 @@
 <form method="post" action="">
   {% csrf_token %}
-  <div class="tbl">
+  <div class="flex flex-col items-center w-full">
     {% for field in form %}
-    <div class="tbl-row" {% if field.name == "permission" %} id="{{ field.name }}" {% endif %}>
-        <span class="tbl-cell bold" style="padding-right:5px;min-width:200px;">{{ field.label_tag }}</span>
-        <span class="tbl-cell form-input">{{ field }}{% if field.help_text %}<br>{{ field.help_text }}{% endif %}</span>
+      <div class="flex flex-col items-center w-full">
+        <label for="{{ field.id_for_label }}" class="text-lg font-bold">{{ field.label_tag }}</label>
+        {{ field }}
+        {% if field.errors %}
+          <ul>
+            {% for error in field.errors %}
+              <li class="text-red-500">{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {% if field.help_text %}
+          <p class="text-sm">{{ field.help_text }}</p>
+        {% endif %}
       </div>
     {% endfor %}
+    <input type="submit" value="{{ submit }}" class="bg-blue-700 text-white font-bold py-2 px-4 rounded">
   </div>
-  <input type="submit" value="{{ submit }}" class="bg-blue-700 text-white font-bold py-2 px-4 rounded">
 </form>

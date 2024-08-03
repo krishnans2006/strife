@@ -4,11 +4,12 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView as DjangoLoginView
 
-from .forms import RegisterForm
+from .forms import RegisterForm, LoginForm
 
 
 class LoginView(DjangoLoginView):
     template_name = "users/login.html"
+    form_class = LoginForm
     redirect_authenticated_user = True
 
 
