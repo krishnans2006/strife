@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "strife.apps.channels",
     "strife.apps.emoji",
+    "strife.apps.home",
     "strife.apps.messages",
     "strife.apps.reactions",
     "strife.apps.roles",
