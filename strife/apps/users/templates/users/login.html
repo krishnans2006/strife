@@ -25,18 +25,6 @@
     {% endif %}
   {% endif %}
 
-  <form method="POST" action="{% url 'home:login' %}">
-    {% csrf_token %}
-    <div class="flex flex-col gap-3 mt-12">
-      <h1 class="text-4xl font-bold">Strife Login</h1>
-      <h3 class="text-lg mb-3">Get to chatting</h3>
-      <label for="id_username">Username:</label>
-      {{ form.username }}
-      <label for="id_password">Password:</label>
-      {{ form.password }}
-      <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" value="Log In">
-      <input type="hidden" name="next" value="{{ next }}">
-    </div>
-  </form>
+  {% include 'form.html' with submit="Log In" %}
 
 {% endblock main %}
