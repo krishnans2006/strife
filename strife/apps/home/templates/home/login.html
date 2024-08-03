@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+  {% if form.errors %}
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+         role="alert">
+      <strong class="font-bold">Invalid username or password!</strong>
+    </div>
+  {% endif %}
+
+  {% if next %}
+    <!-- This should never happen, but just in case -->
+    {% if user.is_authenticated %}
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+           role="alert">
+        <strong class="font-bold">You don't have access to this page.</strong>
+      </div>
+    {% else %}
+      <div
+          class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative"
+          role="alert">
+        <strong class="font-bold">You must log in first!</strong>
+      </div>
+    {% endif %}
+  {% endif %}
+
+  <form method="POST" action="{% url 'home:login' %}">
+    {% csrf_token %}
+    <div class="flex flex-col gap-3 mt-12">
+      <h1 class="text-4xl font-bold">Strife Login</h1>
+      <h3 class="text-lg mb-3">Get to chatting</h3>
+      <label for="id_username">Username:</label>
+      {{ form.username }}
+      <label for="id_password">Password:</label>
+      {{ form.password }}
+      <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" value="Log In">
+      <input type="hidden" name="next" value="{{ next }}">
+    </div>
+  </form>
+
+{% endblock main %}
