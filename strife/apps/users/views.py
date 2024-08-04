@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -25,6 +26,6 @@ class RegisterView(CreateView, SuccessMessageMixin):
         return super().get(request, *args, **kwargs)
 
 
-class LogoutView(DjangoLogoutView, SuccessMessageMixin):
-    next_page = reverse_lazy("users:login")
-    success_message = "You have been logged out."
+def logout_view(request):
+    logout(request)
+    return redirect("users:login")
