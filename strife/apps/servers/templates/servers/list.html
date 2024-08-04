@@ -1,0 +1,9 @@
+<div class="flex flex-col gap-4">
+  {% for member in user.member_objs.all %}
+    {% with server=member.server %}
+      <div class="w-full aspect-square">
+        <p>{{ server.name }}</p>
+      </div>
+    {% endwith %}
+  {% endfor %}
+</div>

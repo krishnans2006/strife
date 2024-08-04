@@ -25,7 +25,7 @@ class Member(models.Model):
     joined_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.username
+        return self.user.username
 
     def __repr__(self):
-        return f"<Member: {self.username}>"
+        return f"<Member: {self.user.username}>"
