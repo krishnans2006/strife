@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
-from utils import StrifeForm
+from ...utils import StrifeForm
 from .models import User
 
 

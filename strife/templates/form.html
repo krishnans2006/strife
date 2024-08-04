@@ -1,6 +1,6 @@
 <form method="post" action="">
   {% csrf_token %}
-  <div class="flex flex-col items-center w-full">
+  <div class="flex flex-col items-center w-full gap-4">
     {% for field in form %}
       <div class="flex flex-col items-center w-full">
         <label for="{{ field.id_for_label }}" class="text-lg font-bold">{{ field.label_tag }}</label>
@@ -13,7 +13,9 @@
           </ul>
         {% endif %}
         {% if field.help_text %}
-          <p class="text-sm">{{ field.help_text }}</p>
+          <div class="text-sm">
+            {{ field.help_text }}
+          </div>
         {% endif %}
       </div>
     {% endfor %}

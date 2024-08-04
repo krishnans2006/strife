@@ -1,8 +1,8 @@
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 
 
-class User(AbstractBaseUser):
+class User(AbstractUser):
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
     REQUIRED_FIELDS = ("username", "display_name", "password")
@@ -11,12 +11,13 @@ class User(AbstractBaseUser):
     display_name = models.CharField(max_length=32)
 
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=64)
 
     bio = models.CharField(max_length=2048, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    objects = UserManager()
 
     def get_full_name(self):
         return f"{self.display_name} ({self.username})"
