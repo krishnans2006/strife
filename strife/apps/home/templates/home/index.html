@@ -11,6 +11,8 @@
         <div class="flex flex-col justify-center">
           <p>Welcome, <strong>{{ user.display_name }}</strong>!</p>
         </div>
+        <a href="{% url 'home:dashboard' %}"
+           class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Launch Strife</a>
         <a href="{% url 'users:logout' %}"
            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Log Out</a>
       {% else %}
