@@ -11,4 +11,4 @@ class LoginForm(AuthenticationForm, StrifeForm):
 class RegisterForm(UserCreationForm, StrifeForm):
     class Meta:
         model = User
-        fields = ['username', 'display_name', 'email', 'password']
+        fields = ['username', 'display_name', 'email']
