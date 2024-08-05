@@ -10,6 +10,7 @@ class Server(models.Model):
     image = models.ImageField(upload_to="servers/", blank=True, null=True)
 
     owner = models.ForeignKey(User, on_delete=models.PROTECT)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
