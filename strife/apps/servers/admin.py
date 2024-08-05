@@ -1,3 +1,12 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Server
+
+
+@admin.register(Server)
+class ServerAdmin(admin.ModelAdmin):
+    list_display = ("name", "description", "owner", "created_at")
+    ordering = ("created_at",)
+    search_fields = ("name", "description")
+    autocomplete_fields = ("owner",)
+    save_as = True
