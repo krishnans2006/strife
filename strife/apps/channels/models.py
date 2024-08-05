@@ -34,9 +34,13 @@ class ForumChannel(Messageable):
     pass
 
 
-class VoiceChannel(Channel):
+class Speakable(Channel):
     pass
 
 
-class StageChannel(Channel):
+class VoiceChannel(Speakable):
+    pass
+
+
+class StageChannel(Speakable):
     pass
