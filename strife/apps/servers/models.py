@@ -7,6 +7,8 @@ class Server(models.Model):
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=256)
 
+    image = models.ImageField(upload_to="servers/", blank=True, null=True)
+
     owner = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):

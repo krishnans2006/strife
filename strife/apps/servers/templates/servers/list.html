@@ -2,7 +2,11 @@
   {% for member in user.member_objs.all %}
     {% with server=member.server %}
       <div class="w-full aspect-square">
-        <p>{{ server.name }}</p>
+        {% if server.image %}
+          <img class="w-full aspect-square object-cover" src="{{ server.image.url }}" alt="{{ server.name }}">
+        {% else %}
+          <p>{{ server.name | truncatechars:2 }}</p>
+        {% endif %}
       </div>
     {% endwith %}
   {% endfor %}
