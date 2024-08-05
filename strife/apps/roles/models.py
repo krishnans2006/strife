@@ -12,6 +12,8 @@ class Role(models.Model):
 
     members = models.ManyToManyField(Member, related_name="roles")
 
+    created_at = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return self.name
 
