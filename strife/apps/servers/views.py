@@ -1,9 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-from .models import Server, Member
+from .models import Server, Owner
 
 
 class ServerCreateView(CreateView, LoginRequiredMixin):
@@ -18,5 +19,7 @@ class ServerCreateView(CreateView, LoginRequiredMixin):
     }
 
     def form_valid(self, form):
-        form.instance.owner = Member.objects.create(user=self.request.user, server=form.instance)
-        return super().form_valid(form)
+        server = form.save(commit=False)
+        server.owner = Owner.objects.create(user=self.request.user, server=self.object)
+        server.save()
+        return HttpResponseRedirect(self.get_success_url())
