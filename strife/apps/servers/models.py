@@ -15,6 +15,10 @@ class Server(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def delete(self, *args, **kwargs):
+        self.owner.delete()
+        return super().delete(*args, **kwargs)
+
     def __str__(self):
         return self.name
 
