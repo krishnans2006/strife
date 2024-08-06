@@ -20,6 +20,7 @@ class ServerCreateView(CreateView, LoginRequiredMixin):
 
     def form_valid(self, form):
         server = form.save(commit=False)
-        server.owner = Owner.objects.create(user=self.request.user, server=self.object)
+        server.owner = Owner.objects.create(user=self.request.user)
         server.save()
+        self.object = server
         return HttpResponseRedirect(self.get_success_url())

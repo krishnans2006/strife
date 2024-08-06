@@ -9,6 +9,9 @@ class Server(models.Model):
 
     image = models.ImageField(upload_to="servers/", blank=True, null=True)
 
+    # The owner object shouldn't be deleted; only changed
+    owner = models.OneToOneField("Owner", on_delete=models.CASCADE)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -37,7 +40,6 @@ class Member(models.Model):
 
 class Owner(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    server = models.OneToOneField(Server, on_delete=models.CASCADE)
 
     updated_at = models.DateTimeField(auto_now=True)
 
