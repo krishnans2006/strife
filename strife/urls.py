@@ -25,7 +25,7 @@ urlpatterns = [
     # path("messages/", include(("strife.apps.messages.urls", "messages"), namespace="messages")),
     # path("reactions/", include(("strife.apps.reactions.urls", "reactions"), namespace="reactions")),
     # path("roles/", include(("strife.apps.roles.urls", "roles"), namespace="roles")),
-    # path("servers/", include(("strife.apps.servers.urls", "servers"), namespace="servers")),
+    path("servers/", include(("strife.apps.servers.urls", "servers"), namespace="servers")),
     path("", include(("strife.apps.users.urls", "users"), namespace="users")),
     path("", include(("strife.apps.home.urls", "home"), namespace="home")),
 ]
