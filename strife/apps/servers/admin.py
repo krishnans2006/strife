@@ -5,10 +5,9 @@ from .models import Server, Member, Owner
 
 @admin.register(Server)
 class ServerAdmin(admin.ModelAdmin):
-    list_display = ("name", "description", "owner", "created_at")
+    list_display = ("name", "description", "created_at")
     ordering = ("created_at",)
     search_fields = ("name", "description")
-    autocomplete_fields = ("owner",)
     save_as = True
 
 
