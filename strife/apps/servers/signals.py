@@ -5,6 +5,6 @@ from .models import Server
 
 
 @receiver(post_delete, sender=Server)
-def delete_server_owner_obj(_sender, instance, *_args, **_kwargs):
+def delete_server_owner_obj(sender, instance, *_args, **_kwargs):
     if instance.owner:
         instance.owner.delete()
