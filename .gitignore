@@ -162,4 +162,5 @@ cython_debug/
 .idea/
 
 # Custom
+strife/media
 strife/settings/secret.py
