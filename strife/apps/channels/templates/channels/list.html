@@ -6,7 +6,7 @@
     </div>
   {% endfor %}
 
-  <a class="w-full p-1 text-center flex flex-col justify-center bg-gray-400 rounded-md cursor-pointer" href="{% url 'servers:channels:create' server.id %}">
-    <p>+ New Channel</p>
+  <a class="w-full p-1 text-center flex flex-col justify-center bg-gray-400 rounded-md cursor-pointer" href="{% url 'servers:channels:create_text' server.id %}">
+    <p>+ New Text Channel</p>
   </a>
 </div>
