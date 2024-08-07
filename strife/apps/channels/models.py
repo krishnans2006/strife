@@ -8,7 +8,7 @@ class Channel(PolymorphicModel):
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=256)
 
-    server = models.ForeignKey(Server, on_delete=models.CASCADE)
+    server = models.ForeignKey(Server, on_delete=models.CASCADE)  # Do not add related_name
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

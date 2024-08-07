@@ -1,0 +1,11 @@
+<div class="flex flex-col items-center py-3 px-2 gap-2">
+  {% for channel in server.channels.all %}
+    <div class="w-full p-1 text-center flex flex-col justify-center bg-gray-500 rounded-md cursor-pointer">
+      <p>{{ channel.name | truncatechars:15 }}</p>
+    </div>
+  {% endfor %}
+
+  <a class="w-full p-1 text-center flex flex-col justify-center bg-gray-500 rounded-md cursor-pointer">
+    <p>+ New Channel</p>
+  </a>
+</div>

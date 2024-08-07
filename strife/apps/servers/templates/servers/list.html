@@ -1,13 +1,13 @@
-<div class="flex flex-col items-center pt-2 pb-2 gap-2 max-w-14">
+<div class="flex flex-col items-center py-2 gap-2 max-w-14">
   {% for owner in request.user.owner_objs.all %}
     {% with server=owner.server %}
-      <div class="size-10 aspect-square text-center flex flex-col justify-center bg-gray-400 rounded-3xl hover:rounded-xl cursor-pointer transition-all ease-in-out duration-300">
+      <a class="size-10 aspect-square text-center flex flex-col justify-center bg-gray-400 rounded-3xl hover:rounded-xl cursor-pointer transition-all ease-in-out duration-300" href="{% url 'servers:detail' server.id %}">
         {% if server.image %}
           <img class="w-full aspect-square object-cover" src="{{ server.image.url }}" alt="{{ server.name }}">
         {% else %}
           <p>{{ server.name | slice:':2' | upper }}</p>
         {% endif %}
-      </div>
+      </a>
     {% endwith %}
   {% endfor %}
   {% for member in user.member_objs.all %}

@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 
 from .models import Server, Owner
 
@@ -24,3 +24,9 @@ class ServerCreateView(CreateView, LoginRequiredMixin):
         server.save()
         self.object = server
         return HttpResponseRedirect(self.get_success_url())
+
+
+class ServerDetailView(DetailView, LoginRequiredMixin):
+    model = Server
+    template_name = "servers/detail.html"
+    context_object_name = "server"

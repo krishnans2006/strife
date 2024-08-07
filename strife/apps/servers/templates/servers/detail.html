@@ -1,0 +1,5 @@
+{% extends 'home/dashboard.html' %}
+
+{% block channels %}
+  {% include 'channels/list.html' with server=server %}
+{% endblock channels %}
