@@ -20,7 +20,7 @@ from django.urls import path, include
 urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     path("admin/", admin.site.urls),
-    # path("channels/", include(("strife.apps.channels.urls", "channels"), namespace="channels")),
+    # channels included by servers
     # path("emoji/", include(("strife.apps.emoji.urls", "emoji"), namespace="emoji")),
     # path("messages/", include(("strife.apps.messages.urls", "messages"), namespace="messages")),
     # path("reactions/", include(("strife.apps.reactions.urls", "reactions"), namespace="reactions")),
