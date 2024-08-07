@@ -5,14 +5,10 @@ from ..servers.models import Server
 
 
 class Channel(PolymorphicModel):
-    @staticmethod
-    def get_channels_related_name():
-        return "channels"
-
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=256)
 
-    server = models.ForeignKey(Server, on_delete=models.CASCADE, related_name=get_channels_related_name.__func__())
+    server = models.ForeignKey(Server, on_delete=models.CASCADE)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -25,39 +21,34 @@ class Channel(PolymorphicModel):
 
     class Meta:
         abstract = True
+        default_related_name = "channels"
 
 
 class Messageable(Channel):
-    @staticmethod
-    def get_channels_related_name():
-        return "messageable_channels"
+    class Meta:
+        default_related_name = "messageable_channels"
 
 
 class TextChannel(Messageable):
-    @staticmethod
-    def get_channels_related_name():
-        return "text_channels"
+    class Meta:
+        default_related_name = "text_channels"
 
 
 class ForumChannel(Messageable):
-    @staticmethod
-    def get_channels_related_name():
-        return "forum_channels"
+    class Meta:
+        default_related_name = "forum_channels"
 
 
 class Speakable(Channel):
-    @staticmethod
-    def get_channels_related_name():
-        return "speakable_channels"
+    class Meta:
+        default_related_name = "speakable_channels"
 
 
 class VoiceChannel(Speakable):
-    @staticmethod
-    def get_channels_related_name():
-        return "voice_channels"
+    class Meta:
+        default_related_name = "voice_channels"
 
 
 class StageChannel(Speakable):
-    @staticmethod
-    def get_channels_related_name():
-        return "stage_channels"
+    class Meta:
+        default_related_name = "stage_channels"
