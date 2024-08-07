@@ -8,7 +8,7 @@ class Role(models.Model):
     description = models.CharField(max_length=256)
     color = models.CharField(max_length=6)  # hex
 
-    server = models.ForeignKey(Server, on_delete=models.CASCADE)
+    server = models.ForeignKey(Server, on_delete=models.CASCADE, related_name="roles")
 
     members = models.ManyToManyField(Member, related_name="roles")
 

@@ -5,9 +5,9 @@ from ..users.models import User
 
 
 class Message(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="messages")
 
-    channel = models.ForeignKey(Messageable, on_delete=models.CASCADE)
+    channel = models.ForeignKey(Messageable, on_delete=models.CASCADE, related_name="messages")
 
     content = models.CharField(max_length=2048)
 

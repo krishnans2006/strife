@@ -24,7 +24,7 @@ class Server(models.Model):
 
 class Member(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="member_objs")
-    server = models.ForeignKey(Server, on_delete=models.CASCADE)
+    server = models.ForeignKey(Server, on_delete=models.CASCADE, related_name="members")
 
     nickname = models.CharField(max_length=32, blank=True)
 
@@ -39,7 +39,7 @@ class Member(models.Model):
 
 
 class Owner(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner_objs")
 
     updated_at = models.DateTimeField(auto_now=True)
 
