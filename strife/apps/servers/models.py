@@ -3,11 +3,15 @@ from django.db import models
 from ..users.models import User
 
 
+def server_image_path(instance, filename):
+    return f"servers/{instance.id}.{filename.split('.')[-1]}"
+
+
 class Server(models.Model):
     name = models.CharField(max_length=32)
     description = models.CharField(max_length=256)
 
-    image = models.ImageField(upload_to="servers/", blank=True, null=True)
+    image = models.ImageField(upload_to=server_image_path, blank=True, null=True)
 
     # The owner object shouldn't be deleted; only changed
     owner = models.OneToOneField("Owner", on_delete=models.CASCADE)
