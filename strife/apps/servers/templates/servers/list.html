@@ -1,7 +1,7 @@
 <div class="flex flex-col items-center py-2 gap-2 max-w-14">
   {% for owner in request.user.owner_objs.all %}
     {% with server=owner.server %}
-      <a class="size-10 aspect-square text-center flex flex-col justify-center bg-gray-400 rounded-3xl hover:rounded-xl cursor-pointer transition-all ease-in-out duration-300" href="{% url 'servers:detail' server.id %}">
+      <a class="size-10 aspect-square text-center flex flex-col justify-center bg-gray-400 rounded-3xl hover:rounded-2xl cursor-pointer transition-all ease-in-out duration-300" href="{% url 'servers:detail' server.id %}">
         {% if server.image %}
           <img class="w-full aspect-square object-cover" src="{{ server.image.url }}" alt="{{ server.name }}">
         {% else %}
@@ -12,7 +12,7 @@
   {% endfor %}
   {% for member in user.member_objs.all %}
     {% with server=member.server %}
-      <div class="size-10 aspect-square text-center flex flex-col justify-center bg-gray-400 rounded-3xl hover:rounded-xl cursor-pointer transition-all ease-in-out duration-300">
+      <div class="size-10 aspect-square text-center flex flex-col justify-center bg-gray-400 rounded-3xl hover:rounded-2xl cursor-pointer transition-all ease-in-out duration-300">
         {% if server.image %}
           <img class="w-full aspect-square object-cover" src="{{ server.image.url }}" alt="{{ server.name }}">
         {% else %}
@@ -22,7 +22,7 @@
     {% endwith %}
   {% endfor %}
 
-  <a class="size-10 aspect-square text-center flex flex-col justify-center bg-green-500 rounded-3xl hover:rounded-xl cursor-pointer transition-all ease-in-out delay-0 duration-300" href="{% url 'servers:create' %}">
+  <a class="size-10 aspect-square text-center flex flex-col justify-center bg-green-500 rounded-3xl hover:rounded-2xl cursor-pointer transition-all ease-in-out delay-0 duration-300" href="{% url 'servers:create' %}">
     <p>+</p>
   </a>
 </div>
