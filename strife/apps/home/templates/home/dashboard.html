@@ -3,14 +3,14 @@
 
 {% block root %}
   <div class="flex flex-row fixed top-0 left-0 w-full h-full m-0 p-0">
-    <div class="basis-12">
+    <div class="basis-12 bg-gray-800">
       <!-- Server list -->
       {% include 'servers/list.html' with submit="Log In" %}
     </div>
-    <div class="basis-1/6">
+    <div class="basis-1/6 bg-gray-700">
       <!-- Channel list -->
     </div>
-    <div class="basis-3/4">
+    <div class="basis-3/4 flex-grow bg-gray-600">
       <!-- Chat window -->
     </div>
   </div>
