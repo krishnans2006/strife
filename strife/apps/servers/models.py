@@ -19,6 +19,10 @@ class Server(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    @property
+    def channels(self):
+        return self.channels.all()
+
     def __str__(self):
         return self.name
 

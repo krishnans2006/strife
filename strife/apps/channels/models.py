@@ -20,9 +20,6 @@ class Channel(PolymorphicModel):
     def __repr__(self):
         return f"<Channel: {self.name}>"
 
-    class Meta:
-        abstract = True
-
 
 class Messageable(Channel):
     pass
