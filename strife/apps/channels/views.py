@@ -20,8 +20,9 @@ class GenericChannelCreateView(CreateView, LoginRequiredMixin):
     }
 
     def form_valid(self, form):
-        server_id = super().get_form_kwargs().get("server_id")
+        server_id = self.kwargs.get("server_id")
         form.instance.server = Server.objects.get(pk=server_id)
+        return super().form_valid(form)
 
 
 class TextChannelCreateView(GenericChannelCreateView):
@@ -34,7 +35,7 @@ class TextChannelCreateView(GenericChannelCreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        server_id = super().get_form_kwargs().get("server_id")
+        server_id = self.kwargs.get("server_id")
         server = Server.objects.get(pk=server_id)
         context["description"] = f"In {server}."
         return context

@@ -30,3 +30,4 @@ class ServerDetailView(DetailView, LoginRequiredMixin):
     model = Server
     template_name = "servers/detail.html"
     context_object_name = "server"
+    pk_url_kwarg = "server_id"
