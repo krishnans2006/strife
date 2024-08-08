@@ -8,7 +8,7 @@ from ..servers.models import Server
 
 # This view will not work (Channel is an abstract model)
 # It is only here for inheritance purposes
-class GenericChannelCreateView(CreateView, LoginRequiredMixin):
+class GenericChannelCreateView(LoginRequiredMixin, CreateView):
     model = Channel
     fields = ("name", "description")
     template_name = "forms/create.html"

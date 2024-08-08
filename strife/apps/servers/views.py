@@ -7,7 +7,7 @@ from django.views.generic import CreateView, DetailView
 from .models import Server, Owner
 
 
-class ServerCreateView(CreateView, LoginRequiredMixin):
+class ServerCreateView(LoginRequiredMixin, CreateView):
     model = Server
     fields = ("name", "description", "image")
     template_name = "forms/create.html"
@@ -26,7 +26,7 @@ class ServerCreateView(CreateView, LoginRequiredMixin):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class ServerDetailView(DetailView, LoginRequiredMixin):
+class ServerDetailView(LoginRequiredMixin, DetailView):
     model = Server
     template_name = "servers/detail.html"
     context_object_name = "server"

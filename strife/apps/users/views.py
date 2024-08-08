@@ -14,7 +14,7 @@ class LoginView(DjangoLoginView):
     redirect_authenticated_user = True
 
 
-class RegisterView(CreateView, SuccessMessageMixin):
+class RegisterView(SuccessMessageMixin, CreateView):
     template_name = "users/register.html"
     form_class = RegisterForm
     success_url = reverse_lazy("users:login")

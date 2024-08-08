@@ -1,10 +1,10 @@
-from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import TemplateView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
 
 
 class IndexView(TemplateView):
     template_name = "home/index.html"
 
 
-class DashboardView(TemplateView):
+class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = "home/dashboard.html"
