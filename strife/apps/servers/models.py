@@ -1,10 +1,19 @@
+import os
+import random
+
 from django.db import models
 
 from ..users.models import User
 
 
 def server_image_path(instance, filename):
-    return f"servers/{instance.id}.{filename.split('.')[-1]}"
+    if instance.id:
+        return f"servers/{instance.id}.{filename.split('.')[-1]}"
+
+    random_id = random.randint(100000, 999999)
+    while os.path.exists(f"servers/{random_id}.{filename.split('.')[-1]}"):
+        random_id = random.randint(100000, 999999)
+    return f"servers/{random_id}.{filename.split('.')[-1]}"
 
 
 class Server(models.Model):

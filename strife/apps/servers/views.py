@@ -20,8 +20,24 @@ class ServerCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         server = form.save(commit=False)
+
+        # Set owner
         server.owner = Owner.objects.create(user=self.request.user)
+
+        # Remove image upload
+        imagefield_backup = None
+        if server.image:
+            imagefield_backup = server.image
+            server.image = None
+
+        # Save server
         server.save()
+
+        # Upload image (using the server's ID)
+        if imagefield_backup:
+            server.image = imagefield_backup
+            server.save()
+
         self.object = server
         return HttpResponseRedirect(self.get_success_url())
 
