@@ -5,7 +5,7 @@
   </div>
 {% endif %}
 
-<form method="post" action="">
+<form method="post" action="" enctype="multipart/form-data">
   {% csrf_token %}
   <div class="flex flex-col items-center w-full gap-4">
     {% for field in form %}
