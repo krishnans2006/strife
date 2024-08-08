@@ -28,6 +28,22 @@ class Server(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    #@override
+    def save(self, *args, **kwargs):
+        if not self.id:
+            # Remove image, save, then add image
+            # This is to use the server ID in the image path
+            server_image = self.image
+            self.image = None
+            super().save(*args, **kwargs)
+            self.image = server_image
+
+            # Allow model updates in the same function as creation
+            if "force_insert" in kwargs:
+                kwargs.pop("force_insert")
+
+        super().save(*args, **kwargs)
+
     @property
     def channels(self):
         return self.channels.all()
