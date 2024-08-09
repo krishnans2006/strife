@@ -11,7 +11,7 @@
               channel: {{ channel.id }},
           };
 
-          fetch('{% url "servers:channels:messages:create" %}', {
+          fetch('{% url "servers:channels:messages:create" server.id channel.id %}', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',

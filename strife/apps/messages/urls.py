@@ -4,5 +4,5 @@ from . import views
 
 
 urlpatterns = [
-    path("create/text/", views.TextChannelCreateView.as_view(), name="create_text"),
+    path("create/", views.send_message_view, name="create"),
 ]

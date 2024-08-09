@@ -2,6 +2,7 @@
   <!-- Header -->
   <h1 class="text-2xl font-bold text-gray-300">{{ channel.name }}</h1>
 
+  <!-- Messages -->
   {% for message in channel.messages.all %}
     <div class="w-full p-1 text-center flex flex-col justify-center bg-gray-400 rounded-md cursor-pointer">
       <h4 class="text-lg font-bold">{{ message.author.username }}</h4>
@@ -10,5 +11,5 @@
   {% endfor %}
 
   <!-- Send Message -->
-
+  {% include 'messages/create.html' %}
 </div>
