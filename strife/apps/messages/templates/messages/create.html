@@ -28,8 +28,9 @@
           .then(response => response.json())
           .then(data => {
               console.log(data.result);
-              contentInput.value = '';
               contentInput.disabled = false;
+              contentInput.value = '';
+              contentInput.focus();
           })
           .catch(error => {
               console.error('Error:', error);
