@@ -1,0 +1,41 @@
+{% block script %}
+<script>
+  function sendMessage() {
+      let contentInput = document.querySelector('#send-message #content');
+
+      if (contentInput.value) {
+          contentInput.disabled = true;
+
+          let data = {
+              content: contentInput.value,
+              channel: {{ channel.id }},
+          };
+
+          fetch('{% url "servers:channels:messages:create" %}', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'X-CSRFToken': '{{ csrf_token }}',
+              },
+              body: JSON.stringify(data),
+          })
+          .then(response => response.json())
+          .then(data => {
+              console.log(data.result);
+              contentInput.value = '';
+              contentInput.disabled = false;
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              contentInput.disabled = false;
+          });
+      }
+  }
+</script>
+{% endblock script %}
+
+<div id="send-message" class="flex flex-row w-full">
+  <label>
+    <input type="text" name="content" id="content" class="w-full p-2" placeholder="Type a message...">
+  </label>
+</div>
