@@ -33,6 +33,8 @@ INTERNAL_IPS = [
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
+    "channels",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -84,6 +86,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "strife.wsgi.application"
+ASGI_APPLICATION = "strife.asgi.application"
 
 
 # Database
