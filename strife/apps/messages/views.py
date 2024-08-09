@@ -1,17 +1,19 @@
-from django.http import HttpResponseNotAllowed
+import json
+
+from django.http import HttpResponseNotAllowed, JsonResponse
 
 from .models import Message
 
 
-def send_message_view(request):
+def send_message_view(request, _server_id, channel_id):
     if request.method != "POST":
         return HttpResponseNotAllowed(["POST"])
 
-    content = request.POST.get("content")
-    channel_id = request.POST.get("channel_id")
+    content = json.loads(request.body).get("content")
+    print(content)
 
-    if not content or not channel_id:
-        return {"result": False, "error": "Missing content or channel_id"}
+    if not content:
+        return JsonResponse({"result": False, "error": "Missing content"})
 
     Message.objects.create(
         author=request.user,
@@ -19,4 +21,4 @@ def send_message_view(request):
         content=content
     )
 
-    return {"result": True}
+    return JsonResponse({"result": True})

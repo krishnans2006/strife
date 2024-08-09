@@ -15,7 +15,6 @@
 
           let data = {
               content: contentInput.value,
-              channel: {{ channel.id }},
           };
 
           fetch('{% url "servers:channels:messages:create" server.id channel.id %}', {
