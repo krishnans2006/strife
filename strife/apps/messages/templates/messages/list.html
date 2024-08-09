@@ -1,6 +1,6 @@
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-2 h-dvh">
   <!-- Header -->
-  <div class="px-4 py-1 text-gray-300 flex flex-row items-center bg-gray-700 border-l-2 border-gray-600">
+  <div class="flex-none px-4 py-1 text-gray-300 flex flex-row items-center bg-gray-700 border-l-2 border-gray-600">
     <div class="divide-x flex flex-row items-center">
       <h1 class="text-2xl font-bold inline-block">{{ channel.name }}</h1>
       <h3 class="text-lg inline-block ml-3 pl-2.5">{{ channel.description }}</h3>
@@ -8,12 +8,14 @@
   </div>
 
   <!-- Messages -->
-  {% for message in channel.messages.all %}
-    <div class="w-full px-5 py-1 text-gray-300 flex flex-col justify-center cursor-pointer">
-      <h4 class="text-lg font-bold">{{ message.author.username }}</h4>
-      <p>{{ message.content }}</p>
-    </div>
-  {% endfor %}
+  <div class="grow">
+    {% for message in channel.messages.all %}
+      <div class="w-full px-5 py-1 text-gray-300 flex flex-col justify-center cursor-pointer">
+        <h4 class="text-lg font-bold">{{ message.author.username }}</h4>
+        <p>{{ message.content }}</p>
+      </div>
+    {% endfor %}
+  </div>
 
   <!-- Send Message -->
   {% include 'messages/create.html' %}
