@@ -154,6 +154,14 @@ TAILWIND_APP_NAME = "strife.theme"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
+# Custom
+
+NUM_DEFAULT_AVATARS = 8
+
+
+# Import from secret.py
+
 try:
     from .secret import *
 except ImportError:
