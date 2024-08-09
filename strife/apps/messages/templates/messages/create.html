@@ -40,8 +40,8 @@
 </script>
 {% endblock script %}
 
-<div id="send-message" class="flex flex-row w-full">
-  <label>
-    <input type="text" name="content" id="content" class="w-full p-2" placeholder="Type a message..." onkeydown="processMessageKeydown(this);">
+<div id="send-message" class="flex flex-row w-full p-4">
+  <label class="w-full">
+    <input type="text" id="content" class="w-full px-4 py-2 bg-gray-800 rounded-xl text-white border-none" placeholder="Message {{ channel.name }}" autocomplete="off" onkeydown="processMessageKeydown(this);">
   </label>
 </div>
