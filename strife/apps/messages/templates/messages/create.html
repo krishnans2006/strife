@@ -1,5 +1,12 @@
 {% block script %}
 <script>
+  function processMessageKeydown(input) {
+      if (event.key === 'Enter') {
+          event.preventDefault();
+          sendMessage();
+      }
+  }
+
   function sendMessage() {
       let contentInput = document.querySelector('#send-message #content');
 
@@ -36,6 +43,6 @@
 
 <div id="send-message" class="flex flex-row w-full">
   <label>
-    <input type="text" name="content" id="content" class="w-full p-2" placeholder="Type a message...">
+    <input type="text" name="content" id="content" class="w-full p-2" placeholder="Type a message..." onkeydown="processMessageKeydown(this);">
   </label>
 </div>
