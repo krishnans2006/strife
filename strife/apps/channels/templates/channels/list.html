@@ -1,12 +1,12 @@
 <div class="flex flex-col items-center py-3 px-2 gap-2">
   <h1 class="text-2xl font-bold text-gray-300">{{ server.name }}</h1>
-  {% for channel in server.channels.all %}
-    <a class="w-full p-1 text-center flex flex-col justify-center bg-gray-400 rounded-md cursor-pointer" href="{% url 'servers:channels:detail' server.id channel.id %}">
-      <p>{{ channel.name | truncatechars:15 }}</p>
+  {% for channel_iter in server.channels.all %}
+    <a class="w-full p-1 text-center flex flex-col justify-center {% if channel and channel.id == channel_iter.id %}bg-gray-500{% else %}bg-gray-600{% endif %} text-gray-300 rounded-md cursor-pointer" href="{% url 'servers:channels:detail' server.id channel_iter.id %}">
+      <p>{{ channel_iter.name | truncatechars:15 }}</p>
     </a>
   {% endfor %}
 
-  <a class="w-full p-1 text-center flex flex-col justify-center bg-gray-400 rounded-md cursor-pointer" href="{% url 'servers:channels:create_text' server.id %}">
+  <a class="w-full p-1 text-center flex flex-col justify-center bg-gray-600 text-gray-300 rounded-md cursor-pointer" href="{% url 'servers:channels:create_text' server.id %}">
     <p>+ New Text Channel</p>
   </a>
 </div>

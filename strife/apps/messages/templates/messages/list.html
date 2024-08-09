@@ -1,3 +1,13 @@
+{% block script %}
+  <script>
+    // Scroll to bottom
+    window.onload = function() {
+      let messageList = document.getElementById('message-list');
+      messageList.scrollTop = messageList.scrollHeight;
+    }
+  </script>
+{% endblock script %}
+
 <div class="flex flex-col h-dvh max-h-dvh">
   <!-- Header -->
   <div class="flex-none px-4 py-1 text-gray-300 flex flex-row items-center bg-gray-700 border-l-2 border-gray-600">
@@ -8,7 +18,7 @@
   </div>
 
   <!-- Messages -->
-  <div class="grow overflow-y-auto">
+  <div id="message-list" class="grow overflow-y-auto pb-3">
     {% for message in channel.messages.all %}
       <div class="w-full px-5 py-1 text-gray-300 flex flex-col justify-center cursor-pointer">
         <h4 class="text-lg font-bold">{{ message.author.username }}</h4>
