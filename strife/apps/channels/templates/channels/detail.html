@@ -1,0 +1,11 @@
+{% extends 'home/dashboard.html' %}
+
+<!-- Channel List -->
+{% block channels %}
+  {% include 'channels/list.html' with server=channel.server %}
+{% endblock channels %}
+
+<!-- Message List -->
+{% block messages %}
+  {% include 'messages/list.html' with server=channel.server channel=channel %}
+{% endblock messages %}

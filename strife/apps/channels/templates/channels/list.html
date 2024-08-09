@@ -1,9 +1,9 @@
 <div class="flex flex-col items-center py-3 px-2 gap-2">
   <h1 class="text-2xl font-bold text-gray-300">{{ server.name }}</h1>
   {% for channel in server.channels.all %}
-    <div class="w-full p-1 text-center flex flex-col justify-center bg-gray-400 rounded-md cursor-pointer">
+    <a class="w-full p-1 text-center flex flex-col justify-center bg-gray-400 rounded-md cursor-pointer" href="{% url 'servers:channels:detail' server.id channel.id %}">
       <p>{{ channel.name | truncatechars:15 }}</p>
-    </div>
+    </a>
   {% endfor %}
 
   <a class="w-full p-1 text-center flex flex-col justify-center bg-gray-400 rounded-md cursor-pointer" href="{% url 'servers:channels:create_text' server.id %}">

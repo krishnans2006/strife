@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 
 from .models import Channel, TextChannel
 from ..servers.models import Server
@@ -39,3 +39,10 @@ class TextChannelCreateView(GenericChannelCreateView):
         server = Server.objects.get(pk=server_id)
         context["description"] = f"In {server}."
         return context
+
+
+class TextChannelDetailView(LoginRequiredMixin, DetailView):
+    model = TextChannel
+    template_name = "channels/detail.html"
+    context_object_name = "channel"
+    pk_url_kwarg = "channel_id"
