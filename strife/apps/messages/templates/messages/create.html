@@ -3,10 +3,11 @@
   function processMessageKeydown(input) {
       if (event.key === 'Enter') {
           event.preventDefault();
-          sendMessage();
+          sendSocketMessage();
       }
   }
 
+  // Unused in favor of websockets
   function sendMessage() {
       let contentInput = document.querySelector('#send-message #content');
 
