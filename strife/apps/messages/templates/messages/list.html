@@ -9,6 +9,10 @@
     // WebSockets
     const socket = new WebSocket(`ws://{{ request.get_host }}/servers/{{ server.id }}/channels/{{ channel.id }}/messages/ws/`);
 
+    socket.onopen = function(e) {
+        console.log('Message socket connected');
+    }
+
     socket.onmessage = function(e) {
         const data = JSON.parse(e.data);
         const message = data.message;
