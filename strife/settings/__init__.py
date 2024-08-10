@@ -102,7 +102,7 @@ DATABASES = {
 
 # Authentication
 
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "app_users.User"
 
 LOGIN_URL = "users:login"
 LOGIN_REDIRECT_URL = "home:index"
