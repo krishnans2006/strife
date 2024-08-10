@@ -1,7 +1,7 @@
 from django.db import models
 
-from ..channels.models import Messageable
-from ..users.models import User
+from strife.apps.channels.models import Messageable
+from strife.apps.users.models import User
 
 
 class Message(models.Model):

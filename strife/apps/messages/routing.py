@@ -4,5 +4,5 @@ from . import consumers
 
 
 websocket_urlpatterns = [
-    path("ws/messages/", consumers.MessageConsumer.as_asgi()),
+    path("ws/", consumers.MessageConsumer.as_asgi()),
 ]

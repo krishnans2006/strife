@@ -1,7 +1,7 @@
 from django.db import models
 from polymorphic.models import PolymorphicModel
 
-from ..servers.models import Server
+from strife.apps.servers.models import Server
 
 
 class Channel(PolymorphicModel):

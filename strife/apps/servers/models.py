@@ -3,7 +3,7 @@ import random
 
 from django.db import models
 
-from ..users.models import User
+from strife.apps.users.models import User
 
 
 def server_image_path(instance, filename):
