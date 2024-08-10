@@ -34,7 +34,7 @@ class MessageConsumer(WebsocketConsumer):
             self.channel_group_name,
             {
                 "type": "chat.message",
-                "message": message,
+                "message": message.to_dict(),
             },
         )
 

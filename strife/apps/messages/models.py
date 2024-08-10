@@ -18,6 +18,20 @@ class Message(models.Model):
     def is_edited(self):
         return self.edited_at != self.created_at
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "author": {
+                "id": self.author.id,
+                "username": self.author.username,
+                "display_avatar": self.author.display_avatar,
+            },
+            "content": self.content,
+            "created_at": self.created_at.isoformat(),
+            "edited_at": self.edited_at.isoformat(),
+            "is_edited": self.is_edited,
+        }
+
     def __str__(self):
         return f"{self.author} - {self.content[:32]}"
 
