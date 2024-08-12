@@ -7,46 +7,25 @@
       }
   }
 
-  // Unused in favor of websockets
-  function sendMessage() {
-      let contentInput = document.querySelector('#send-message #content');
+  function setUpAttachmentFunctionality() {
+      const uploadButton = document.getElementById('upload-attachment');
+      const fileStorage = document.getElementById('attachments');
+      const fileDisplay = document.getElementById('attachments-view');
 
-      if (contentInput.value) {
-          contentInput.disabled = true;
-
-          let data = {
-              content: contentInput.value,
-          };
-
-          fetch('{% url "servers:channels:messages:create" server.id channel.id %}', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'X-CSRFToken': '{{ csrf_token }}',
-              },
-              body: JSON.stringify(data),
-          })
-          .then(response => response.json())
-          .then(data => {
-              console.log(data.result);
-              contentInput.disabled = false;
-              contentInput.value = '';
-              contentInput.focus();
-          })
-          .catch(error => {
-              console.error('Error:', error);
-              contentInput.disabled = false;
-          });
-      }
+      uploadButton.addEventListener('click', () => {
+          fileStorage.click();
+      });
   }
 </script>
 {% endblock script %}
 
 <div id="send-message" class="flex flex-row w-full p-4 pt-0">
+  <div id="attachments-view"></div>
   <label class="basis-full flex flex-row bg-gray-800 rounded-xl items-center">
-    <a class="mx-3.5 size-7 flex-none aspect-square object-cover rounded-3xl bg-gray-700 text-white flex items-center justify-center" href="attachment upload url here">
+    <a id="upload-attachment" class="mx-3.5 size-7 flex-none aspect-square object-cover rounded-3xl bg-gray-700 text-white flex items-center justify-center cursor-pointer">
       <p class="text-2xl pb-0.5">+</p>
     </a>
+    <input type="file" multiple id="attachments" class="hidden" />
     <input type="text" id="content" class="w-full px-4 pr-2 pl-0 bg-gray-800 rounded-r-xl text-white border-transparent focus:border-transparent focus:ring-0" placeholder="Message {{ channel.name }}" autocomplete="off" onkeydown="processMessageKeydown(this);">
   </label>
 </div>
