@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 from django.templatetags.static import static
+from django.urls import reverse
 
 
 def user_avatar_path(instance, filename):

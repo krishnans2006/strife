@@ -2,6 +2,7 @@ import os
 import random
 
 from django.db import models
+from django.urls import reverse
 
 from strife.apps.channels.models import Messageable
 from strife.apps.users.models import User
@@ -81,6 +82,26 @@ class Attachment(models.Model):
     @property
     def url(self):
         return self.file.url
+
+    @property
+    def view_url(self):
+        kwargs = {
+            "server_id": self.message.channel.server.id,
+            "channel_id": self.message.channel.id,
+            "message_id": self.message.id,
+            "attachment_id": self.id,
+        }
+        return reverse("servers:channels:messages:view_attachment", kwargs=kwargs)
+
+    @property
+    def download_url(self):
+        kwargs = {
+            "server_id": self.message.channel.server.id,
+            "channel_id": self.message.channel.id,
+            "message_id": self.message.id,
+            "attachment_id": self.id,
+        }
+        return reverse("servers:channels:messages:download_attachment", kwargs=kwargs)
 
     def __str__(self):
         return f"{self.message} - {self.file.name}"
