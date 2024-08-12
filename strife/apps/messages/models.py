@@ -1,7 +1,20 @@
+import os
+import random
+
 from django.db import models
 
 from strife.apps.channels.models import Messageable
 from strife.apps.users.models import User
+
+
+def message_attachment_path(instance, filename):
+    if instance.id:
+        return f"attachments/{instance.id}.{filename.split('.')[-1]}"
+
+    random_id = random.randint(100000, 999999)
+    while os.path.exists(f"attachments/{random_id}.{filename.split('.')[-1]}"):
+        random_id = random.randint(100000, 999999)
+    return f"attachments/{random_id}.{filename.split('.')[-1]}"
 
 
 class Message(models.Model):
@@ -37,3 +50,31 @@ class Message(models.Model):
 
     def __repr__(self):
         return f"<Message: {self.author} - {self.content[:32]}>"
+
+
+class Attachment(models.Model):
+    message = models.ForeignKey(Message, on_delete=models.CASCADE, related_name="attachments")
+
+    file = models.FileField(upload_to=message_attachment_path)
+
+    #@override
+    def save(self, *args, **kwargs):
+        if not self.id:
+            # Remove file, save, then add file
+            # This is to use the attachment ID in the file path
+            attachment_file = self.file
+            self.file = None
+            super().save(*args, **kwargs)
+            self.file = attachment_file
+
+            # Allow model updates in the same function as creation
+            if "force_insert" in kwargs:
+                kwargs.pop("force_insert")
+
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.message} - {self.file.name}"
+
+    def __repr__(self):
+        return f"<Attachment: {self.message} - {self.file.name}>"
