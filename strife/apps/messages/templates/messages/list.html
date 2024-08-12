@@ -63,9 +63,10 @@
   </div>
 
   <!-- Messages -->
-  <div id="message-list" class="grow overflow-y-auto pb-3 flex flex-col justify-end">
+  <div id="message-list" class="grow overflow-y-auto pb-3">
+    <div class="h-full"></div>
     {% for message in channel.messages.all %}
-      <div class="w-full px-5 py-1 justify-center flex flex-row gap-3.5 flex-none max-h-50">
+      <div class="w-full px-5 py-1 justify-center flex flex-row gap-3.5">
         <img class="size-10 flex-none aspect-square object-cover rounded-full mt-1" src="{{ message.author.display_avatar }}" alt="{{ message.author.username }}">
         <div class="grow text-gray-300 flex flex-col">
           <h4 class="text-lg font-bold">{{ message.author.username }}</h4>
