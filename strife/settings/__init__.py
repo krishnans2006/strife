@@ -156,6 +156,7 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "serve"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
+MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 TAILWIND_APP_NAME = "strife.theme"

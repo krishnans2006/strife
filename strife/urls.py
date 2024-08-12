@@ -30,5 +30,8 @@ urlpatterns = [
     path("servers/", include(("strife.apps.servers.urls", "servers"), namespace="servers")),
     path("", include(("strife.apps.users.urls", "users"), namespace="users")),
     path("", include(("strife.apps.home.urls", "home"), namespace="home")),
+
+    # static/
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
+    # media/
 ]
