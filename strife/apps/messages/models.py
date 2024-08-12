@@ -55,6 +55,7 @@ class Message(models.Model):
 class Attachment(models.Model):
     message = models.ForeignKey(Message, on_delete=models.CASCADE, related_name="attachments")
 
+    filename = models.CharField(max_length=256)
     file = models.FileField(upload_to=message_attachment_path)
 
     #@override
@@ -72,6 +73,14 @@ class Attachment(models.Model):
                 kwargs.pop("force_insert")
 
         super().save(*args, **kwargs)
+
+    @property
+    def name(self):
+        return self.filename
+
+    @property
+    def url(self):
+        return self.file.url
 
     def __str__(self):
         return f"{self.message} - {self.file.name}"

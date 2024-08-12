@@ -1,0 +1,16 @@
+<div class="w-full px-5 py-1 justify-center flex flex-row gap-3.5 flex-none">
+  <img class="size-10 flex-none aspect-square object-cover rounded-full mt-1"
+       src="{{ message.author.display_avatar }}" alt="{{ message.author.username }}">
+  <div class="grow text-gray-300 flex flex-col">
+    <h4 class="text-lg font-bold">{{ message.author.username }}</h4>
+    <p>{{ message.content }}</p>
+
+    {% if message.attachments.exists %}
+      <div class="flex flex-row gap-3.5">
+        {% for attachment in message.attachments.all %}
+          <a href="{{ attachment.file.url }}" target="_blank" class="min-w-20 p-2 bg-gray-800 text-white cursor-pointer">{{ attachment.name }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
