@@ -8,8 +8,8 @@
   }
 
   $(document).ready(() => {
-      const uploadButton = $('#upload-attachment');
-      const fileStorage = $('#attachments');
+      const uploadButton = $('#upload-attachment')[0];
+      const fileStorage = $('#attachments')[0];
       const fileDisplay = $('#attachments-view');
 
       const uploadedFiles = [];
