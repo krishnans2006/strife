@@ -1,10 +1,10 @@
 {% block script %}
   <script>
     // Scroll to bottom
-    window.onload = function() {
-      let messageList = document.getElementById('message-list');
+    $(document).ready(() => {
+      const messageList = $('#message-list')[0];
       messageList.scrollTop = messageList.scrollHeight;
-    }
+    });
 
     // WebSockets
     const socket = new WebSocket(`ws://{{ request.get_host }}/servers/{{ server.id }}/channels/{{ channel.id }}/messages/ws/`);
@@ -17,7 +17,7 @@
         const data = JSON.parse(e.data);
         const message = data.message;
 
-        const messageList = document.getElementById('message-list-div');
+        const messageList = $('#message-list-div')[0];
         messageList.innerHTML += `
           <div class="w-full px-5 py-1 justify-center flex flex-row gap-3.5">
             <img class="size-10 flex-none aspect-square object-cover rounded-full mt-1" src="${message.author.display_avatar}" alt="${message.author.username}">
@@ -34,7 +34,7 @@
     }
 
     function sendSocketMessage() {
-      let contentInput = document.querySelector('#send-message #content');
+      let contentInput = $('#send-message #content')[0];
 
       if (contentInput.value) {
           contentInput.disabled = true;
