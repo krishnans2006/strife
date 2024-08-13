@@ -12,10 +12,44 @@
       const fileStorage = document.getElementById('attachments');
       const fileDisplay = document.getElementById('attachments-view');
 
+      const uploadedFiles = [];
+
+      // When the upload button is clicked
       uploadButton.addEventListener('click', () => {
           fileStorage.click();
       });
+
+      // When a file is uploaded
+      fileStorage.addEventListener('change', () => {
+          console.log(fileStorage.files);
+
+          // Update the list of uploaded files
+          for (let i = 0; i < fileStorage.files.length; i++) {
+              const file = fileStorage.files[i];
+              const fileIndex = uploadedFiles.findIndex((f) => f.name === file.name);
+
+              if (fileIndex === -1) {
+                  uploadedFiles.push(file);
+              } else {
+                  uploadedFiles.splice(fileIndex, 1);
+                  uploadedFiles.push(file);
+              }
+          }
+
+          // Update the file display
+          fileDisplay.innerHTML = '';
+          uploadedFiles.forEach((file) => {
+              const fileElement = document.createElement('a');
+              fileElement.href = URL.createObjectURL(file);
+              fileElement.target = '_blank';
+              fileElement.className = 'inline-block min-w-20 py-1 px-2.5 rounded-xl bg-gray-700 text-white cursor-pointer';
+              fileElement.innerText = file.name;
+              fileDisplay.appendChild(fileElement);
+          });
+      });
   }
+
+  setUpAttachmentFunctionality();
 </script>
 {% endblock script %}
 
