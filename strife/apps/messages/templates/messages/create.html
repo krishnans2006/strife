@@ -8,9 +8,9 @@
   }
 
   $(document).ready(() => {
-      const uploadButton = $('#upload-attachment')[0];
-      const fileStorage = $('#attachments')[0];
-      const fileDisplay = $('#attachments-view')[0];
+      const uploadButton = $('#upload-attachment');
+      const fileStorage = $('#attachments');
+      const fileDisplay = $('#attachments-view');
 
       const uploadedFiles = [];
 
@@ -23,7 +23,7 @@
       fileStorage.addEventListener('change', () => {
           console.log(fileStorage.files);
 
-          // Update the list of uploaded files
+          // Update the list of files
           for (let i = 0; i < fileStorage.files.length; i++) {
               const file = fileStorage.files[i];
               const fileIndex = uploadedFiles.findIndex((f) => f.name === file.name);
@@ -37,14 +37,14 @@
           }
 
           // Update the file display
-          fileDisplay.innerHTML = '';
+          fileDisplay.empty();
           uploadedFiles.forEach((file) => {
-              const fileElement = document.createElement('a');
-              fileElement.href = URL.createObjectURL(file);
-              fileElement.target = '_blank';
-              fileElement.className = 'inline-block min-w-20 py-1 px-2.5 rounded-xl bg-gray-700 text-white cursor-pointer';
-              fileElement.innerText = file.name;
-              fileDisplay.appendChild(fileElement);
+              const url = URL.createObjectURL(file);
+              fileDisplay.append(`
+                  <a href="${url}" target="_blank" class="inline-block min-w-20 py-1 px-2.5 rounded-xl bg-gray-700 text-white cursor-pointer">
+                      ${file.name}
+                  </a>
+              `);
           });
       });
   });
