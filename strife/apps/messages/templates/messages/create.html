@@ -57,10 +57,15 @@
     </span>
     <span class="flex flex-col">
       <span>
-        <input type="text" id="content"
-               class="w-full px-4 pr-2 pl-0 bg-gray-800 rounded-r-xl text-white border-transparent focus:border-transparent focus:ring-0"
-               placeholder="Message {{ channel.name }}" autocomplete="off"
-               onkeydown="processMessageKeydown(this);">
+        <span class="flex flex-row w-full bg-gray-800 items-center">
+          <input type="text" id="content"
+                 class="grow px-4 pr-2 pl-0 bg-gray-800 rounded-r-xl text-white border-transparent focus:border-transparent focus:ring-0"
+                 placeholder="Message {{ channel.name }}" autocomplete="off"
+                 onkeydown="processMessageKeydown(this);">
+          <emoji-picker class="dark hidden">
+            😜
+          </emoji-picker>
+        </span>
         <input type="file" multiple id="attachments" class="hidden"/>
       </span>
       <span id="attachments-view"></span>
