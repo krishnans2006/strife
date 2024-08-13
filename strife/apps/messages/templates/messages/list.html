@@ -13,22 +13,19 @@
         console.log('Message socket connected');
     }
 
-    socket.onmessage = function(e) {
-        const data = JSON.parse(e.data);
-        const message = data.message;
-
+    function addMessage(message) {
         const messageList = $('#message-list-div')[0];
 
         // Any updates here should also be done to messages/detail.html
         messageList.innerHTML += `
-          <div class="w-full px-5 py-1 justify-center flex flex-row gap-3.5">
+          <div id="message-${message.id}" class="w-full px-5 py-1 justify-center flex flex-row gap-3.5">
             <img class="size-10 flex-none aspect-square object-cover rounded-full mt-1" src="${message.author.display_avatar}" alt="${message.author.username}">
             <div class="grow text-gray-300 flex flex-col">
               <h4 class="text-lg font-bold">${message.author.username}</h4>
               <p>${message.content}</p>
 
               ${message.attachments.length > 0 ? `
-                <div class="flex flex-row gap-3.5">
+                <div id="message-${message.id}-attachments" class="flex flex-row gap-3.5">
                   ${message.attachments.map((attachment) => `
                     <a href="${attachment.download_url}" target="_blank" class="inline-block min-w-20 py-1 px-2.5 rounded-xl bg-gray-700 text-white cursor-pointer">${attachment.name}</a>
                   `).join('')}
@@ -38,9 +35,36 @@
           </div>
         `;
 
-        console.log(lastMessage);
         lastMessage = message;
-        console.log(lastMessage);
+    }
+
+    function updateAttachments(message) {
+        const messageDiv = $(`#message-${message.id}`)[0];
+        const attachmentsDiv = $(`#message-${message.id}-attachments`)[0];
+
+        if (attachmentsDiv) {
+            attachmentsDiv.innerHTML = message.attachments.map((attachment) => `
+                <a href="${attachment.download_url}" target="_blank" class="inline-block min-w-20 py-1 px-2.5 rounded-xl bg-gray-700 text-white cursor-pointer">${attachment.name}</a>
+            `).join('');
+        } else {
+            messageDiv.innerHTML += `
+                <div id="message-${message.id}-attachments" class="flex flex-row gap-3.5">
+                    ${message.attachments.map((attachment) => `
+                        <a href="${attachment.download_url}" target="_blank" class="inline-block min-w-20 py-1 px-2.5 rounded-xl bg-gray-700 text-white cursor-pointer">${attachment.name}</a>
+                    `).join('')}
+                </div>
+            `;
+        }
+    }
+
+    socket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+
+        if (data.type === 'message') {
+            addMessage(data.message);
+        } else if (data.type === 'attachment') {
+            updateAttachments(data.message);
+        }
     }
 
     socket.onclose = function(e) {
