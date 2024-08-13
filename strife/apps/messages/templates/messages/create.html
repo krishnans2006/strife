@@ -46,6 +46,43 @@
               });
           });
       });
+
+      // Emoji Picker
+      function insertAtCursor(myField, myValue) {
+          if (document.selection) {
+              myField.focus();
+              sel = document.selection.createRange();
+              sel.text = myValue;
+          }
+          else if (myField.selectionStart || myField.selectionStart == '0') {
+              var startPos = myField.selectionStart;
+              var endPos = myField.selectionEnd;
+              myField.value = myField.value.substring(0, startPos)
+                  + myValue
+                  + myField.value.substring(endPos, myField.value.length);
+              myField.focus();
+              myField.selectionStart = startPos + myValue.length;
+              myField.selectionEnd = startPos + myValue.length;
+          } else {
+              myField.value += myValue;
+              myField.focus();
+          }
+      }
+
+      $(document).ready(() => {
+          const emojiPicker = $('#emoji-picker');
+          const openEmojiPicker = $('#open-emoji-picker');
+
+          openEmojiPicker.on('click', () => {
+              emojiPicker.toggleClass('hidden');
+          });
+
+          emojiPicker.on('emoji-click', (e) => {
+              const emoji = e.detail.unicode;
+              const content = $('#content')[0];
+              insertAtCursor(content, emoji);
+          });
+      });
   </script>
 {% endblock script %}
 
@@ -55,20 +92,22 @@
           class="mx-3.5 size-7 flex-none aspect-square object-cover rounded-3xl bg-gray-700 text-white flex items-center justify-center cursor-pointer">
       <span class="text-2xl pb-0.5">+</span>
     </span>
-    <span class="flex flex-col">
+    <span class="flex flex-col grow">
       <span>
-        <span class="flex flex-row w-full bg-gray-800 items-center">
-          <input type="text" id="content"
-                 class="grow px-4 pr-2 pl-0 bg-gray-800 rounded-r-xl text-white border-transparent focus:border-transparent focus:ring-0"
-                 placeholder="Message {{ channel.name }}" autocomplete="off"
-                 onkeydown="processMessageKeydown(this);">
-          <emoji-picker class="dark hidden">
-            😜
-          </emoji-picker>
-        </span>
+        <input type="text" id="content"
+               class="w-full px-4 pr-2 pl-0 bg-gray-800 rounded-r-xl text-white border-transparent focus:border-transparent focus:ring-0"
+               placeholder="Message {{ channel.name }}" autocomplete="off"
+               onkeydown="processMessageKeydown(this);">
         <input type="file" multiple id="attachments" class="hidden"/>
       </span>
       <span id="attachments-view"></span>
     </span>
+    <span class="mx-3.5 flex-none flex items-center justify-center">
+      <button id="open-emoji-picker" class="size-7 flex-none aspect-square object-cover rounded-3xl bg-gray-700 text-white cursor-pointer">
+        <span class="text-md">😜</span>
+      </button>
+    </span>
   </label>
 </div>
+
+<emoji-picker id="emoji-picker" class="dark hidden absolute bottom-16 right-5"></emoji-picker>
