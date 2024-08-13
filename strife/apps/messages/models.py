@@ -47,7 +47,7 @@ class Message(models.Model):
             "attachments": [
                 {
                     "id": attachment.id,
-                    "filename": attachment.filename,
+                    "name": attachment.filename,
                     "url": attachment.url,
                     "view_url": attachment.view_url,
                     "download_url": attachment.download_url,
