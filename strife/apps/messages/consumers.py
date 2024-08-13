@@ -39,8 +39,22 @@ class MessageConsumer(WebsocketConsumer):
                 },
             )
         else:
-            print("Received binary data")
-            print(bytes_data[:32])
+            if bytes_data[0] != 33:  # ! (exclamation mark)
+                print("Invalid bytes data")
+                return
+
+            data_chunks = bytes_data[1:].split(b"!")
+
+            supported_commands = {b"file"}
+            if data_chunks[0] not in supported_commands:
+                print("Unsupported command")
+                return
+
+            if data_chunks[0] == b"file":
+                metadata = json.loads(data_chunks[1])
+                file_obj = data_chunks[2]
+                print(metadata)
+                print(file_obj)
 
     def chat_message(self, event):
         message = event["message"]
