@@ -44,6 +44,16 @@ class Message(models.Model):
             "created_at": self.created_at.isoformat(),
             "edited_at": self.edited_at.isoformat(),
             "is_edited": self.is_edited,
+            "attachments": [
+                {
+                    "id": attachment.id,
+                    "filename": attachment.filename,
+                    "url": attachment.url,
+                    "view_url": attachment.view_url,
+                    "download_url": attachment.download_url,
+                }
+                for attachment in self.attachments.all()
+            ],
         }
 
     def __str__(self):
