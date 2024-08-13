@@ -20,23 +20,27 @@ class MessageConsumer(WebsocketConsumer):
     def disconnect(self, close_code):
         async_to_sync(self.channel_layer.group_discard)(self.channel_group_name, self.channel_name)
 
-    def receive(self, text_data):
-        text_data_json = json.loads(text_data)
-        content = text_data_json["content"]
+    def receive(self, text_data=None, bytes_data=None):
+        if text_data:
+            text_data_json = json.loads(text_data)
+            content = text_data_json["content"]
 
-        message = Message.objects.create(
-            author=self.user,
-            channel_id=self.channel_id,
-            content=content
-        )
+            message = Message.objects.create(
+                author=self.user,
+                channel_id=self.channel_id,
+                content=content,
+            )
 
-        async_to_sync(self.channel_layer.group_send)(
-            self.channel_group_name,
-            {
-                "type": "chat.message",
-                "message": message.to_dict(),
-            },
-        )
+            async_to_sync(self.channel_layer.group_send)(
+                self.channel_group_name,
+                {
+                    "type": "chat.message",
+                    "message": message.to_dict(),
+                },
+            )
+        else:
+            print("Received binary data")
+            print(bytes_data[:32])
 
     def chat_message(self, event):
         message = event["message"]

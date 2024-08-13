@@ -33,6 +33,30 @@
         console.error('Message socket closed unexpectedly');
     }
 
+    function sendFile(fileObj, fileData) {
+        const fileMetadata = JSON.stringify({
+            name: fileObj.name,
+            type: fileObj.type,
+            size: fileObj.size,
+        });
+
+        const enc = new TextEncoder();
+        const prefix = enc.encode('!file!');
+        const metadata = enc.encode(fileMetadata);
+        const separator = enc.encode('!');
+        const data = fileData;
+
+        let toSend = new Uint8Array(prefix.byteLength + metadata.byteLength + separator.byteLength + data.byteLength);
+        toSend.set(new Uint8Array(prefix), 0);
+        toSend.set(new Uint8Array(metadata), prefix.byteLength);
+        toSend.set(new Uint8Array(separator), prefix.byteLength + metadata.byteLength);
+        toSend.set(new Uint8Array(data), prefix.byteLength + metadata.byteLength + separator.byteLength);
+
+        socket.binaryType = 'arraybuffer';
+        socket.send(toSend);
+        socket.binaryType = 'blob';
+    }
+
     function sendSocketMessage() {
       let contentInput = $('#send-message #content')[0];
 
@@ -51,22 +75,17 @@
                   const reader = new FileReader();
 
                   reader.onload = function (e) {
-                      const arrayBuffer = e.target.result;
+                      let rawData = new ArrayBuffer();
+                      rawData = e.target.result;
 
-                      data.attachments.push({
-                          name: file.name,
-                          type: file.type,
-                          size: file.size,
-                          data: arrayBuffer,
-                      });
+                      sendFile(file, rawData);
                   };
 
                   reader.readAsArrayBuffer(file);
-
-                  uploadedFiles = [];
-                  $('#attachments-view').empty();
-
               }
+
+              uploadedFiles = [];
+              $('#attachments-view').empty();
           }
 
           socket.send(JSON.stringify(data));
