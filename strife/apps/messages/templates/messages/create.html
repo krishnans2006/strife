@@ -39,7 +39,7 @@
               uploadedFiles.forEach((file) => {
                   const url = URL.createObjectURL(file);
                   fileDisplay.append(`
-                  <a href="${url}" target="_blank" class="inline-block min-w-20 py-1 px-2.5 rounded-xl bg-gray-700 text-white cursor-pointer">
+                  <a href="${url}" target="_blank" class="inline-block min-w-20 py-1 px-2.5 rounded-xl bg-gray-700 text-white cursor-pointer mb-2">
                       ${file.name}
                   </a>
               `);
@@ -63,7 +63,7 @@
                onkeydown="processMessageKeydown(this);">
         <input type="file" multiple id="attachments" class="hidden"/>
       </span>
-      <span id="attachments-view" class="mb-2"></span>
+      <span id="attachments-view"></span>
     </span>
   </label>
 </div>
