@@ -41,7 +41,33 @@
 
           let data = {
               content: contentInput.value,
+              attachments: [],
           };
+
+          if (uploadedFiles.length > 0) {
+              // Use FileReader and ArrayBuffer to send files
+              for (let i = 0; i < uploadedFiles.length; i++) {
+                  const file = uploadedFiles[i];
+                  const reader = new FileReader();
+
+                  reader.onload = function (e) {
+                      const arrayBuffer = e.target.result;
+
+                      data.attachments.push({
+                          name: file.name,
+                          type: file.type,
+                          size: file.size,
+                          data: arrayBuffer,
+                      });
+                  };
+
+                  reader.readAsArrayBuffer(file);
+
+                  uploadedFiles = [];
+                  $('#attachments-view').empty();
+
+              }
+          }
 
           socket.send(JSON.stringify(data));
 
@@ -50,6 +76,10 @@
           contentInput.focus();
       }
     }
+
+    // Used in messages/create.html
+    // And in sendSocketMessage()
+    let uploadedFiles = [];
   </script>
 {% endblock script %}
 
