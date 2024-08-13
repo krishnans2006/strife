@@ -65,7 +65,20 @@ class MessageConsumer(WebsocketConsumer):
                     file=File(io.BytesIO(file_obj), name=filename),
                 )
 
+                async_to_sync(self.channel_layer.group_send)(
+                    self.channel_group_name,
+                    {
+                        "type": "chat.attachment",
+                        "message": message.to_dict(),
+                    },
+                )
+
     def chat_message(self, event):
         message = event["message"]
 
-        self.send(text_data=json.dumps({"message": message}))
+        self.send(text_data=json.dumps({"type": "message", "message": message}))
+
+    def chat_attachment(self, event):
+        message = event["message"]
+
+        self.send(text_data=json.dumps({"type": "attachment", "message": message}))
