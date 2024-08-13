@@ -12,7 +12,6 @@ class MessageConsumer(WebsocketConsumer):
     def connect(self):
         self.channel_id = self.scope["url_route"]["kwargs"]["channel_id"]
         self.user = self.scope["user"]
-        self.attachments = []
 
         self.channel_group_name = f"chat_{self.channel_id}"
 
@@ -25,7 +24,6 @@ class MessageConsumer(WebsocketConsumer):
 
     def receive(self, text_data=None, bytes_data=None):
         if text_data:
-            print("T")
             text_data_json = json.loads(text_data)
             content = text_data_json["content"]
 
@@ -35,13 +33,6 @@ class MessageConsumer(WebsocketConsumer):
                 content=content,
             )
 
-            if self.attachments:
-                for metadata, file_obj in self.attachments:
-                    message.attachments.create(
-                        filename=metadata["filename"],
-                        file=File(io.BytesIO(file_obj), name=metadata["filename"]),
-                    )
-
             async_to_sync(self.channel_layer.group_send)(
                 self.channel_group_name,
                 {
@@ -50,7 +41,6 @@ class MessageConsumer(WebsocketConsumer):
                 },
             )
         else:
-            print("B")
             if bytes_data[0] != 33:  # ! (exclamation mark)
                 print("Invalid bytes data")
                 return
@@ -66,7 +56,14 @@ class MessageConsumer(WebsocketConsumer):
                 metadata = json.loads(data_chunks[1])
                 file_obj = data_chunks[2]
 
-                self.attachments.append((metadata, file_obj))
+                filename = metadata["name"]
+                message_id = metadata["messageID"]
+                message = Message.objects.get(id=message_id)
+
+                message.attachments.create(
+                    filename=filename,
+                    file=File(io.BytesIO(file_obj), name=filename),
+                )
 
     def chat_message(self, event):
         message = event["message"]
