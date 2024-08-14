@@ -1,5 +1,9 @@
 {% extends 'home/dashboard.html' %}
 
+{% block script %}
+  <script type="module" src="{% static 'js/sockets.js' %}"></script>
+{% endblock script %}
+
 <!-- Channel List -->
 {% block channels %}
   {% include 'channels/list.html' with server=channel.server %}
