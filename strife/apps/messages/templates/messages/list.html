@@ -18,8 +18,14 @@
 
         // Any updates here should also be done to messages/detail.html
         messageList.innerHTML += `
-          <div id="message-${message.id}" class="w-full px-5 py-1 justify-center flex flex-row gap-3.5">
-            <img class="size-10 flex-none aspect-square object-cover rounded-full mt-1" src="${message.author.display_avatar}" alt="${message.author.username}">
+          <div id="message-${message.id}" class="w-full px-5 py-1 justify-center flex flex-row gap-3.5 relative">
+            <a id="message-${message.ID}-user-icon" class="cursor-pointer user-icon-popup-link">
+              <img class="size-10 flex-none aspect-square object-cover rounded-full mt-1"
+                   src="${message.author.display_avatar}" alt="${message.author.username}">
+              <div class="hidden user-icon-popup" id="message-${message.id}-profile">
+                {% include 'users/profile.html' with user=message.author %}
+              </div>
+            </a>
             <div id="message-${message.id}-child" class="grow text-gray-300 flex flex-col">
               <h4 class="text-lg font-bold">${message.author.username}</h4>
               <p>${message.content}</p>
@@ -155,6 +161,14 @@
 
     // Stores the most recent message
     let lastMessage = null;
+
+    // User avatar popup
+    $(document).ready(() => {
+        $('.user-icon-popup-link').click((e) => {
+            const profile = $(e.currentTarget).find('.user-icon-popup')[0];
+            profile.classList.toggle('hidden');
+        });
+    });
   </script>
 {% endblock script %}
 
