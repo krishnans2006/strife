@@ -5,7 +5,6 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 from django.templatetags.static import static
-from django.urls import reverse
 
 
 def user_avatar_path(instance, filename):
@@ -53,13 +52,26 @@ class User(AbstractUser):
     def get_short_name(self):
         return self.display_name
 
-    # Handle member -> user conversion
+    # Handle user -> member/owner conversion
     @property
-    def is_member(self):
+    def is_serverized(self):
         return False
 
-    def force_user_obj(self):
+    @property
+    def as_user(self):
         return self
+
+    def as_serverized(self, server_id: int):
+        # Avoid circular import
+        from strife.apps.servers.models import Member, Owner
+
+        member = Member.objects.filter(user=self, server__id=server_id).first()
+        if member:
+            return member
+        owner = Owner.objects.filter(user=self, server__id=server_id).first()
+        if owner:
+            return owner
+        return None
 
     def __str__(self):
         return self.username

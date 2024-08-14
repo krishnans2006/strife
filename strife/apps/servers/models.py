@@ -91,11 +91,17 @@ class Member(models.Model):
 
     # Handle member -> user conversion
     @property
-    def is_member(self):
+    def is_serverized(self):
         return True
 
-    def force_user_obj(self):
+    @property
+    def as_user(self):
         return self.user
+
+    def as_serverized(self, server_id: int):
+        if server_id == self.server.id:
+            return self
+        return self.user.as_serverized(server_id)
 
     def __str__(self):
         return self.user.username

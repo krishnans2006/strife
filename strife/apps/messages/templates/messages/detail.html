@@ -4,7 +4,7 @@
     <img id="message-{{ message.id }}-user-icon" class="cursor-pointer size-10 flex-none aspect-square object-cover rounded-full mt-1 user-icon-popup-link"
            src="{{ message.author.display_avatar }}" alt="{{ message.author.username }}">
     <div class="hidden user-icon-popup" id="message-{{ message.id }}-profile">
-      {% include 'users/profile.html' with user=message.member %}
+      {% include 'users/profile.html' with user=message.serverized_author %}
     </div>
   </a>
   <div id="message-{{ message.id }}-child" class="grow text-gray-300 flex flex-col">

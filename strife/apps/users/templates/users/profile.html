@@ -1,16 +1,15 @@
 <div class="bg-gray-800/60 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center user-profile-backdrop">
   <div
       class="bg-gray-900 rounded-3xl flex flex-col items-center justify-center p-4">
-    {{ user }}
     <img src="{{ user.display_avatar }}" alt="{{ user.username }}"
          class="size-20 aspect-square object-cover rounded-full mb-4">
     <h1 class="text-3xl text-gray-100 font-bold">{{ user.display_name }}</h1>
     <h3 class="text-lg text-gray-300">{{ user.username }}</h3>
     <p class="text-gray-300 mt-4">{{ user.bio }}</p>
-    {% if user.is_member %}
-    MEMBER
+    {% if user.is_serverized %}
+      <p class="text-gray-300">MEMBER</p>
     {% endif %}
-    {% if user.force_user_obj.id == request.user.id %}
+    {% if user.as_user.id == request.user.id %}
       <!-- Cannot use <a> tag here, because for some reason it messes up display logic -->
       <button onclick="location.replace('{% url 'users:edit' %}');" class="bg-gray-700 text-white rounded-xl py-1 px-4 mt-4">Edit Profile</button>
     {% endif %}

@@ -34,8 +34,8 @@ class Message(models.Model):
         return self.edited_at != self.created_at
 
     @property
-    def member(self):
-        return Member.objects.get(user=self.author, server=self.channel.server)
+    def serverized_author(self):
+        return self.author.as_serverized(self.channel.server.id)
 
     def to_dict(self):
         return {
