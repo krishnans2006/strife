@@ -1,10 +1,3 @@
-// Used in messages/create.html
-// And in sendSocketMessage()
-let uploadedFiles = [];
-
-// Stores the most recent message
-let lastMessage = null;
-
 const socket = new WebSocket(`ws://{{ request.get_host }}/servers/{{ server.id }}/channels/{{ channel.id }}/messages/ws/`);
 
 socket.onopen = function (e) {

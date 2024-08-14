@@ -1,7 +1,12 @@
 {% extends 'home/dashboard.html' %}
+{% load static %}
 
 {% block script %}
-  <script type="module" src="{% static 'js/sockets.js' %}"></script>
+  <script type="module" src="{% static 'js/messages/index.js' %}"></script>
+  <script type="module" src="{% static 'js/messages/sockets.js' %}"></script>
+  <script type="module" src="{% static 'js/messages/sending.js' %}"></script>
+  <script type="module" src="{% static 'js/messages/attachments.js' %}"></script>
+  <script type="module" src="{% static 'js/messages/emoji.js' %}"></script>
 {% endblock script %}
 
 <!-- Channel List -->
