@@ -1,7 +1,7 @@
 <!-- Any updates here should also be done to messages/list.html's socket.onmessage -->
-<div id="message-{{ message.id }}" class="w-full px-5 py-1 justify-center flex flex-row gap-3.5 flex-none relative">
-  <a id="message-{{ message.id }}-user-icon" class="cursor-pointer user-icon-popup-link">
-    <img class="size-10 flex-none aspect-square object-cover rounded-full mt-1"
+<div id="message-{{ message.id }}" class="w-full px-5 py-1 justify-center flex flex-row gap-3.5 flex-none">
+  <a id="message-{{ message.id }}-user-icon" class="user-icon-popup-link">
+    <img class="cursor-pointer size-10 flex-none aspect-square object-cover rounded-full mt-1"
            src="{{ message.author.display_avatar }}" alt="{{ message.author.username }}">
     <div class="hidden user-icon-popup" id="message-{{ message.id }}-profile">
       {% include 'users/profile.html' with user=message.author %}
