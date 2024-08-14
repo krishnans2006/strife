@@ -4,6 +4,7 @@ import random
 from django.db import models
 from django.urls import reverse
 
+from strife.apps.servers.models import Member
 from strife.apps.channels.models import Messageable
 from strife.apps.users.models import User
 
@@ -32,6 +33,10 @@ class Message(models.Model):
     def is_edited(self):
         return self.edited_at != self.created_at
 
+    @property
+    def member(self):
+        return Member.objects.get(user=self.author, server=self.channel.server)
+
     def to_dict(self):
         return {
             "id": self.id,
@@ -39,6 +44,19 @@ class Message(models.Model):
                 "id": self.author.id,
                 "username": self.author.username,
                 "display_avatar": self.author.display_avatar,
+            },
+            "member": {
+                "id": self.member.id,
+                "nickname": self.member.nickname,
+                "roles": [
+                    {
+                        "id": role.id,
+                        "name": role.name,
+                        "description": role.description,
+                        "color": role.color,
+                    }
+                    for role in self.member.roles.all()
+                ]
             },
             "content": self.content,
             "created_at": self.created_at.isoformat(),
