@@ -1,11 +1,12 @@
 from django.contrib.auth import logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from django.contrib.auth.views import LoginView as DjangoLoginView
 
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, UpdateProfileForm
 
 
 class LoginView(DjangoLoginView):
@@ -24,6 +25,16 @@ class RegisterView(SuccessMessageMixin, CreateView):
         if request.user.is_authenticated:
             return redirect("home:index")
         return super().get(request, *args, **kwargs)
+
+
+class EditView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+    template_name = "users/edit.html"
+    form_class = UpdateProfileForm
+    success_url = reverse_lazy("home:dashboard")
+    success_message = "Your profile has been updated."
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 def logout_view(request):

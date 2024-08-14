@@ -6,5 +6,8 @@
     <h1 class="text-3xl text-gray-100 font-bold">{{ user.display_name }}</h1>
     <h3 class="text-lg text-gray-300">{{ user.username }}</h3>
     <p class="text-gray-300 mt-4">{{ user.bio }}</p>
+    {% if user.id == request.user.id %}
+      <a href="{% url 'users:edit' %}" class="bg-gray-700 text-white rounded-xl py-1 px-4 mt-4">Edit Profile</a>
+    {% endif %}
   </div>
 </div>
