@@ -53,6 +53,14 @@ class User(AbstractUser):
     def get_short_name(self):
         return self.display_name
 
+    # Handle member -> user conversion
+    @property
+    def is_member(self):
+        return False
+
+    def force_user_obj(self):
+        return self
+
     def __str__(self):
         return self.username
 

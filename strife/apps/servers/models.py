@@ -64,6 +64,39 @@ class Member(models.Model):
     first_joined_at = models.DateTimeField(auto_now_add=True)
     joined_at = models.DateTimeField(auto_now_add=True)
 
+    # Properties for quick access to User
+    @property
+    def username(self):
+        return self.user.username
+
+    @property
+    def display_name(self):
+        return self.user.display_name
+
+    @property
+    def email(self):
+        return self.user.email
+
+    @property
+    def bio(self):
+        return self.user.bio
+
+    @property
+    def avatar(self):
+        return self.user.avatar
+
+    @property
+    def display_avatar(self):
+        return self.user.display_avatar
+
+    # Handle member -> user conversion
+    @property
+    def is_member(self):
+        return True
+
+    def force_user_obj(self):
+        return self.user
+
     def __str__(self):
         return self.user.username
 
