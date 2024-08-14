@@ -72,6 +72,7 @@
       $(document).ready(() => {
           const emojiPicker = $('#emoji-picker');
           const openEmojiPicker = $('#open-emoji-picker');
+          const messageBox = $('#content');
 
           openEmojiPicker.on('click', () => {
               emojiPicker.toggleClass('hidden');
@@ -81,6 +82,10 @@
               const emoji = e.detail.unicode;
               const content = $('#content')[0];
               insertAtCursor(content, emoji);
+          });
+
+          messageBox.on('click', () => {
+              emojiPicker.addClass('hidden');
           });
       });
   </script>
