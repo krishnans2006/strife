@@ -13,7 +13,14 @@
   <script>
     // Django stuff
     const USER_ID = {{ request.user.id }};
+    const GET_HOST = '{{ request.get_host }}';
+
+    const SERVER_ID = '{{ server.id }}' || null;
+    const CHANNEL_ID = '{{ channel.id }}' || null;
+    const MESSAGE_ID = '{{ message.id }}' || null;
   </script>
+  {% block head %}
+  {% endblock head %}
 </head>
 
 <body>

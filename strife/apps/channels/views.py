@@ -46,3 +46,11 @@ class TextChannelDetailView(LoginRequiredMixin, DetailView):
     template_name = "channels/detail.html"
     context_object_name = "channel"
     pk_url_kwarg = "channel_id"
+    extra_context = {
+        "server": "***Set by get_context_data() below***",
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["server"] = self.object.server
+        return context

@@ -1,4 +1,4 @@
-const socket = new WebSocket(`ws://{{ request.get_host }}/servers/{{ server.id }}/channels/{{ channel.id }}/messages/ws/`);
+const socket = new WebSocket(`ws://${GET_HOST}/servers/${SERVER_ID}/channels/${CHANNEL_ID}/messages/ws/`);
 
 socket.onopen = function (e) {
     console.log('Message socket connected');
