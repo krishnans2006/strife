@@ -109,6 +109,45 @@ class Owner(models.Model):
 
     updated_at = models.DateTimeField(auto_now=True)
 
+    # Properties for quick access to User
+    @property
+    def username(self):
+        return self.user.username
+
+    @property
+    def display_name(self):
+        return self.user.display_name
+
+    @property
+    def email(self):
+        return self.user.email
+
+    @property
+    def bio(self):
+        return self.user.bio
+
+    @property
+    def avatar(self):
+        return self.user.avatar
+
+    @property
+    def display_avatar(self):
+        return self.user.display_avatar
+
+    # Handle owner -> user conversion
+    @property
+    def is_serverized(self):
+        return True
+
+    @property
+    def as_user(self):
+        return self.user
+
+    def as_serverized(self, server_id: int):
+        if server_id == self.server.id:
+            return self
+        return self.user.as_serverized(server_id)
+
     def __str__(self):
         return self.user.username
 
