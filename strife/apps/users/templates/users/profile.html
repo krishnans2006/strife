@@ -1,6 +1,10 @@
-<div class="bg-gray-800 rounded-3xl flex flex-col items-center justify-center p-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-  <img src="{{ user.display_avatar }}" alt="{{ user.username }}" class="size-20 aspect-square object-cover rounded-full mb-4">
-  <h1 class="text-3xl text-gray-100 font-bold">{{ user.display_name }}</h1>
-  <h3 class="text-lg text-gray-300">{{ user.username }}</h3>
-  <p class="text-gray-300 mt-4">{{ user.bio }}</p>
+<div class="bg-gray-800 opacity-60 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+  <div
+      class="bg-black rounded-3xl flex flex-col items-center justify-center p-4">
+    <img src="{{ user.display_avatar }}" alt="{{ user.username }}"
+         class="size-20 aspect-square object-cover rounded-full mb-4">
+    <h1 class="text-3xl text-gray-100 font-bold">{{ user.display_name }}</h1>
+    <h3 class="text-lg text-gray-300">{{ user.username }}</h3>
+    <p class="text-gray-300 mt-4">{{ user.bio }}</p>
+  </div>
 </div>
