@@ -7,7 +7,8 @@
     <h3 class="text-lg text-gray-300">{{ user.username }}</h3>
     <p class="text-gray-300 mt-4">{{ user.bio }}</p>
     {% if user.id == request.user.id %}
-      <a href="{% url 'users:edit' %}" class="bg-gray-700 text-white rounded-xl py-1 px-4 mt-4">Edit Profile</a>
+      <!-- Cannot use <a> tag here, because for some reason it messes up display logic -->
+      <button onclick="location.replace('{% url 'users:edit' %}');" class="bg-gray-700 text-white rounded-xl py-1 px-4 mt-4">Edit Profile</button>
     {% endif %}
   </div>
 </div>
