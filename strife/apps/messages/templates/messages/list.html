@@ -165,7 +165,7 @@
     // User avatar popup
     $(document).ready(() => {
         $('.user-icon-popup-link').click((e) => {
-            const profile = $(e.currentTarget).find('.user-icon-popup')[0];
+            const profile = $(e.currentTarget).parent().find('.user-icon-popup')[0];
             profile.classList.toggle('hidden');
         });
     });
