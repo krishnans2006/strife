@@ -63,14 +63,11 @@ class User(AbstractUser):
 
     def as_serverized(self, server_id: int):
         # Avoid circular import
-        from strife.apps.servers.models import Member, Owner
+        from strife.apps.servers.models import Member
 
         member = Member.objects.filter(user=self, server__id=server_id).first()
         if member:
             return member
-        owner = Owner.objects.filter(user=self, server__id=server_id).first()
-        if owner:
-            return owner
         return None
 
     def __str__(self):

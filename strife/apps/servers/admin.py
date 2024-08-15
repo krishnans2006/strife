@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Server, Member, Owner
+from .models import Server, Member
 
 
 @admin.register(Server)
@@ -17,13 +17,4 @@ class MemberAdmin(admin.ModelAdmin):
     ordering = ("joined_at",)
     search_fields = ("user", "server")
     autocomplete_fields = ("user", "server")
-    save_as = True
-
-
-@admin.register(Owner)
-class OwnerAdmin(admin.ModelAdmin):
-    list_display = ("user", "server", "updated_at")
-    ordering = ("updated_at",)
-    search_fields = ("user", "server")
-    autocomplete_fields = ("user",)
     save_as = True

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView
 
-from .models import Server, Owner
+from .models import Server, Member
 
 
 class ServerCreateView(LoginRequiredMixin, CreateView):
@@ -21,9 +21,15 @@ class ServerCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         server = form.save(commit=False)
-        server.owner = Owner.objects.create(user=self.request.user)
+
+        new_member = Member(user=self.request.user, server=server)
+        new_member.save()
+
+        server.owner = new_member
         server.save()
+
         self.object = server
+
         return HttpResponseRedirect(self.get_success_url())
 
 
