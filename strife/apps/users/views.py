@@ -16,7 +16,7 @@ class LoginView(DjangoLoginView):
 
 
 class RegisterView(SuccessMessageMixin, CreateView):
-    template_name = "forms/page.html"
+    template_name = "users/register.html"
     form_class = RegisterForm
     success_url = reverse_lazy("users:login")
     success_message = "Your account has been created. You can now login."
