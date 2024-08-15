@@ -8,9 +8,9 @@ from .models import Role
 from ..servers.models import Server
 
 
-class RoleListView(LoginRequiredMixin, ListView):
+class RoleIndexView(LoginRequiredMixin, ListView):
     model = Role
-    template_name = "roles/list.html"
+    template_name = "roles/manage.html"
     context_object_name = "roles"
     paginate_by = 10
 
@@ -52,17 +52,10 @@ class RoleCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class RoleDetailView(LoginRequiredMixin, DetailView):
-    model = Role
-    template_name = "roles/detail.html"
-    context_object_name = "role"
-    pk_url_kwarg = "role_id"
-
-
 class RoleEditView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = Role
     fields = ("name", "description", "color")
-    template_name = "forms/page.html"
+    template_name = "roles/edit.html"
     pk_url_kwarg = "role_id"
     success_url = reverse_lazy("home:dashboard")
     success_message = "Role updated successfully."
