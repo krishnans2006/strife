@@ -113,6 +113,8 @@ class Member(models.Model):
 class Owner(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner_objs")
 
+    nickname = models.CharField(max_length=32, blank=True)
+
     updated_at = models.DateTimeField(auto_now=True)
 
     # Properties for quick access to User

@@ -46,8 +46,8 @@ class Message(models.Model):
                 "display_avatar": self.author.display_avatar,
             },
             "member": {
-                "id": self.member.id,
-                "nickname": self.member.nickname,
+                "id": self.serverized_author.id,
+                "nickname": self.serverized_author.nickname,
                 "roles": [
                     {
                         "id": role.id,
@@ -55,7 +55,7 @@ class Message(models.Model):
                         "description": role.description,
                         "color": role.color,
                     }
-                    for role in self.member.roles.all()
+                    for role in self.serverized_author.roles.all()
                 ]
             },
             "content": self.content,
