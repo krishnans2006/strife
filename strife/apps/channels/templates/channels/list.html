@@ -12,7 +12,9 @@
     </a>
   {% endfor %}
 
-  <a class="w-full p-1 text-center flex flex-col justify-center bg-gray-700 text-gray-300 rounded-md cursor-pointer" href="{% url 'servers:channels:create_text' server.id %}">
-    <p>+ New Text Channel</p>
-  </a>
+  {% if server.owner.as_user.id == user.id %}
+    <a class="w-full p-1 text-center flex flex-col justify-center bg-gray-700 text-gray-300 rounded-md cursor-pointer" href="{% url 'servers:channels:create_text' server.id %}">
+      <p>+ New Text Channel</p>
+    </a>
+  {% endif %}
 </div>

@@ -1,13 +1,21 @@
 <div class="flex flex-col items-center py-2 gap-2 max-w-14">
   {% for member in user.member_objs.all %}
-    {% with server=member.server %}
-      <a class="size-10 aspect-square text-center flex flex-col justify-center bg-gray-900 text-white {% if not server.image %}hover:bg-blue-500{% endif %} rounded-3xl hover:rounded-2xl cursor-pointer transition-all ease-in-out duration-300" href="{% url 'servers:detail' server.id %}">
-        {% if server.image %}
-          <img class="size-10 w-full aspect-square object-cover rounded-3xl hover:rounded-xl transition-all ease-in-out duration-300" src="{{ server.image.url }}" alt="{{ server.name }}">
-        {% else %}
-          <p>{{ server.name | slice:':2' | upper }}</p>
-        {% endif %}
-      </a>
+    {% with server_iter=member.server %}
+
+      <div class="flex flex-row w-full items-center {% if server_iter.id == server.id %}justify-between{% else %}justify-center{% endif %}">
+        <div class="w-1 h-7 bg-gray-300 rounded-xl {% if server_iter.id != server.id %}hidden{% endif %}"></div>
+
+        <a class="size-10 aspect-square text-center flex flex-col justify-center bg-gray-900 text-white {% if not server_iter.image %}hover:bg-blue-500{% endif %} {% if server_iter.id == server.id %}rounded-xl{% else %}rounded-3xl{% endif %} hover:rounded-xl cursor-pointer transition-all ease-in-out duration-300" href="{% url 'servers:detail' server_iter.id %}">
+          {% if server_iter.image %}
+            <img class="size-10 w-full aspect-square object-cover {% if server_iter.id == server.id %}rounded-xl{% else %}rounded-3xl{% endif %} hover:rounded-xl transition-all ease-in-out duration-300" src="{{ server_iter.image.url }}" alt="{{ server_iter.name }}">
+          {% else %}
+            <p>{{ server_iter.name | slice:':2' | upper }}</p>
+          {% endif %}
+        </a>
+
+        <div class="w-1 h-3 bg-gray-300 rounded-xl {% if server_iter.id == server.id %}invisible{% else %}hidden{% endif %}"></div>
+      </div>
+
     {% endwith %}
   {% endfor %}
 

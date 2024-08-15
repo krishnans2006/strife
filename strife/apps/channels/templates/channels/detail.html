@@ -10,6 +10,11 @@
   <script src="{% static 'js/messages/emoji.js' %}"></script>
 {% endblock head %}
 
+<!-- Server List -->
+{% block servers %}
+  {% include 'servers/list.html' with server=channel.server %}
+{% endblock servers %}
+
 <!-- Channel List -->
 {% block channels %}
   {% include 'channels/list.html' with server=channel.server %}
