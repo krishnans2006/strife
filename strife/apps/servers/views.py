@@ -20,7 +20,7 @@ class ServerCreateView(LoginRequiredMixin, CreateView):
     }
 
     def form_valid(self, form):
-        server = form.save(commit=False)
+        server = form.save()
 
         new_member = Member(user=self.request.user, server=server)
         new_member.save()

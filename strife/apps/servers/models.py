@@ -22,7 +22,8 @@ class Server(models.Model):
 
     image = models.ImageField(upload_to=server_image_path, blank=True, null=True)
 
-    owner = models.OneToOneField("Member", on_delete=models.PROTECT, related_name="owned_server")
+    # Must be nullable, as the server is created before the owner
+    owner = models.OneToOneField("Member", on_delete=models.PROTECT, related_name="owned_server", null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
