@@ -52,6 +52,13 @@ class RoleCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
 
+class RoleDetailView(LoginRequiredMixin, DetailView):
+    model = Role
+    template_name = "roles/detail.html"
+    context_object_name = "role"
+    pk_url_kwarg = "role_id"
+
+
 class RoleEditView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = Role
     fields = ("name", "description", "color")
