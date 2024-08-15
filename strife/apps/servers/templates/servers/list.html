@@ -3,7 +3,7 @@
     {% with server=member.server %}
       <a class="size-10 aspect-square text-center flex flex-col justify-center bg-gray-900 text-white {% if not server.image %}hover:bg-blue-500{% endif %} rounded-3xl hover:rounded-2xl cursor-pointer transition-all ease-in-out duration-300" href="{% url 'servers:detail' server.id %}">
         {% if server.image %}
-          <img class="size-10 w-full aspect-square object-cover rounded-3xl hover:rounded-2xl transition-all ease-in-out duration-300" src="{{ server.image.url }}" alt="{{ server.name }}">
+          <img class="size-10 w-full aspect-square object-cover rounded-3xl hover:rounded-xl transition-all ease-in-out duration-300" src="{{ server.image.url }}" alt="{{ server.name }}">
         {% else %}
           <p>{{ server.name | slice:':2' | upper }}</p>
         {% endif %}
@@ -11,7 +11,7 @@
     {% endwith %}
   {% endfor %}
 
-  <a class="size-10 aspect-square text-center flex flex-col justify-center bg-gray-900 text-green-500 hover:bg-green-500 hover:text-white rounded-3xl hover:rounded-2xl cursor-pointer transition-all ease-in-out delay-0 duration-300" href="{% url 'servers:create' %}">
+  <a class="size-10 aspect-square text-center flex flex-col justify-center bg-gray-900 text-green-500 hover:bg-green-500 hover:text-white rounded-3xl hover:rounded-xl cursor-pointer transition-all ease-in-out delay-0 duration-300" href="{% url 'servers:create' %}">
     <p>+</p>
   </a>
 </div>

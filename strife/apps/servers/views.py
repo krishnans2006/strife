@@ -44,6 +44,7 @@ class ServerEditView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = Server
     fields = ("name", "description", "image")
     template_name = "forms/page.html"
+    pk_url_kwarg = "server_id"
     success_url = reverse_lazy("home:dashboard")
     success_message = "Server updated successfully."
     extra_context = {
