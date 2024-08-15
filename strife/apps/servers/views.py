@@ -1,18 +1,18 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView
 
 from .models import Server, Member
 
 
-class ServerCreateView(LoginRequiredMixin, CreateView):
+class ServerCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Server
     fields = ("name", "description", "image")
     template_name = "forms/page.html"
     success_url = reverse_lazy("home:dashboard")
+    success_message = "Server created successfully."
     extra_context = {
         "title": "Create Server",
         "description": "Create a new server.",
