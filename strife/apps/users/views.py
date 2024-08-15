@@ -16,10 +16,15 @@ class LoginView(DjangoLoginView):
 
 
 class RegisterView(SuccessMessageMixin, CreateView):
-    template_name = "users/register.html"
+    template_name = "forms/page.html"
     form_class = RegisterForm
     success_url = reverse_lazy("users:login")
     success_message = "Your account has been created. You can now login."
+    extra_context = {
+        "title": "Register",
+        "description": "Start chatting today",
+        "form_button_text": "Register"
+    }
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -28,10 +33,15 @@ class RegisterView(SuccessMessageMixin, CreateView):
 
 
 class EditView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
-    template_name = "users/edit.html"
+    template_name = "forms/page.html"
     form_class = UpdateProfileForm
     success_url = reverse_lazy("home:dashboard")
     success_message = "Your profile has been updated."
+    extra_context = {
+        "title": "Edit Profile",
+        "description": "Tweak your online appearance",
+        "form_button_text": "Save"
+    }
 
     def get_object(self, queryset=None):
         return self.request.user
