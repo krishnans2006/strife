@@ -2,21 +2,31 @@
 
 {% block main %}
 
-  {% for role in roles %}
-    <div class="flex flex-row w-full items-center px-2">
-      <h1 class="text-2xl font-bold text-gray-300 grow">{{ role.name }}</h1>
-      <div class="ml-auto">
-        <a href="{% url 'servers:roles:edit' server.id role.id %}"
-           class="text-sm text-red-300 mr-2">Edit</a>
-        <a href="{% url 'servers:roles:delete' server.id role.id %}"
-           class="text-sm text-red-300 mr-2">Delete</a>
-      </div>
-    </div>
-  {% endfor %}
+  <div class="flex flex-row">
+    <div class="flex flex-col basis-1/4 p-2">
+      {% for role in roles %}
+        <div class="flex flex-row w-full items-center px-2 role-expansion-trigger" data-role-id="{{ role.id }}">
+          <h1 class="text-2xl font-bold text-gray-300 grow">{{ role.name }}</h1>
+          <div class="ml-auto">
+            <a href="{% url 'servers:roles:delete' server.id role.id %}"
+               class="text-sm text-red-300 mr-2">Delete</a>
+          </div>
+        </div>
+      {% endfor %}
 
-  <a class="w-full p-1 text-center flex flex-col justify-center text-gray-300 rounded-md cursor-pointer"
-     href="{% url 'servers:roles:create' server.id %}">
-    <p>+ New Role</p>
-  </a>
+      <a class="w-full p-1 text-center flex flex-col justify-center text-gray-300 rounded-md cursor-pointer"
+         href="{% url 'servers:roles:create' server.id %}">
+        <p>+ New Role</p>
+      </a>
+    </div>
+
+    <div class="flex flex-col basis-3/4 p-2">
+      {% for role in roles %}
+        <div id="role-{{ role.id }}" class="hidden role-expansion">
+          {% include 'roles/detail.html' with role=role %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 
 {% endblock main %}
