@@ -11,7 +11,7 @@ from ..servers.models import Server
 class GenericChannelCreateView(LoginRequiredMixin, CreateView):
     model = Channel
     fields = ("name", "description")
-    template_name = "forms/create.html"
+    template_name = "forms/page.html"
     success_url = reverse_lazy("home:dashboard")
     extra_context = {
         "title": "Create Server",

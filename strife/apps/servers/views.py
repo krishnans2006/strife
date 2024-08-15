@@ -1,8 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView
 
 from .models import Server, Owner
 
@@ -10,7 +11,7 @@ from .models import Server, Owner
 class ServerCreateView(LoginRequiredMixin, CreateView):
     model = Server
     fields = ("name", "description", "image")
-    template_name = "forms/create.html"
+    template_name = "forms/page.html"
     success_url = reverse_lazy("home:dashboard")
     extra_context = {
         "title": "Create Server",
@@ -31,3 +32,16 @@ class ServerDetailView(LoginRequiredMixin, DetailView):
     template_name = "servers/detail.html"
     context_object_name = "server"
     pk_url_kwarg = "server_id"
+
+
+class ServerEditView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+    model = Server
+    fields = ("name", "description", "image")
+    template_name = "forms/page.html"
+    success_url = reverse_lazy("home:dashboard")
+    success_message = "Server updated successfully."
+    extra_context = {
+        "title": "Edit Server",
+        "description": "Edit your server.",
+        "form_button_text": "Save Changes"
+    }
