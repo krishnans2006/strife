@@ -7,20 +7,29 @@ repos:
     rev: v4.6.0
     hooks:
       - id: check-ast
-        name: validate python
+        name: "[pc] validate python"
       - id: trailing-whitespace
+        name: "[pc] trim trailing whitespace"
       - id: mixed-line-ending
+        name: "[pc] fix mixed line endings"
       - id: check-toml
-      - id: detect-private-key
+        name: "[pc] validate toml"
       - id: check-yaml
+        name: "[pc] validate yaml"
+      - id: detect-private-key
+        name: "[pc] detect private keys"
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.5.6
     hooks:
       - id: ruff
         args: [--fix]
+        name: "[ruff] lint python"
       - id: ruff-format
+        name: "[ruff] format python"
   - repo: https://github.com/djlint/djLint
     rev: v1.34.1
     hooks:
       - id: djlint-reformat-django
+        name: "[djlint] format templates"
       - id: djlint-django
+        name: "[djlint] lint templates"
