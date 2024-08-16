@@ -2,8 +2,8 @@
 
   {% for member in user.member_objs.all %}
     {% with server_iter=member.server %}
-      <div class="flex flex-row w-full items-center{# djlint:off #}{% if server_iter.id == server.id %}justify-between{% else %}justify-center{% endif %}{# djlint:on #}">
-        <div class="w-1 h-7 bg-gray-300 rounded-xl{# djlint:off #}{% if server_iter.id != server.id %}hidden{% endif %}{# djlint:on #}">
+      <div class="flex flex-row w-full items-center {# djlint:off #}{% if server_iter.id == server.id %}justify-between{% else %}justify-center{% endif %}{# djlint:on #}">
+        <div class="w-1 h-7 bg-gray-300 rounded-xl {# djlint:off #}{% if server_iter.id != server.id %}hidden{% endif %}{# djlint:on #}">
         </div>
         <a class="size-10 aspect-square text-center flex flex-col justify-center bg-gray-900 text-white {# djlint:off #}{% if not server_iter.image %}hover:bg-blue-500{% endif %} {% if server_iter.id == server.id %}rounded-xl{% else %}rounded-3xl{% endif %}{# djlint:on #} hover:rounded-xl cursor-pointer transition-all ease-in-out duration-300"
            href="{% url 'servers:detail' server_iter.id %}">

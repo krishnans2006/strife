@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "strife.apps.emoji",
     "strife.apps.home",
     "strife.apps.messages",
+    "strife.apps.permissions",
     "strife.apps.reactions",
     "strife.apps.roles",
     "strife.apps.servers",

@@ -4,7 +4,8 @@ import random
 from django.db import models
 from django.urls import reverse
 
-from strife.apps.users.models import User
+from ..permissions.models import Permissions
+from ..users.models import User
 
 
 def server_image_path(instance, filename):
@@ -28,7 +29,7 @@ class Server(models.Model):
         "Member", on_delete=models.PROTECT, related_name="owned_server", null=True
     )
 
-    permissions = models.OneToOneField("app_roles.Permissions", on_delete=models.CASCADE)
+    permissions = models.OneToOneField(Permissions, on_delete=models.CASCADE)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -40,8 +41,6 @@ class Server(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             # Add permissions object
-            from strife.apps.roles.models import Permissions
-
             permissions = Permissions.objects.create()
             self.permissions = permissions
 
@@ -75,7 +74,7 @@ class Member(models.Model):
 
     nickname = models.CharField(max_length=32, blank=True)
 
-    permissions = models.OneToOneField("app_roles.Permissions", on_delete=models.CASCADE)
+    permissions = models.OneToOneField(Permissions, on_delete=models.CASCADE)
 
     first_joined_at = models.DateTimeField(auto_now_add=True)
     joined_at = models.DateTimeField(auto_now_add=True)
@@ -87,8 +86,6 @@ class Member(models.Model):
     def save(self, *args, **kwargs):
         if not self.id or not hasattr(self, "permissions"):
             # New role, add permissions object
-            from strife.apps.roles.models import Permissions
-
             permissions = Permissions.objects.create()
             self.permissions = permissions
 

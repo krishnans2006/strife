@@ -8,22 +8,12 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ("app_permissions", "0001_initial"),
-        ("app_servers", "0003_alter_server_owner"),
+        ("app_roles", "0002_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name="member",
-            name="permissions",
-            field=models.OneToOneField(
-                default=-1,
-                on_delete=django.db.models.deletion.CASCADE,
-                to="app_permissions.permissions",
-            ),
-            preserve_default=False,
-        ),
-        migrations.AddField(
-            model_name="server",
+            model_name="role",
             name="permissions",
             field=models.OneToOneField(
                 default=-1,
