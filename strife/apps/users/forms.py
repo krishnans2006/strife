@@ -11,10 +11,10 @@ class LoginForm(AuthenticationForm, StrifeForm):
 class RegisterForm(UserCreationForm, StrifeForm):
     class Meta:
         model = User
-        fields = ['username', 'display_name', 'email']
+        fields = ["username", "display_name", "email"]
 
 
 class UpdateProfileForm(UserChangeForm, StrifeForm):
     class Meta:
         model = User
-        fields = ['display_name', 'avatar']
+        fields = ["display_name", "avatar"]

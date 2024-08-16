@@ -15,7 +15,7 @@ class ServerCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     extra_context = {
         "title": "Create Server",
         "description": "Create a new server.",
-        "form_button_text": "Create Server"
+        "form_button_text": "Create Server",
     }
 
     def get_success_url(self):
@@ -51,7 +51,7 @@ class ServerEditView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     extra_context = {
         "title": "Edit Server",
         "description": "Edit your server.",
-        "form_button_text": "Save Changes"
+        "form_button_text": "Save Changes",
     }
 
     def get_success_url(self):

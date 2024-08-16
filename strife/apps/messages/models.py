@@ -56,7 +56,7 @@ class Message(models.Model):
                         "color": role.color,
                     }
                     for role in self.serverized_author.roles.all()
-                ]
+                ],
             },
             "content": self.content,
             "created_at": self.created_at.isoformat(),
@@ -87,7 +87,7 @@ class Attachment(models.Model):
     filename = models.CharField(max_length=256)
     file = models.FileField(upload_to=message_attachment_path)
 
-    #@override
+    # @override
     def save(self, *args, **kwargs):
         if not self.id:
             # Remove file, save, then add file

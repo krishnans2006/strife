@@ -14,11 +14,7 @@ def send_message_view(request, server_id, channel_id):
     if not content:
         return JsonResponse({"result": False, "error": "Missing content"})
 
-    Message.objects.create(
-        author=request.user,
-        channel_id=channel_id,
-        content=content
-    )
+    Message.objects.create(author=request.user, channel_id=channel_id, content=content)
 
     return JsonResponse({"result": True})
 

@@ -23,7 +23,7 @@ class RegisterView(SuccessMessageMixin, CreateView):
     extra_context = {
         "title": "Register",
         "description": "Start chatting today",
-        "form_button_text": "Register"
+        "form_button_text": "Register",
     }
 
     def get(self, request, *args, **kwargs):
@@ -40,7 +40,7 @@ class EditView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     extra_context = {
         "title": "Edit Profile",
         "description": "Tweak your online appearance",
-        "form_button_text": "Save"
+        "form_button_text": "Save",
     }
 
     def get_object(self, queryset=None):

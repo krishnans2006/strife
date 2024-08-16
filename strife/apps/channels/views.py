@@ -15,7 +15,7 @@ class GenericChannelCreateView(LoginRequiredMixin, CreateView):
     extra_context = {
         "title": "Create Server",
         "description": "Create a new server.",
-        "form_button_text": "Create Server"
+        "form_button_text": "Create Server",
     }
 
     def get_success_url(self):
@@ -32,7 +32,7 @@ class TextChannelCreateView(GenericChannelCreateView):
     extra_context = {
         "title": "Create a Text Channel",
         "description": "***Set by get_context_data() below***",
-        "form_button_text": "Create Text Channel"
+        "form_button_text": "Create Text Channel",
     }
 
     def get_context_data(self, **kwargs):

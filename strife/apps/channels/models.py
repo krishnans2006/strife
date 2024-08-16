@@ -16,7 +16,9 @@ class Channel(PolymorphicModel):
     updated_at = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
-        return reverse("servers:channels:detail", kwargs={"server_id": self.server.id, "channel_id": self.id})
+        return reverse(
+            "servers:channels:detail", kwargs={"server_id": self.server.id, "channel_id": self.id}
+        )
 
     def __str__(self):
         return self.name

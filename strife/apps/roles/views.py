@@ -34,7 +34,7 @@ class RoleCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     extra_context = {
         "title": "Create Role",
         "description": "Create a new role.",
-        "form_button_text": "Create Role"
+        "form_button_text": "Create Role",
     }
 
     def get_success_url(self):
@@ -63,11 +63,17 @@ class RoleEditView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     extra_context = {
         "title": "Edit Role",
         "description": "Edit your role.",
-        "form_button_text": "Save Changes"
+        "form_button_text": "Save Changes",
     }
 
     def get_success_url(self):
-        return reverse("servers:roles:edit", kwargs={"server_id": self.kwargs.get("server_id"), "role_id": self.kwargs.get("role_id")})
+        return reverse(
+            "servers:roles:edit",
+            kwargs={
+                "server_id": self.kwargs.get("server_id"),
+                "role_id": self.kwargs.get("role_id"),
+            },
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -83,7 +89,7 @@ class RoleDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     extra_context = {
         "title": "Delete Role",
         "description": "Are you sure you want to delete this role?",
-        "form_button_text": "Delete Role"
+        "form_button_text": "Delete Role",
     }
 
     def get_success_url(self):
