@@ -12,11 +12,11 @@
     <div id="message-list-div" class="flex flex-col">
 
       {% for message in channel.messages.all %}
-        {% include 'messages/detail.html' %}
+        {% include "messages/detail.html" %}
       {% endfor %}
 
     </div>
   </div>
   <!-- Send Message -->
-  {% include 'messages/send.html' %}
+  {% include "messages/send.html" %}
 </div>

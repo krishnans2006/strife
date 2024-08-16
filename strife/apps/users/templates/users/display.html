@@ -8,7 +8,7 @@
       <p class="text-xs text-gray-500">{{ user.username }}</p>
     </div>
   </div>
-  <div class="hidden user-icon-popup">{% include 'users/profile.html' with user=user %}</div>
+  <div class="hidden user-icon-popup">{% include "users/profile.html" with user=user %}</div>
   <div class="ml-auto p-2">
     <a href="{% url 'admin:index' %}" class="text-sm text-red-300 mr-2">Admin</a>
     <a href="{% url 'users:logout' %}" class="text-sm text-red-300 mr-2">Logout</a>

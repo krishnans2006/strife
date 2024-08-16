@@ -7,7 +7,7 @@
          src="{{ message.author.display_avatar }}"
          alt="{{ message.author.username }}" />
     <div class="hidden user-icon-popup" id="message-{{ message.id }}-profile">
-      {% include 'users/profile.html' with user=message.serverized_author %}
+      {% include "users/profile.html" with user=message.serverized_author %}
     </div>
   </a>
   <div id="message-{{ message.id }}-child"
