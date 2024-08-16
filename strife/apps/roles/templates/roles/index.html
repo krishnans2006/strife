@@ -9,12 +9,12 @@
 {% block main %}
 
   <div class="flex flex-row">
-    {% include 'roles/list.html' with server=server roles=roles %}
+    {% include 'roles/list.html' with server=server roles=roles role=role %}
 
     <div class="flex flex-col basis-3/4 p-2">
-      {% for role in roles %}
+      {% for role_iter in roles %}
         <div id="role-{{ role.id }}" class="hidden role-expansion">
-          {% include 'roles/edit.html' with role=role %}
+          {% include 'roles/edit.html' with server=server role=role_iter %}
         </div>
       {% endfor %}
     </div>

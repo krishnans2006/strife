@@ -1,17 +1,11 @@
-<div class="flex flex-col basis-1/4 p-2">
-  {% for role in roles %}
-    <div class="flex flex-row w-full items-center px-2 role-expansion-trigger"
-         data-role-id="{{ role.id }}">
-      <h1 class="text-2xl font-bold text-gray-300 grow">{{ role.name }}</h1>
-      <div class="ml-auto">
-        <a href="{% url 'servers:roles:delete' server.id role.id %}"
-           class="text-sm text-red-300 mr-2">Delete</a>
-      </div>
-    </div>
+<div class="basis-1/4 flex flex-col items-center py-3 px-2 gap-2 overflow-y-auto">
+  {% for role_iter in roles %}
+    <a class="w-full p-1 text-center flex flex-col justify-center {% if role_iter.id == role.id %}bg-[#{{ role_iter.color }}]{% else %}bg-gray-600{% endif %} text-gray-300 rounded-md cursor-pointer" data-role-id="{{ role_iter.id }}">
+      <p class="{% if role_iter.id == role.id %}text-white{% else %}text-[#{{ role_iter.color }}]{% endif %}">{{ role_iter.name | truncatechars:15 }}</p>
+    </a>
   {% endfor %}
 
-  <a class="w-full p-1 text-center flex flex-col justify-center text-gray-300 rounded-md cursor-pointer"
-     href="{% url 'servers:roles:create' server.id %}">
+  <a class="w-full p-1 text-center flex flex-col justify-center bg-gray-700 text-gray-300 rounded-md cursor-pointer" href="{% url 'servers:roles:create' server.id %}">
     <p>+ New Role</p>
   </a>
 </div>
