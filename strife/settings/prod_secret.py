@@ -6,13 +6,13 @@ DEBUG = False
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "portal",
-        "USER": "portal",
-        "PASSWORD": "portal",
+        "NAME": "strife",
+        "USER": "strife",
+        "PASSWORD": "strife",
         "HOST": "127.0.0.1",
         "PORT": "5432",
     }
 }
 
-STATIC_ROOT = "/var/www/portal/static"
-MEDIA_ROOT = "/var/www/portal/media"
+STATIC_ROOT = "/var/www/strife/static"
+MEDIA_ROOT = "/var/www/strife/media"

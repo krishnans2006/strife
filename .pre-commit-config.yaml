@@ -1,6 +1,6 @@
 default_stages: [commit, push]
 fail_fast: false
-exclude: ^strife/.*migrations
+exclude: ^strife/.*(migrations|secret).*$
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks

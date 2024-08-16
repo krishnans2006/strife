@@ -175,7 +175,7 @@ NUM_DEFAULT_AVATARS = 8
 # Import from secret.py
 
 try:
-    from .secret import *
+    from .secret import *  # noqa: F403
 except ImportError:
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY = "django-notinsecure-y!ogrmh^&w-%#+-5i$+grd&!te8eac*-r6o-vjv30=_5qlulsr"

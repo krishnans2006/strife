@@ -31,6 +31,9 @@ class Server(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
     # @override
     def save(self, *args, **kwargs):
         if not self.id:
@@ -47,15 +50,12 @@ class Server(models.Model):
 
         super().save(*args, **kwargs)
 
-    @property
-    def channels(self):
-        return self.channels.all()
-
     def get_absolute_url(self):
         return reverse("servers:detail", kwargs={"server_id": self.id})
 
-    def __str__(self):
-        return self.name
+    @property
+    def channels(self):
+        return self.channels.all()
 
     def __repr__(self):
         return f"<Server: {self.name}>"
@@ -69,6 +69,9 @@ class Member(models.Model):
 
     first_joined_at = models.DateTimeField(auto_now_add=True)
     joined_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username
 
     # Properties for quick access to User
     @property
@@ -108,9 +111,6 @@ class Member(models.Model):
         if server_id == self.server.id:
             return self
         return self.user.as_serverized(server_id)
-
-    def __str__(self):
-        return self.user.username
 
     def __repr__(self):
         return f"<Member: {self.user.username}>"

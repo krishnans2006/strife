@@ -9,6 +9,8 @@ from strife.apps.messages.models import Message
 
 
 class MessageConsumer(WebsocketConsumer):
+    BYTES_SEPARATOR = 33  # ! (exclamation mark)
+
     def connect(self):
         self.channel_id = self.scope["url_route"]["kwargs"]["channel_id"]
         self.user = self.scope["user"]
@@ -41,7 +43,7 @@ class MessageConsumer(WebsocketConsumer):
                 },
             )
         else:
-            if bytes_data[0] != 33:  # ! (exclamation mark)
+            if bytes_data[0] != self.BYTES_SEPARATOR:
                 print("Invalid bytes data")
                 return
 

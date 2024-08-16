@@ -74,6 +74,8 @@ select = [
     "UP",
 ]
 ignore = [
+  # mutable class attrs annotated as typing.ClassVar
+  "RUF012",
   # missing docstring
   "D1",
   # periods at the end of docstrings
