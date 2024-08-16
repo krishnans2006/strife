@@ -1,3 +1,5 @@
+from audioop import reverse
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
@@ -30,13 +32,15 @@ class RoleCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Role
     fields = ("name", "description", "color")
     template_name = "forms/page.html"
-    success_url = reverse_lazy("home:dashboard")
     success_message = "Role created successfully."
     extra_context = {
         "title": "Create Role",
         "description": "Create a new role.",
         "form_button_text": "Create Role"
     }
+
+    def get_success_url(self):
+        return reverse("servers:roles:index", kwargs={"server_id": self.kwargs.get("server_id")})
 
     def form_valid(self, form):
         role = form.save(commit=False)
@@ -57,13 +61,15 @@ class RoleEditView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     fields = ("name", "description", "color")
     template_name = "roles/edit.html"
     pk_url_kwarg = "role_id"
-    success_url = reverse_lazy("home:dashboard")
     success_message = "Role updated successfully."
     extra_context = {
         "title": "Edit Role",
         "description": "Edit your role.",
         "form_button_text": "Save Changes"
     }
+
+    def get_success_url(self):
+        return reverse("servers:roles:edit", kwargs={"server_id": self.kwargs.get("server_id"), "role_id": self.kwargs.get("role_id")})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -75,10 +81,12 @@ class RoleDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     model = Role
     template_name = "forms/page.html"
     pk_url_kwarg = "role_id"
-    success_url = reverse_lazy("home:dashboard")
     success_message = "Role deleted successfully."
     extra_context = {
         "title": "Delete Role",
         "description": "Are you sure you want to delete this role?",
         "form_button_text": "Delete Role"
     }
+
+    def get_success_url(self):
+        return reverse("servers:roles:index", kwargs={"server_id": self.kwargs.get("server_id")})

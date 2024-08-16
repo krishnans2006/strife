@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from polymorphic.models import PolymorphicModel
 
 from strife.apps.servers.models import Server
@@ -13,6 +14,9 @@ class Channel(PolymorphicModel):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse("servers:channels:detail", kwargs={"server_id": self.server.id, "channel_id": self.id})
 
     def __str__(self):
         return self.name

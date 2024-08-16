@@ -2,6 +2,7 @@ import os
 import random
 
 from django.db import models
+from django.urls import reverse
 
 from strife.apps.users.models import User
 
@@ -47,6 +48,9 @@ class Server(models.Model):
     @property
     def channels(self):
         return self.channels.all()
+
+    def get_absolute_url(self):
+        return reverse("servers:detail", kwargs={"server_id": self.id})
 
     def __str__(self):
         return self.name

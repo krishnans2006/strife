@@ -11,13 +11,15 @@ class ServerCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Server
     fields = ("name", "description", "image")
     template_name = "forms/page.html"
-    success_url = reverse_lazy("home:dashboard")
     success_message = "Server created successfully."
     extra_context = {
         "title": "Create Server",
         "description": "Create a new server.",
         "form_button_text": "Create Server"
     }
+
+    def get_success_url(self):
+        return self.object.get_absolute_url()
 
     def form_valid(self, form):
         server = form.save()
@@ -45,10 +47,12 @@ class ServerEditView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     fields = ("name", "description", "image")
     template_name = "forms/page.html"
     pk_url_kwarg = "server_id"
-    success_url = reverse_lazy("home:dashboard")
     success_message = "Server updated successfully."
     extra_context = {
         "title": "Edit Server",
         "description": "Edit your server.",
         "form_button_text": "Save Changes"
     }
+
+    def get_success_url(self):
+        return self.object.get_absolute_url()

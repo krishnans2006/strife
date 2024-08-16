@@ -12,12 +12,14 @@ class GenericChannelCreateView(LoginRequiredMixin, CreateView):
     model = Channel
     fields = ("name", "description")
     template_name = "forms/page.html"
-    success_url = reverse_lazy("home:dashboard")
     extra_context = {
         "title": "Create Server",
         "description": "Create a new server.",
         "form_button_text": "Create Server"
     }
+
+    def get_success_url(self):
+        return self.object.server.get_absolute_url()
 
     def form_valid(self, form):
         server_id = self.kwargs.get("server_id")
