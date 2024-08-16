@@ -4,7 +4,6 @@
     <strong class="font-bold">Invalid form data!</strong>
   </div>
 {% endif %}
-
 <form method="post" action="" enctype="multipart/form-data">
   {% csrf_token %}
   <div class="flex flex-col items-center w-full gap-4">
@@ -14,18 +13,14 @@
         {{ field }}
         {% if field.errors %}
           <ul>
-            {% for error in field.errors %}
-              <li class="text-red-500">{{ error }}</li>
-            {% endfor %}
+            {% for error in field.errors %}<li class="text-red-500">{{ error }}</li>{% endfor %}
           </ul>
         {% endif %}
-        {% if field.help_text %}
-          <div class="text-sm mb-1">
-            {{ field.help_text }}
-          </div>
-        {% endif %}
+        {% if field.help_text %}<div class="text-sm mb-1">{{ field.help_text }}</div>{% endif %}
       </div>
     {% endfor %}
-    <input type="submit" value="{{ submit }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-1 cursor-pointer">
+    <input type="submit"
+           value="{{ submit }}"
+           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-1 cursor-pointer" />
   </div>
 </form>

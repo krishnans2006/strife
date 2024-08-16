@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-
 {% block main %}
-
   {% if next %}
     <!-- This should never happen, but just in case -->
     {% if user.is_authenticated %}
@@ -10,21 +8,19 @@
         <strong class="font-bold">You don't have access to this page.</strong>
       </div>
     {% else %}
-      <div
-          class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative"
-          role="alert">
+      <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative"
+           role="alert">
         <strong class="font-bold">You must log in first!</strong>
       </div>
     {% endif %}
   {% endif %}
-
   <div class="w-1/2 mx-auto flex flex-col gap-5 text-center">
     <h1 class="text-4xl font-bold">Log In</h1>
     <p class="text-md">Get back to chatting</p>
     {% include 'form.html' with submit="Log In" %}
     <div class="flex flex-row justify-center">
-      <a class="bg-gray-200 hover:bg-gray-300 text-black font-bold py-2 px-4 rounded" href="{% url 'users:register' %}">Or, Register</a>
+      <a class="bg-gray-200 hover:bg-gray-300 text-black font-bold py-2 px-4 rounded"
+         href="{% url 'users:register' %}">Or, Register</a>
     </div>
   </div>
-
 {% endblock main %}

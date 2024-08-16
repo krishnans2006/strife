@@ -1,14 +1,14 @@
 <div class="flex flex-col items-center py-3 px-2 gap-2 overflow-y-auto">
-  {% include 'servers/header.html' with server=server %}
-
+  {% include "servers/header.html" with server=server %}
   {% for channel_iter in server.channels.all %}
-    <a class="w-full p-1 text-center flex flex-col justify-center {% if channel and channel.id == channel_iter.id %}bg-gray-500{% else %}bg-gray-600{% endif %} text-gray-300 rounded-md cursor-pointer" href="{% url 'servers:channels:detail' server.id channel_iter.id %}">
+    <a class="w-full p-1 text-center flex flex-col justify-center {% if channel and channel.id == channel_iter.id %}bg-gray-500{% else %}bg-gray-600{% endif %} text-gray-300 rounded-md cursor-pointer"
+       href="{% url 'servers:channels:detail' server.id channel_iter.id %}">
       <p>{{ channel_iter.name | truncatechars:15 }}</p>
     </a>
   {% endfor %}
-
   {% if server.owner.as_user.id == user.id %}
-    <a class="w-full p-1 text-center flex flex-col justify-center bg-gray-700 text-gray-300 rounded-md cursor-pointer" href="{% url 'servers:channels:create_text' server.id %}">
+    <a class="w-full p-1 text-center flex flex-col justify-center bg-gray-700 text-gray-300 rounded-md cursor-pointer"
+       href="{% url 'servers:channels:create_text' server.id %}">
       <p>+ New Text Channel</p>
     </a>
   {% endif %}

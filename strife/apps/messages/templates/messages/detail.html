@@ -1,20 +1,26 @@
 <!-- Any updates here should also be done to messages/list.html's socket.onmessage -->
-<div id="message-{{ message.id }}" class="w-full px-5 py-1 justify-center flex flex-row gap-3.5 flex-none">
+<div id="message-{{ message.id }}"
+     class="w-full px-5 py-1 justify-center flex flex-row gap-3.5 flex-none">
   <a>
-    <img id="message-{{ message.id }}-user-icon" class="cursor-pointer size-10 flex-none aspect-square object-cover rounded-full mt-1 user-icon-popup-link"
-           src="{{ message.author.display_avatar }}" alt="{{ message.author.username }}">
+    <img id="message-{{ message.id }}-user-icon"
+         class="cursor-pointer size-10 flex-none aspect-square object-cover rounded-full mt-1 user-icon-popup-link"
+         src="{{ message.author.display_avatar }}"
+         alt="{{ message.author.username }}" />
     <div class="hidden user-icon-popup" id="message-{{ message.id }}-profile">
       {% include 'users/profile.html' with user=message.serverized_author %}
     </div>
   </a>
-  <div id="message-{{ message.id }}-child" class="grow text-gray-300 flex flex-col">
+  <div id="message-{{ message.id }}-child"
+       class="grow text-gray-300 flex flex-col">
     <h4 class="text-lg font-bold">{{ message.author.username }}</h4>
     <p>{{ message.content }}</p>
-
     {% if message.attachments.exists %}
-      <div id="message-{{ message.id }}-attachments" class="flex flex-row gap-3.5">
+      <div id="message-{{ message.id }}-attachments"
+           class="flex flex-row gap-3.5">
         {% for attachment in message.attachments.all %}
-          <a href="{{ attachment.download_url }}" target="_blank" class="inline-block min-w-20 py-1 px-2.5 rounded-xl bg-gray-700 text-white cursor-pointer">{{ attachment.name }}</a>
+          <a href="{{ attachment.download_url }}"
+             target="_blank"
+             class="inline-block min-w-20 py-1 px-2.5 rounded-xl bg-gray-700 text-white cursor-pointer">{{ attachment.name }}</a>
         {% endfor %}
       </div>
     {% endif %}
