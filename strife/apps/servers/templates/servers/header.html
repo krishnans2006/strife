@@ -1,0 +1,8 @@
+<div class="flex flex-row w-full items-center px-2">
+  <h1 class="text-2xl font-bold text-gray-300 grow">{{ server.name }}</h1>
+  <div class="ml-auto">
+    <a href="{% url 'servers:roles:index' server.id %}"
+       class="text-sm text-red-300 mr-2">Roles</a>
+    <a href="{% url 'servers:edit' server.id %}" class="text-sm text-red-300 mr-2">Settings</a>
+  </div>
+</div>

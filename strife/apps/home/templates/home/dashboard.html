@@ -20,23 +20,7 @@
         {% block channels %}
         {% endblock channels %}
       </div>
-      <div class="flex-none bg-gray-800 flex flex-row p-1 pl-0 items-center">
-        <div class="bg-gray-800 hover:bg-gray-700 cursor-pointer rounded-md px-2 py-1 flex flex-row gap-3 items-center user-icon-popup-link">
-          <img src="{{ user.display_avatar }}" alt="{{ user.username }}"
-                  class="size-8 aspect-square object-cover rounded-full">
-          <div class="flex flex-col mt-0.5">
-            <h3 class="text-sm text-gray-300">{{ user.display_name }}</h3>
-            <p class="text-xs text-gray-500">{{ user.username }}</p>
-          </div>
-        </div>
-        <div class="hidden user-icon-popup">
-          {% include 'users/profile.html' with user=request.user %}
-        </div>
-        <div class="ml-auto p-2">
-          <a href="{% url 'admin:index' %}" class="text-sm text-red-300 mr-2">Admin</a>
-          <a href="{% url 'users:logout' %}" class="text-sm text-red-300 mr-2">Logout</a>
-        </div>
-      </div>
+      {% include 'users/display.html' with user=request.user %}
     </div>
     <div class="flex-grow bg-gray-600">
       <!-- Chat window -->

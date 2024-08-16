@@ -10,7 +10,7 @@ from ..servers.models import Server
 
 class RoleIndexView(LoginRequiredMixin, ListView):
     model = Role
-    template_name = "roles/manage.html"
+    template_name = "roles/index.html"
     context_object_name = "roles"
     paginate_by = 10
 
