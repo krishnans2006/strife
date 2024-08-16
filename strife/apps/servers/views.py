@@ -1,10 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
-from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView
 
-from .models import Server, Member
+from .models import Member, Server
 
 
 class ServerCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):

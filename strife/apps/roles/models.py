@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-from ..servers.models import Server, Member
+from ..servers.models import Member, Server
 
 
 class Role(models.Model):

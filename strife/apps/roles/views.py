@@ -2,10 +2,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.views.generic import CreateView, DetailView, UpdateView, ListView, DeleteView
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
-from .models import Role
 from ..servers.models import Server
+from .models import Role
 
 
 class RoleIndexView(LoginRequiredMixin, ListView):

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Messageable, Speakable, TextChannel, ForumChannel, VoiceChannel, StageChannel
+from .models import ForumChannel, Messageable, Speakable, StageChannel, TextChannel, VoiceChannel
 
 
 @admin.register(Messageable)

@@ -1,9 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView
 
-from .models import Channel, TextChannel
 from ..servers.models import Server
+from .models import Channel, TextChannel
 
 
 # This view will not work (Channel is an abstract model)

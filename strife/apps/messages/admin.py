@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Message, Attachment
+from .models import Attachment, Message
 
 
 @admin.register(Message)

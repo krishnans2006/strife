@@ -1,12 +1,12 @@
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView as DjangoLoginView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
-from django.contrib.auth.views import LoginView as DjangoLoginView
 
-from .forms import RegisterForm, LoginForm, UpdateProfileForm
+from .forms import LoginForm, RegisterForm, UpdateProfileForm
 
 
 class LoginView(DjangoLoginView):

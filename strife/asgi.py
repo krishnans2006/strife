@@ -1,5 +1,4 @@
-"""
-ASGI config for strife project.
+"""ASGI config for strife project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

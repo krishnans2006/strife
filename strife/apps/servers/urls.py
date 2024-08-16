@@ -1,7 +1,6 @@
-from django.urls import path, include
+from django.urls import include, path
 
 from . import views
-
 
 urlpatterns = [
     path("create/", views.ServerCreateView.as_view(), name="create"),

@@ -1,8 +1,8 @@
 import json
 
-from django.http import HttpResponseNotAllowed, JsonResponse, FileResponse
+from django.http import FileResponse, HttpResponseNotAllowed, JsonResponse
 
-from .models import Message, Attachment
+from .models import Attachment, Message
 
 
 def send_message_view(request, server_id, channel_id):

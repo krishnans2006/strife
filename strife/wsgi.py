@@ -1,5 +1,4 @@
-"""
-WSGI config for strife project.
+"""WSGI config for strife project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

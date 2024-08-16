@@ -4,7 +4,6 @@ import random
 from django.db import models
 from django.urls import reverse
 
-from strife.apps.servers.models import Member
 from strife.apps.channels.models import Messageable
 from strife.apps.users.models import User
 
