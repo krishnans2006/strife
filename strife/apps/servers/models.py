@@ -28,6 +28,8 @@ class Server(models.Model):
         "Member", on_delete=models.PROTECT, related_name="owned_server", null=True
     )
 
+    permissions = models.OneToOneField("app_roles.Permissions", on_delete=models.CASCADE)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -37,6 +39,12 @@ class Server(models.Model):
     # @override
     def save(self, *args, **kwargs):
         if not self.id:
+            # Add permissions object
+            from strife.apps.roles.models import Permissions
+
+            permissions = Permissions.objects.create()
+            self.permissions = permissions
+
             # Remove image, save, then add image
             # This is to use the server ID in the image path
             server_image = self.image
@@ -67,11 +75,24 @@ class Member(models.Model):
 
     nickname = models.CharField(max_length=32, blank=True)
 
+    permissions = models.OneToOneField("app_roles.Permissions", on_delete=models.CASCADE)
+
     first_joined_at = models.DateTimeField(auto_now_add=True)
     joined_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.user.username
+
+    # @override
+    def save(self, *args, **kwargs):
+        if not self.id or not hasattr(self, "permissions"):
+            # New role, add permissions object
+            from strife.apps.roles.models import Permissions
+
+            permissions = Permissions.objects.create()
+            self.permissions = permissions
+
+        super().save(*args, **kwargs)
 
     # Properties for quick access to User
     @property
