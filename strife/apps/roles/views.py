@@ -62,11 +62,13 @@ def role_edit_view(request, server_id, role_id):
 
     if request.method == "POST":
         role_form = RoleForm(request.POST, instance=role, prefix="role")
-        permissions_form = PermissionsForm(request.POST, instance=role, prefix="permissions")
+        permissions_form = PermissionsForm(
+            request.POST, instance=role.permissions, prefix="permissions"
+        )
         if role_form.is_valid() and permissions_form.is_valid():
             role_form.save()
             permissions_form.save()
-            return redirect("servers:roles:index", server_id=server_id)
+            return redirect("servers:roles:edit", server_id=server_id, role_id=role_id)
     else:
         role_form = RoleForm(instance=role, prefix="role")
         permissions_form = PermissionsForm(instance=role.permissions, prefix="permissions")
