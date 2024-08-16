@@ -1,10 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from django.views.generic import CreateView, DeleteView, ListView
 
+from ..permissions.forms import PermissionsForm
 from ..servers.models import Server
+from .forms import RoleForm
 from .models import Role
 
 
@@ -54,31 +57,30 @@ class RoleCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class RoleEditView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
-    model = Role
-    fields = ("name", "description", "color")
-    template_name = "roles/edit.html"
-    pk_url_kwarg = "role_id"
-    success_message = "Role updated successfully."
-    extra_context = {
-        "title": "Edit Role",
-        "description": "Edit your role.",
-        "form_button_text": "Save Changes",
-    }
+def role_edit_view(request, server_id, role_id):
+    role = Role.objects.get(id=role_id)
 
-    def get_success_url(self):
-        return reverse(
-            "servers:roles:edit",
-            kwargs={
-                "server_id": self.kwargs.get("server_id"),
-                "role_id": self.kwargs.get("role_id"),
-            },
-        )
+    if request.method == "POST":
+        role_form = RoleForm(request.POST, instance=role, prefix="role")
+        permissions_form = PermissionsForm(request.POST, instance=role, prefix="permissions")
+        if role_form.is_valid() and permissions_form.is_valid():
+            role_form.save()
+            permissions_form.save()
+            return redirect("servers:roles:index", server_id=server_id)
+    else:
+        role_form = RoleForm(instance=role, prefix="role")
+        permissions_form = PermissionsForm(instance=role.permissions, prefix="permissions")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["server"] = Server.objects.get(id=self.kwargs.get("server_id"))
-        return context
+    return render(
+        request,
+        "roles/edit.html",
+        {
+            "server": role.server,
+            "role": role,
+            "role_form": role_form,
+            "permissions_form": permissions_form,
+        },
+    )
 
 
 class RoleDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
