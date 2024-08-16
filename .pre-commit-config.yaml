@@ -1,0 +1,25 @@
+default_stages: [commit, push]
+fail_fast: false
+exclude: ^strife/.*migrations
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-ast
+        name: validate python
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+      - id: check-toml
+      - id: detect-private-key
+      - id: check-yaml
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.5.6
+    hooks:
+      - id: ruff
+      - id: ruff-format
+  - repo: https://github.com/djlint/djLint
+    rev: v1.34.1
+    hooks:
+      - id: djlint-reformat-django
+      - id: djlint-django
