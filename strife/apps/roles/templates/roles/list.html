@@ -1,15 +1,18 @@
 <div class="w-full flex flex-col items-center py-3 px-2 gap-2 overflow-y-auto">
 
   {% for role_iter in roles %}
-    <a class="w-full p-1 text-center flex flex-col justify-center bg-gray-600 rounded-md cursor-pointer role-select-trigger" href="{% url 'servers:roles:edit' server.id role_iter.id %}" data-role-selected="
-      {% if role_iter.id == role.id %}true{% endif %}
-      " data-role-color="#{{ role_iter.color }}">
-      <p>{{ role_iter.name | truncatechars:15 }}</p>
-    </a>
-  {% endfor %}
-
-  <a class="w-full p-1 text-center flex flex-col justify-center text-gray-300 rounded-md cursor-pointer"
-     href="{% url 'servers:roles:create' server.id %}">
-    <p>+ New Role</p>
+    <!-- djlint:off -->
+                                <a class="w-full p-1 text-center flex flex-col justify-center bg-gray-600 rounded-md cursor-pointer role-select-trigger"
+                                   href="{% url 'servers:roles:edit' server.id role_iter.id %}"
+                                   data-role-selected="{% if role_iter.id == role.id %}true{% endif %}"
+                                   data-role-color="#{{ role_iter.color }}">
+    <!-- djlint:on -->
+    <p>{{ role_iter.name | truncatechars:15 }}</p>
   </a>
+{% endfor %}
+
+<a class="w-full p-1 text-center flex flex-col justify-center text-gray-300 rounded-md cursor-pointer"
+   href="{% url 'servers:roles:create' server.id %}">
+  <p>+ New Role</p>
+</a>
 </div>
