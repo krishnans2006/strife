@@ -1,22 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block head %}
-  {{ block.super }}
-  <script src="{% static 'js/roles/index.js' %}"></script>
-{% endblock head %}
-
 {% block main %}
 
   <div class="flex flex-row">
-    {% include 'roles/list.html' with server=server roles=roles role=role %}
+    <div class="basis-1/4">
+      {% block role_list %}
+        {% include 'roles/list.html' with server=server roles=roles role=role %}
+      {% endblock role_list %}
+    </div>
 
-    <div class="flex flex-col basis-3/4 p-2">
-      {% for role_iter in roles %}
-        <div id="role-{{ role.id }}" class="hidden role-expansion">
-          {% include 'roles/edit.html' with server=server role=role_iter %}
-        </div>
-      {% endfor %}
+    <div class="basis-3/4">
+      {% block role_edit %}
+      {% endblock role_edit %}
     </div>
   </div>
 

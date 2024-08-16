@@ -65,6 +65,11 @@ class RoleEditView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
         "form_button_text": "Save Changes"
     }
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["server"] = Server.objects.get(id=self.kwargs.get("server_id"))
+        return context
+
 
 class RoleDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     model = Role
