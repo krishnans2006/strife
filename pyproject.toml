@@ -20,7 +20,74 @@ channels-redis = "^4.2.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
+ruff = "^0.6.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+extend-exclude = [
+    ".github",
+    "secret",
+    "media",
+    "migrations"
+]
+line-length = 99
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    # flake8-bugbear
+    "B",
+    # flake8-blind-except
+    "BLE",
+    # flake8-comprehensions
+    "C4",
+    # pydocstyle
+    "D",
+    # flake8-django
+    "DJ",
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # flake8-boolean-trap
+    "FBT",
+    # isort
+    "I",
+    # flake8-no-pep420
+    "INP",
+    # pep8-naming
+    "N",
+    # Pylint
+    "PL",
+    # Pytest
+    "PT",
+    # pygrep hooks
+    "PGH",
+    # ruff
+    "RUF",
+    # pyupgrade
+    "UP",
+]
+ignore = [
+  # missing docstring
+  "D1",
+  # periods at the end of docstrings
+  "D415",
+  # as recommended by https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
+  "E111",
+  "E114",
+  "E117",
+  "E501",
+  "D206",
+  "D300",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+line-ending = "lf"
+docstring-code-format = true
