@@ -11,6 +11,9 @@ class Permissions(models.Model):
     can_send_messages = models.BooleanField(default=False)
     can_send_attachments = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name_plural = "Permissions"
+
     def __str__(self):
         if self.is_for_server:
             return f"Permissions for server {self.server.name}"
