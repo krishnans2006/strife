@@ -17,6 +17,7 @@ pyparsing = "^3.1.2"
 pydot = "^3.0.1"
 channels = {extras = ["daphne"], version = "^4.1.0"}
 channels-redis = "^4.2.0"
+djlint = "^1.34.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
@@ -91,3 +92,6 @@ convention = "google"
 [tool.ruff.format]
 line-ending = "lf"
 docstring-code-format = true
+
+[tool.djlint]
+profile = "django"
