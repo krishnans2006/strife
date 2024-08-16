@@ -8,15 +8,11 @@
 {% block role_edit %}
 
   <div class="w-full flex flex-col items-center gap-2">
-    <div class="flex flex-row w-full items-center px-2">
-      <h1 class="text-2xl font-bold text-gray-300 grow">{{ role.name }}</h1>
-      <div class="ml-auto">
-        <a href="{% url 'servers:roles:delete' server.id role.id %}"
-           class="text-sm text-red-300 mr-2">Delete</a>
-      </div>
-    </div>
-
     {% include 'form.html' with submit=form_button_text %}
+
+    <div class="flex flex-row justify-center">
+      <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="{% url 'servers:roles:delete' server.id role.id %}">Delete Role</a>
+    </div>
 
     <!-- Permissions stuff here -->
   </div>
