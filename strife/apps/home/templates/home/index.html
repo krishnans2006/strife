@@ -1,10 +1,13 @@
 {% extends "base.html" %}
+
 {% load static %}
+
 {% block main %}
   <div class="flex flex-col justify-center gap-3 tracking-wide text-center mt-12">
     <h1 class="text-4xl font-bold">Strife</h1>
     <h3 class="text-lg mb-3">A fun chat platform</h3>
     <div class="flex justify-center gap-3">
+
       {% if user.is_authenticated %}
         <div class="flex flex-col justify-center">
           <p>
@@ -21,6 +24,7 @@
         <a href="{% url 'users:register' %}"
            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Register</a>
       {% endif %}
+
     </div>
   </div>
 {% endblock main %}

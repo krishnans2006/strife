@@ -1,5 +1,7 @@
 {% extends "home/dashboard.html" %}
+
 {% load static %}
+
 {% block head %}
   {{ block.super }}
   <script src="{% static "js/messages/index.js" %}"></script>
@@ -8,15 +10,21 @@
   <script src="{% static "js/messages/attachments.js" %}"></script>
   <script src="{% static "js/messages/emoji.js" %}"></script>
 {% endblock head %}
+
 <!-- Server List -->
+
 {% block servers %}
   {% include "servers/list.html" with server=channel.server %}
 {% endblock servers %}
+
 <!-- Channel List -->
+
 {% block channels %}
   {% include "channels/list.html" with server=channel.server %}
 {% endblock channels %}
+
 <!-- Message List -->
+
 {% block messages %}
   {% include "messages/list.html" with server=channel.server channel=channel %}
 {% endblock messages %}

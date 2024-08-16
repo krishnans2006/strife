@@ -1,7 +1,10 @@
 {% extends "base.html" %}
+
 {% block main %}
+
   {% if next %}
     <!-- This should never happen, but just in case -->
+
     {% if user.is_authenticated %}
       <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
            role="alert">
@@ -14,6 +17,7 @@
       </div>
     {% endif %}
   {% endif %}
+
   <div class="w-1/2 mx-auto flex flex-col gap-5 text-center">
     <h1 class="text-4xl font-bold">Log In</h1>
     <p class="text-md">Get back to chatting</p>

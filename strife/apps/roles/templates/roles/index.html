@@ -1,19 +1,26 @@
 {% extends "base.html" %}
+
 {% load static %}
+
 {% block head %}
   {{ block.super }}
   <script src="{% static 'js/roles/index.js' %}"></script>
 {% endblock head %}
+
 {% block main %}
   <div class="flex flex-row">
     <div class="basis-1/4">
+
       {% block role_list %}
         {% include 'roles/list.html' with server=server roles=roles role=role %}
       {% endblock role_list %}
+
     </div>
     <div class="basis-3/4">
+
       {% block role_edit %}
       {% endblock role_edit %}
+
     </div>
   </div>
 {% endblock main %}

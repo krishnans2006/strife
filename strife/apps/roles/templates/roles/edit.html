@@ -1,8 +1,11 @@
 {% extends "roles/index.html" %}
+
 {% load static %}
+
 {% block role_list %}
   {% include 'roles/list.html' with server=server roles=server.roles.all role=role %}
 {% endblock role_list %}
+
 {% block role_edit %}
   <div class="w-full flex flex-col items-center gap-2">
     {% include 'form.html' with submit=form_button_text %}

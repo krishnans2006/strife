@@ -1,29 +1,38 @@
 {% extends "base.html" %}
+
 {% load static %}
+
 {% block head %}
   {{ block.super }}
   <script src="{% static "js/users/avatars.js" %}"></script>
 {% endblock head %}
+
 {% block root %}
   <div class="flex flex-row fixed top-0 left-0 w-full h-full m-0 p-0">
     <div class="basis-14 bg-gray-800">
       <!-- Server list -->
+
       {% block servers %}
         {% include "servers/list.html" %}
       {% endblock servers %}
+
     </div>
     <div class="basis-1/6 bg-gray-700 flex flex-col max-h-dvh min-w-[300px]">
       <!-- Channel list -->
       <div class="grow">
+
         {% block channels %}
         {% endblock channels %}
+
       </div>
       {% include "users/display.html" with user=request.user %}
     </div>
     <div class="flex-grow bg-gray-600">
       <!-- Chat window -->
+
       {% block messages %}
       {% endblock messages %}
+
     </div>
   </div>
 {% endblock root %}
