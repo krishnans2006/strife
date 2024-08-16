@@ -28,6 +28,7 @@ class Role(models.Model):
             # New role, add permissions object
             permissions = Permissions.objects.create()
             self.permissions = permissions
+            assert self.permissions.is_valid()
 
         super().save(*args, **kwargs)
 

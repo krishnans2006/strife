@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -14,19 +15,23 @@ class Permissions(models.Model):
         if self.is_for_server:
             return f"Permissions for server {self.server.name}"
         if self.is_for_role:
-            return f"Permissions for role {self.role.name}"
+            return f"Permissions for server {self.role.server.name}, role {self.role.name}"
         if self.is_for_member:
-            return f"Permissions for member {self.member.username}"
+            return f"Permissions for server {self.member.server.name}, member {self.member.user.username}"
         return "Unassigned permissions object"
-
-    def save(self, *args, **kwargs):
-        self.full_clean()
-        super().save(*args, **kwargs)
 
     def clean(self):
         if sum((self.is_for_server, self.is_for_role, self.is_for_member)) != 1:
-            raise ValueError("Permissions object must be assigned to a server, role, or member")
-        super().clean()
+            raise ValidationError(
+                "Permissions object must be assigned to a server, role, or member"
+            )
+
+    def is_valid(self):
+        try:
+            self.clean()
+            return True
+        except ValidationError:
+            return False
 
     # Permissions objects can be assigned to either a server, role, or member
     @property

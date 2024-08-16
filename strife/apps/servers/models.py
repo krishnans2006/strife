@@ -43,6 +43,7 @@ class Server(models.Model):
             # Add permissions object
             permissions = Permissions.objects.create()
             self.permissions = permissions
+            assert self.permissions.is_valid()
 
             # Remove image, save, then add image
             # This is to use the server ID in the image path
@@ -88,6 +89,7 @@ class Member(models.Model):
             # New role, add permissions object
             permissions = Permissions.objects.create()
             self.permissions = permissions
+            assert self.permissions.is_valid()
 
         super().save(*args, **kwargs)
 
