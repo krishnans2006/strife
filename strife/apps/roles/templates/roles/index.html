@@ -8,8 +8,14 @@
 {% endblock head %}
 
 {% block main %}
+  <div class="flex flex-row gap-4 p-4">
+    <a class="bg-gray-200 hover:bg-gray-300 text-black font-bold py-2 px-4 rounded"
+       href="{% url 'servers:detail' server.id %}">Back to Server</a>
+    <h1 class="text-4xl font-bold">Manage Roles</h1>
+  </div>
   <div class="flex flex-row">
     <div class="basis-1/4">
+      <h3 class="text-2xl font-bold text-center">Roles</h3>
 
       {% block role_list %}
         {% include "roles/list.html" with server=server roles=roles role=role %}
@@ -19,6 +25,10 @@
     <div class="basis-3/4">
 
       {% block role_edit %}
+        <div class="w-full min-h-96 flex flex-col items-center justify-center gap-2 p-5 rounded-3xl bg-gray-600">
+          <h4 class="text-2xl font-bold text-center">Select a Role</h4>
+          <p class="text-md mb-2">Click a role from the left to edit its details/permissions</p>
+        </div>
       {% endblock role_edit %}
 
     </div>
