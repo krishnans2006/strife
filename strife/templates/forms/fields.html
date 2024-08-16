@@ -1,0 +1,17 @@
+{% for field in form %}
+  <div class="flex flex-col items-center w-full">
+    <label for="{{ field.id_for_label }}" class="text-lg font-bold">{{ field.label_tag }}</label>
+    {{ field }}
+
+    {% if field.errors %}
+      <ul>
+
+        {% for error in field.errors %}<li class="text-red-500">{{ error }}</li>{% endfor %}
+
+      </ul>
+    {% endif %}
+
+    {% if field.help_text %}<div class="text-sm mb-1">{{ field.help_text }}</div>{% endif %}
+
+  </div>
+{% endfor %}
