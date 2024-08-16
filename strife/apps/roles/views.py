@@ -79,8 +79,32 @@ def role_edit_view(request, server_id, role_id):
         {
             "server": role.server,
             "role": role,
+            "is_default_role": False,
             "role_form": role_form,
             "permissions_form": permissions_form,
+        },
+    )
+
+
+def default_role_edit_view(request, server_id):
+    server = Server.objects.get(id=server_id)
+    permissions = server.permissions
+
+    if request.method == "POST":
+        form = PermissionsForm(request.POST, instance=permissions, prefix="permissions")
+        if form.is_valid():
+            form.save()
+            return redirect("servers:roles:edit_default", server_id=server_id)
+    else:
+        form = PermissionsForm(instance=permissions, prefix="permissions")
+
+    return render(
+        request,
+        "roles/edit_default.html",
+        {
+            "server": server,
+            "form": form,
+            "is_default_role": True,
         },
     )
 
