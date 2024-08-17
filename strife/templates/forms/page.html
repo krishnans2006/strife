@@ -4,6 +4,6 @@
   <div class="w-1/2 mx-auto flex flex-col gap-5 text-center">
     <h1 class="text-4xl font-bold">{{ form_name }}</h1>
     <p class="text-md">{{ form_description }}</p>
-    {% include "forms/form.html" with submit=form_button_text %}
+    {{ form }}
   </div>
 {% endblock main %}

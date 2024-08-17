@@ -12,10 +12,8 @@
       {% csrf_token %}
       <div class="flex flex-col items-center w-full gap-4">
         <div class="flex flex-row items-center w-full">
-          <div class="basis-1/2 px-2">{% include "forms/fields.html" with form=role_form submit=form_button_text %}</div>
-          <div class="basis-1/2 px-2 border-l-2">
-            {% include "forms/fields.html" with form=permissions_form submit=form_button_text %}
-          </div>
+          <div class="basis-1/2 px-2">{{ role_form }}</div>
+          <div class="basis-1/2 px-2 border-l-2">{{ permissions_form }}</div>
         </div>
         <input type="submit"
                value="Save Changes"

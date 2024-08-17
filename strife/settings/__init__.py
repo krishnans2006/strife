@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
+from django.forms.renderers import TemplatesSetting
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.forms",
     "strife.apps.channels",
     "strife.apps.emoji",
     "strife.apps.home",
@@ -166,6 +169,16 @@ TAILWIND_APP_NAME = "strife.theme"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Forms
+
+
+class FormRenderer(TemplatesSetting):
+    form_template_name = "forms/renderer.html"
+
+
+FORM_RENDERER = "strife.settings.FormRenderer"
 
 
 # Custom
