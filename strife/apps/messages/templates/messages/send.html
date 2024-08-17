@@ -7,7 +7,9 @@
         <span class="text-2xl pb-0.5">+</span>
       </span>
     {% else %}
-      <span class="ml-3.5 flex-none rounded-3xl bg-gray-800"></span>
+      <span id="upload-attachment"
+            class="ml-3.5 flex-none rounded-3xl bg-gray-800"
+            data-can-send-attachments="{{ member.can_send_attachments }}"></span>
     {% endif %}
     <span class="flex flex-col grow">
       <span>

@@ -7,9 +7,12 @@
   <script src="{% static "js/messages/index.js" %}"></script>
   <script src="{% static "js/messages/sockets.js" %}"></script>
   <script src="{% static "js/messages/sending.js" %}"></script>
-  <script src="{% static "js/messages/attachments.js" %}"></script>
   <script src="{% static "js/messages/emoji.js" %}"></script>
 {% endblock head %}
+
+{% block script %}
+  <script src="{% static "js/messages/attachments.js" %}"></script>
+{% endblock script %}
 
 <!-- Server List -->
 
