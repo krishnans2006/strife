@@ -1,22 +1,6 @@
-import json
+from django.http import FileResponse
 
-from django.http import FileResponse, HttpResponseNotAllowed, JsonResponse
-
-from .models import Attachment, Message
-
-
-def send_message_view(request, server_id, channel_id):
-    if request.method != "POST":
-        return HttpResponseNotAllowed(["POST"])
-
-    content = json.loads(request.body).get("content")
-
-    if not content:
-        return JsonResponse({"result": False, "error": "Missing content"})
-
-    Message.objects.create(author=request.user, channel_id=channel_id, content=content)
-
-    return JsonResponse({"result": True})
+from .models import Attachment
 
 
 def view_attachment_view(request, server_id, channel_id, message_id, attachment_id):

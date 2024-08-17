@@ -139,7 +139,7 @@ class Member(models.Model):
             (
                 self.server.permissions.can_manage_server,
                 self.permissions.can_manage_server,
-                *(role.permissions.can_manage_server for role in self.roles),
+                *(role.permissions.can_manage_server for role in self.roles.all()),
             )
         )
 
@@ -149,7 +149,7 @@ class Member(models.Model):
             (
                 self.server.permissions.can_manage_roles,
                 self.permissions.can_manage_roles,
-                *(role.permissions.can_manage_roles for role in self.roles),
+                *(role.permissions.can_manage_roles for role in self.roles.all()),
             )
         )
 
@@ -159,7 +159,7 @@ class Member(models.Model):
             (
                 self.server.permissions.can_manage_channels,
                 self.permissions.can_manage_channels,
-                *(role.permissions.can_manage_channels for role in self.roles),
+                *(role.permissions.can_manage_channels for role in self.roles.all()),
             )
         )
 
@@ -169,7 +169,7 @@ class Member(models.Model):
             (
                 self.server.permissions.can_manage_messages,
                 self.permissions.can_manage_messages,
-                *(role.permissions.can_manage_messages for role in self.roles),
+                *(role.permissions.can_manage_messages for role in self.roles.all()),
             )
         )
 
@@ -179,7 +179,7 @@ class Member(models.Model):
             (
                 self.server.permissions.can_send_messages,
                 self.permissions.can_send_messages,
-                *(role.permissions.can_send_messages for role in self.roles),
+                *(role.permissions.can_send_messages for role in self.roles.all()),
             )
         )
 
@@ -189,7 +189,7 @@ class Member(models.Model):
             (
                 self.server.permissions.can_send_attachments,
                 self.permissions.can_send_attachments,
-                *(role.permissions.can_send_attachments for role in self.roles),
+                *(role.permissions.can_send_attachments for role in self.roles.all()),
             )
         )
 

@@ -3,7 +3,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("create/", views.send_message_view, name="create"),
     path(
         "<int:message_id>/attachments/<int:attachment_id>/view/",
         views.view_attachment_view,

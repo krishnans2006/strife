@@ -54,4 +54,5 @@ class TextChannelDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["server"] = self.object.server
+        context["member"] = self.request.user.as_serverized(context["server"].id)
         return context
