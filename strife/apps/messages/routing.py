@@ -4,7 +4,8 @@ from . import consumers
 
 websocket_urlpatterns = [
     path(
-        "servers/<int:server_id>/channels/<int:channel_id>/messages/ws/",
+        "ws/<int:server_id>/<int:channel_id>/",
         consumers.MessageConsumer.as_asgi(),
+        kwargs={"server_id": None, "channel_id": None},
     ),
 ]

@@ -14,10 +14,13 @@ class MessageConsumer(WebsocketConsumer):
 
     def connect(self):
         self.user = self.scope["user"]
+
+        self.server_id = self.scope["url_route"]["kwargs"]["server_id"]
         self.channel_id = self.scope["url_route"]["kwargs"]["channel_id"]
 
-        self.channel = Channel.objects.get(id=self.channel_id)
-        self.server = self.channel.server
+        self.channel = Channel.objects.get(id=self.channel_id) if self.channel_id else None
+        self.server = self.channel.server if self.channel else None
+        assert self.server.id == self.server_id if self.server_id else True
 
         self.channel_group_name = f"chat_{self.channel_id}"
 
