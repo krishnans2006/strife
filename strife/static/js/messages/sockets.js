@@ -122,6 +122,7 @@ function sendSocketMessage() {
         contentInput.disabled = true;
 
         let data = {
+            type: 'message',
             content: contentInput.value,
         };
 

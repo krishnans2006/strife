@@ -37,7 +37,18 @@ class MessageConsumer(WebsocketConsumer):
     # Receiving
     def receive(self, text_data=None, bytes_data=None):
         if text_data:
-            self.handle_message_payload(text_data)
+            # Is the data valid?
+            text_data_json = json.loads(text_data)
+            type = text_data_json["type"]
+
+            supported_types = {"message"}
+            if type not in supported_types:
+                print("Unsupported type")
+                return
+
+            # Dispatch the payload
+            if type == "message":
+                self.handle_message_payload(text_data_json)
         else:
             # Is the data valid?
             if bytes_data[0] != self.BYTES_SEPARATOR:
@@ -51,7 +62,7 @@ class MessageConsumer(WebsocketConsumer):
                 print("Unsupported command")
                 return
 
-            # Are they trying to send an attachment?
+            # Dispatch the payload
             if data_chunks[0] == b"file":
                 self.handle_file_payload(data_chunks)
 
@@ -61,9 +72,7 @@ class MessageConsumer(WebsocketConsumer):
             return
 
         # Send the message
-        text_data_json = json.loads(payload)
-        content = text_data_json["content"]
-
+        content = payload["content"]
         message = Message.objects.create(
             author=self.user,
             channel_id=self.channel_id,
