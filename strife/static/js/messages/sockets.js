@@ -130,11 +130,10 @@ function sendSocketMessage() {
         socket.send(JSON.stringify(data));
 
         function waitForMessageUpdateThenUploadAttachments() {
-            if (lastMessageIDBeforeSend === (lastMessage ? lastMessage.id : -1) || lastMessage.author.id !== USER_ID) {
+            if (lastMessageIDBeforeSend === (lastMessage ? lastMessage.id : -1) || lastMessage.author.id !== parseInt(USER_ID)) {
                 setTimeout(waitForMessageUpdateThenUploadAttachments, 100);
                 return;
             }
-            console.log("!");
             sendSocketAttachments();
         }
 
