@@ -1,27 +1,23 @@
 import io
 import json
 
-from apps.home.consumers import GenericConsumer
 from asgiref.sync import async_to_sync
 from django.core.files import File
 
-from strife.apps.channels.models import Channel
 from strife.apps.messages.models import Message
+from strife.apps.servers.consumers import ServerConsumer
 
 
-class MessageConsumer(GenericConsumer):
-    BYTES_SEPARATOR = 33  # ! (exclamation mark)
-
+class MessageConsumer(ServerConsumer):
     def initialize(self):
+        super().initialize()
+
         # Set parameters
-        self.server_id = self.scope["url_route"]["kwargs"]["server_id"]
         self.channel_id = self.scope["url_route"]["kwargs"]["channel_id"]
-        assert self.server_id
         assert self.channel_id
 
-        self.channel = Channel.objects.get(id=self.channel_id)
-        self.server = self.channel.server
-        assert self.server.id == self.server_id
+        self.channel = self.server.channels.get(id=self.channel_id)
+        assert self.channel.id == self.channel_id
 
         # Register supported types
         self.supported_types_json["message"] = self.handle_message_payload
