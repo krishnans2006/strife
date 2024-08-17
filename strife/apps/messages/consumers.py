@@ -5,6 +5,7 @@ from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 from django.core.files import File
 
+from strife.apps.channels.models import Channel
 from strife.apps.messages.models import Message
 
 
@@ -12,8 +13,11 @@ class MessageConsumer(WebsocketConsumer):
     BYTES_SEPARATOR = 33  # ! (exclamation mark)
 
     def connect(self):
-        self.channel_id = self.scope["url_route"]["kwargs"]["channel_id"]
         self.user = self.scope["user"]
+        self.channel_id = self.scope["url_route"]["kwargs"]["channel_id"]
+
+        self.channel = Channel.objects.get(id=self.channel_id)
+        self.server = self.channel.server
 
         self.channel_group_name = f"chat_{self.channel_id}"
 
@@ -26,6 +30,11 @@ class MessageConsumer(WebsocketConsumer):
 
     def receive(self, text_data=None, bytes_data=None):
         if text_data:
+            # Are they allowed to send messages?
+            if not self.user.as_serverized(self.server.id).can_send_messages:
+                return
+
+            # Send the message
             text_data_json = json.loads(text_data)
             content = text_data_json["content"]
 
@@ -35,6 +44,7 @@ class MessageConsumer(WebsocketConsumer):
                 content=content,
             )
 
+            # Update websocket clients
             async_to_sync(self.channel_layer.group_send)(
                 self.channel_group_name,
                 {
@@ -43,6 +53,7 @@ class MessageConsumer(WebsocketConsumer):
                 },
             )
         else:
+            # Is the data valid?
             if bytes_data[0] != self.BYTES_SEPARATOR:
                 print("Invalid bytes data")
                 return
@@ -54,7 +65,13 @@ class MessageConsumer(WebsocketConsumer):
                 print("Unsupported command")
                 return
 
+            # Are they trying to send an attachment?
             if data_chunks[0] == b"file":
+                # Are they allowed to send attachments?
+                if not self.user.as_serverized(self.server.id).can_send_attachments:
+                    return
+
+                # Send the attachment
                 metadata = json.loads(data_chunks[1])
                 file_obj = data_chunks[2]
 
@@ -67,6 +84,7 @@ class MessageConsumer(WebsocketConsumer):
                     file=File(io.BytesIO(file_obj), name=filename),
                 )
 
+                # Update websocket clients
                 async_to_sync(self.channel_layer.group_send)(
                     self.channel_group_name,
                     {
