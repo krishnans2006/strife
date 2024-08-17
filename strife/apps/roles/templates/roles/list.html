@@ -9,6 +9,12 @@
     </a>
   {% endfor %}
 
+  <a class="w-full p-1 text-center flex flex-col justify-center bg-gray-600 rounded-md cursor-pointer role-select-trigger"
+     href="{% url 'servers:roles:edit_default' server.id %}"
+     data-role-selected="{# djlint:off #}{% if is_default_role %}true{% endif %} {# djlint:on #}"
+     data-role-color="#ffffff">
+    <p>default</p>
+  </a>
   <a class="w-full p-1 text-center flex flex-col justify-center text-gray-300 rounded-md cursor-pointer"
      href="{% url 'servers:roles:create' server.id %}">
     <p>+ New Role</p>

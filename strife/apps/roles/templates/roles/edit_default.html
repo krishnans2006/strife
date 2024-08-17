@@ -1,0 +1,22 @@
+{% extends "roles/index.html" %}
+
+{% load static %}
+
+{% block role_list %}
+  {% include "roles/list.html" with server=server roles=server.roles.all role=role %}
+{% endblock role_list %}
+
+{% block role_edit %}
+  <div class="w-full flex flex-col items-center gap-2 p-5 rounded-3xl bg-gray-600">
+    <form method="post" action="" enctype="multipart/form-data" class="w-full">
+      {% csrf_token %}
+      <div class="flex flex-col items-center w-full gap-4">
+        {% include "forms/fields.html" with submit=form_button_text %}
+        <input type="submit"
+               value="Save Changes"
+               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-1 cursor-pointer" />
+      </div>
+    </form>
+    <!-- Permissions stuff here -->
+  </div>
+{% endblock role_edit %}
