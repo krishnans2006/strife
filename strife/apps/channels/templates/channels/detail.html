@@ -12,10 +12,11 @@
   <script src="{% static "js/messages/attachments.js" %}"></script>
   <script src="{% static "js/messages/emoji.js" %}"></script>
   <script src="{% static "js/messages/sending.js" %}"></script>
+  <!-- Websockets -->
   <script src="{% static "js/websockets/initializers/messages.js" %}"></script>
   <script src="{% static "js/websockets/index.js" %}"></script>
-  <script src="{% static "js/websockets/handlers.js" %}"></script>
-  <script src="{% static "js/messages/websockets.js" %}"></script>
+  <script src="{% static "js/websockets/recv-handlers/messages.js" %}"></script>
+  <script src="{% static "js/websockets/send-handlers/messages.js" %}"></script>
 {% endblock script %}
 
 <!-- Server List -->
