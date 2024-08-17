@@ -8,6 +8,7 @@
 {% endblock head %}
 
 {% block script %}
+  {{ block.super }}
   <script src="{% static "js/messages/attachments.js" %}"></script>
   <script src="{% static "js/messages/emoji.js" %}"></script>
   <script src="{% static "js/messages/sending.js" %}"></script>

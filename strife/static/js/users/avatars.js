@@ -1,11 +1,4 @@
-// User avatar popup
-$(document).ready(() => {
-    $('.user-icon-popup-link').click((e) => {
-        const profile = $(e.currentTarget).parent().find('.user-icon-popup');
-        profile.toggleClass('hidden');
-    });
-
-    $('.user-profile-backdrop').click(() => {
-        $('.user-profile-backdrop').parent().addClass('hidden');
-    });
+$('.user-icon-popup-link').click(function () {
+    const userID = $(this).data('user-id');
+    // Do stuff with sockets
 });
