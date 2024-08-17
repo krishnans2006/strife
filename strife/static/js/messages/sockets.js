@@ -4,6 +4,20 @@ socket.onopen = function (e) {
     console.log('Message socket connected');
 }
 
+socket.onmessage = function (e) {
+    const data = JSON.parse(e.data);
+
+    if (data.type === 'message') {
+        addMessage(data.message);
+    } else if (data.type === 'attachment') {
+        updateAttachments(data.message);
+    }
+}
+
+socket.onclose = function (e) {
+    console.error('Message socket closed unexpectedly');
+}
+
 function addMessage(message) {
     const messageList = $('#message-list-div')[0];
 
@@ -52,20 +66,6 @@ function updateAttachments(message) {
                 </div>
             `;
     }
-}
-
-socket.onmessage = function (e) {
-    const data = JSON.parse(e.data);
-
-    if (data.type === 'message') {
-        addMessage(data.message);
-    } else if (data.type === 'attachment') {
-        updateAttachments(data.message);
-    }
-}
-
-socket.onclose = function (e) {
-    console.error('Message socket closed unexpectedly');
 }
 
 function sendFile(fileObj, fileData, messageID) {

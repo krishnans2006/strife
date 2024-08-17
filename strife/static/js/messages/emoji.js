@@ -18,22 +18,20 @@ function insertAtCursor(myField, myValue) {
     }
 }
 
-$(document).ready(() => {
-    const emojiPicker = $('#emoji-picker');
-    const openEmojiPicker = $('#open-emoji-picker');
-    const messageBox = $('#content');
+const emojiPicker = $('#emoji-picker');
+const openEmojiPicker = $('#open-emoji-picker');
+const messageBox = $('#content');
 
-    openEmojiPicker.on('click', () => {
-        emojiPicker.toggleClass('hidden');
-    });
+openEmojiPicker.on('click', () => {
+    emojiPicker.toggleClass('hidden');
+});
 
-    emojiPicker.on('emoji-click', (e) => {
-        const emoji = e.detail.unicode;
-        const content = $('#content')[0];
-        insertAtCursor(content, emoji);
-    });
+emojiPicker.on('emoji-click', (e) => {
+    const emoji = e.detail.unicode;
+    const content = $('#content')[0];
+    insertAtCursor(content, emoji);
+});
 
-    messageBox.on('click', () => {
-        emojiPicker.addClass('hidden');
-    });
+messageBox.on('click', () => {
+    emojiPicker.addClass('hidden');
 });

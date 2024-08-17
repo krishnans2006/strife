@@ -1,6 +1,6 @@
 // When the upload button is clicked
-$('#upload-attachment').on('click', () => {
-    const canUploadAttachments = $(this).data('can-upload-attachments');
+$('#upload-attachment').on('click', function () {
+    const canUploadAttachments = $(this).data('can-send-attachments');
     if (!canUploadAttachments) {
         return;
     }
@@ -11,7 +11,7 @@ const fileStorage = $('#attachments');
 const fileDisplay = $('#attachments-view');
 
 // When a file is uploaded
-fileStorage.on('change', () => {
+fileStorage.on('change', function () {
     console.log(fileStorage[0].files);
 
     // Update the list of files
@@ -32,7 +32,7 @@ fileStorage.on('change', () => {
     uploadedFiles.forEach((file) => {
         const url = URL.createObjectURL(file);
         fileDisplay.append(`
-                  <a href="${url}" target="_blank" class="inline-block min-w-20 py-1 px-2.5 rounded-xl bg-gray-700 text-white cursor-pointer mb-2">
+                  <a href="${url}" target="_blank" class="inline-block py-1 px-2.5 rounded-xl bg-gray-700 text-white cursor-pointer mb-2">
                       ${file.name}
                   </a>
               `);
