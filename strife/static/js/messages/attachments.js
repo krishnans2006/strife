@@ -1,16 +1,16 @@
 $(document).ready(() => {
-    const uploadButton = $('#upload-attachment')[0];
+    const uploadButton = $('#upload-attachment');
     const fileStorage = $('#attachments')[0];
     const fileDisplay = $('#attachments-view');
 
     // When the upload button is clicked
-    uploadButton.addEventListener('click', () => {
+    uploadButton.on('click', () => {
         const canUploadAttachments = $(this).data('can-upload-attachments');
         if (!canUploadAttachments) {
             return;
         }
         fileStorage.click();
-    });
+    })
 
     // When a file is uploaded
     fileStorage.addEventListener('change', () => {
