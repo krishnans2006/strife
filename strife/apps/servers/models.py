@@ -132,5 +132,66 @@ class Member(models.Model):
             return self
         return self.user.as_serverized(server_id)
 
+    # Permissions
+    @property
+    def can_manage_server(self):
+        return any(
+            (
+                self.server.permissions.can_manage_server,
+                self.permissions.can_manage_server,
+                *(role.permissions.can_manage_server for role in self.roles),
+            )
+        )
+
+    @property
+    def can_manage_roles(self):
+        return any(
+            (
+                self.server.permissions.can_manage_roles,
+                self.permissions.can_manage_roles,
+                *(role.permissions.can_manage_roles for role in self.roles),
+            )
+        )
+
+    @property
+    def can_manage_channels(self):
+        return any(
+            (
+                self.server.permissions.can_manage_channels,
+                self.permissions.can_manage_channels,
+                *(role.permissions.can_manage_channels for role in self.roles),
+            )
+        )
+
+    @property
+    def can_manage_messages(self):
+        return any(
+            (
+                self.server.permissions.can_manage_messages,
+                self.permissions.can_manage_messages,
+                *(role.permissions.can_manage_messages for role in self.roles),
+            )
+        )
+
+    @property
+    def can_send_messages(self):
+        return any(
+            (
+                self.server.permissions.can_send_messages,
+                self.permissions.can_send_messages,
+                *(role.permissions.can_send_messages for role in self.roles),
+            )
+        )
+
+    @property
+    def can_send_attachments(self):
+        return any(
+            (
+                self.server.permissions.can_send_attachments,
+                self.permissions.can_send_attachments,
+                *(role.permissions.can_send_attachments for role in self.roles),
+            )
+        )
+
     def __repr__(self):
         return f"<Member: {self.user.username}>"
