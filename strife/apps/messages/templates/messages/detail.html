@@ -20,7 +20,7 @@
         {% for attachment in message.attachments.all %}
           <a href="{{ attachment.download_url }}"
              target="_blank"
-             class="inline-block min-w-20 py-1 px-2.5 rounded-xl bg-gray-700 text-white cursor-pointer">{{ attachment.name }}</a>
+             class="inline-block py-1 px-2.5 rounded-xl bg-gray-700 text-white cursor-pointer">{{ attachment.name }}</a>
         {% endfor %}
       </div>
     {% endif %}

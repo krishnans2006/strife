@@ -5,6 +5,10 @@ $(document).ready(() => {
 
     // When the upload button is clicked
     uploadButton.addEventListener('click', () => {
+        const canUploadAttachments = $(this).data('can-upload-attachments');
+        if (!canUploadAttachments) {
+            return;
+        }
         fileStorage.click();
     });
 

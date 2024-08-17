@@ -47,7 +47,7 @@ function updateAttachments(message) {
         messageChildDiv.innerHTML += `
                 <div id="message-${message.id}-attachments" class="flex flex-row gap-3.5">
                     ${message.attachments.map((attachment) => `
-                        <a href="${attachment.download_url}" target="_blank" class="inline-block min-w-20 py-1 px-2.5 rounded-xl bg-gray-700 text-white cursor-pointer">${attachment.name}</a>
+                        <a href="${attachment.download_url}" target="_blank" class="inline-block py-1 px-2.5 rounded-xl bg-gray-700 text-white cursor-pointer">${attachment.name}</a>
                     `).join('')}
                 </div>
             `;
