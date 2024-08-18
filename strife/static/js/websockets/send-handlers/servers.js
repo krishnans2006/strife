@@ -1,6 +1,6 @@
-function sendMemberRequest() {
+function sendMemberRequest(member_id) {
     socket.send(JSON.stringify({
         'type': 'req_member',
-        'member_id': this.dataset.member_id
+        'member_id': member_id
     }));
 }

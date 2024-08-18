@@ -101,10 +101,8 @@ class Member(models.Model):
             "display_name": self.display_name,
             "email": self.email,
             "bio": self.bio,
-            "avatar": self.avatar,
             "display_avatar": self.display_avatar,
             "is_serverized": self.is_serverized,
-            "permissions": self.permissions.to_dict(),
         }
 
     # Properties for quick access to User
