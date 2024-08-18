@@ -7,6 +7,8 @@ from .models import Server
 
 class ServerConsumer(GenericConsumer):
     def initialize(self):
+        super().initialize()
+
         # Set parameters
         self.server_id = self.scope["url_route"]["kwargs"]["server_id"]
         assert self.server_id

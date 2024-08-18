@@ -3,6 +3,8 @@ import json
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 
+from strife.apps.users.models import User
+
 
 class GenericConsumer(WebsocketConsumer):
     BYTES_SEPARATOR = 33  # ! (exclamation mark)
@@ -13,6 +15,7 @@ class GenericConsumer(WebsocketConsumer):
 
     def initialize(self):
         self.supported_types_json["ping"] = self.handle_ping
+        self.supported_types_json["req_user"] = self.handle_req_user_payload
         # ...more
 
     def connect(self):
@@ -35,7 +38,7 @@ class GenericConsumer(WebsocketConsumer):
             type = text_data_json["type"]
 
             if type not in self.supported_types_json:
-                print("Unsupported type")
+                print("Unsupported type: " + type)
                 return
 
             # Dispatch the payload
@@ -66,3 +69,18 @@ class GenericConsumer(WebsocketConsumer):
 
     def ping(self, event):
         self.send(text_data=json.dumps(event))
+
+    def handle_req_user_payload(self, payload):
+        # Get user info
+        user_id = payload["user_id"]
+        user = User.objects.get(id=user_id)
+
+        # Send the member info
+        self.send(
+            text_data=json.dumps(
+                {
+                    "type": "member",
+                    "member": user.to_dict(),
+                }
+            )
+        )
