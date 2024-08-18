@@ -70,6 +70,17 @@ class User(AbstractUser):
             return member
         return None
 
+    # Serialization
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "display_name": self.display_name,
+            "email": self.email,
+            "bio": self.bio,
+            "display_avatar": self.display_avatar,
+        }
+
     def __str__(self):
         return self.username
 

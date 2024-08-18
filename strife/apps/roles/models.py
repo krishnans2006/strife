@@ -37,5 +37,14 @@ class Role(models.Model):
             "servers:roles:edit", kwargs={"server_id": self.server.id, "role_id": self.id}
         )
 
+    # Serialization
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "color": self.color,
+        }
+
     def __repr__(self):
         return f"<Role: {self.name}>"

@@ -103,6 +103,7 @@ class Member(models.Model):
             "bio": self.bio,
             "display_avatar": self.display_avatar,
             "is_serverized": self.is_serverized,
+            "roles": [role.to_dict() for role in self.roles.all()],
         }
 
     # Properties for quick access to User
