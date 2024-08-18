@@ -9,17 +9,6 @@ function userHandler(user) {
     populatePopup(user);
 }
 
-function changeRolesHandler(data) {
-    const member = data.member;
-    const roles = data.roles;
-
-    const memberRow = document.getElementById(`member-${member.id}`);
-    const rolesList = memberRow.querySelector('.roles-list');
-
-    rolesList.innerHTML = '';
-    roles.forEach(role => {
-        const roleElement = document.createElement('li');
-        roleElement.textContent = role;
-        rolesList.appendChild(roleElement);
-    });
+function changeRolesHandler(member) {
+    updatePopupRoles(member);
 }

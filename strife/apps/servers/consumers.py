@@ -37,7 +37,7 @@ class ServerConsumer(GenericConsumer):
             )
         )
 
-    def handle_change_roles_payload(self, payload):
+    def handle_add_role_payload(self, payload):
         # Check permissions
         if not self.user.as_serverized(self.server_id).can_manage_roles:
             return
@@ -47,17 +47,48 @@ class ServerConsumer(GenericConsumer):
         member = self.server.members.get(id=member_id)
 
         # Get role info
-        new_roles = payload["roles"]
-        roles = self.server.roles.filter(id__in=new_roles)
+        new_roles = payload["role"]
+        role = self.server.roles.get(name=new_roles)
 
-        # Update roles
-        member.roles.set(roles)
+        # Add the role
+        member.roles.add(role)
+        member.save()
 
         # Send the member info
         self.send(
             text_data=json.dumps(
                 {
-                    "type": "member",
+                    "type": "change_roles_res",
+                    "member": member.to_dict(),
+                }
+            )
+        )
+
+    def handle_remove_role_payload(self, payload):
+        # Check permissions
+        if not self.user.as_serverized(self.server_id).can_manage_roles:
+            return
+
+        # Get member info
+        member_id = payload["member_id"]
+        member = self.server.members.get(id=member_id)
+
+        # Get role info
+        old_roles = payload["role"]
+        role = self.server.roles.get(name=old_roles)
+
+        if member not in role.members.all():
+            return
+
+        # Remove the role
+        member.roles.remove(role)
+        member.save()
+
+        # Send the member info
+        self.send(
+            text_data=json.dumps(
+                {
+                    "type": "change_roles_res",
                     "member": member.to_dict(),
                 }
             )
