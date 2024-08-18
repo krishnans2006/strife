@@ -1,0 +1,25 @@
+<!-- This template will be filled in by JS -->
+<!-- Should not be used multiple times on the same page -->
+<div class="bg-gray-800/60 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center user-profile-backdrop">
+  <div id="js-user-profile-container"
+       class="bg-gray-900 rounded-3xl flex flex-col items-center justify-center p-4">
+    <img id="js-user-profile-image"
+         src="user.display_avatar"
+         alt="user.username"
+         class="size-20 aspect-square object-cover rounded-full mb-4" />
+    <h1 id="js-user-profile-display-name"
+        class="text-3xl text-gray-100 font-bold">user.display_name</h1>
+    <h3 id="js-user-profile-username" class="text-lg text-gray-300">user.username</h3>
+    <p id="js-user-profile-bio" class="text-gray-300 mt-4">user.bio</p>
+    <div class="hidden js-user-profile-member-only-div">
+      <span class="text-gray-300 mt-1">Roles:</span>
+      <span class="js-user-profile-role hidden">role.name</span>
+      <span id="js-user-profile-no-roles" class="text-gray-400 italic hidden">No roles</span>
+    </div>
+    <div class="hidden js-user-profile-me-only-div">
+      <!-- Cannot use <a> tag here, because for some reason it messes up display logic -->
+      <button onclick="location.replace('{% url 'users:edit' %}');"
+              class="bg-gray-700 text-white rounded-xl py-1 px-4 mt-4">Edit Profile</button>
+    </div>
+  </div>
+</div>
