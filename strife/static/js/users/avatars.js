@@ -51,5 +51,50 @@ function populatePopup(user) {
         }
     }
 
+    userProfile.data('user-id', user.id);
     userProfile.removeClass('hidden');
+}
+
+
+function updatePopupRoles(member) {
+    // Make sure we're getting a member (with roles)
+    if (!member.is_serverized) {
+        return;
+    }
+
+    // Make sure there's a popup present
+    const userProfile = $('#js-user-profile');
+    if (userProfile.length < 0) {
+        return;
+    }
+
+    // Make sure they haven't closed the popup
+    if (userProfile.hasClass('hidden')) {
+        return;
+    }
+
+    // Make sure the popup is for the same user
+    const popupUserId = userProfile.data('user-id');
+    if (parseInt(popupUserId) !== member.id) {
+        return;
+    }
+
+    // Clear roles from previous popups
+    $('.js-user-profile-role').remove();
+
+    $(".js-user-profile-member-only-div").removeClass("hidden");
+
+    if (member.roles.length === 0) {
+        $("#js-user-profile-no-roles").removeClass("hidden");
+    } else {
+        for (role of member.roles) {
+            $("#js-user-profile-role-example")
+                .clone()
+                .removeAttr("id")
+                .text(role.name)
+                .css("background-color", role.color)
+                .addClass("js-user-profile-role")
+                .appendTo("#js-user-profile-roles-div");
+        }
+    }
 }
