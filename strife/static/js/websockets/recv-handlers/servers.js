@@ -31,7 +31,13 @@ function memberHandler(member) {
             $("#js-user-profile-no-roles").removeClass("hidden");
         } else {
             for (role of member.roles) {
-                $("#js-user-profile-role-example").clone().removeAttr("id").text(role.name).css("background-color", role.color).addClass("js-user-profile-role").appendTo("#js-user-profile-roles-div");
+                $("#js-user-profile-role-example")
+                    .clone()
+                    .removeAttr("id")
+                    .text(role.name)
+                    .css("background-color", role.color)
+                    .addClass("js-user-profile-role")
+                    .appendTo("#js-user-profile-roles-div");
             }
         }
     }
