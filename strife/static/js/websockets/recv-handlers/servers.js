@@ -21,5 +21,5 @@ function memberHandler(member) {
     username.text(member.username);
     bio.text(member.bio);
 
-    container.removeClass('hidden');
+    userProfile.removeClass('hidden');
 }
