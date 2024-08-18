@@ -1,10 +1,11 @@
 <!-- This template will be filled in by JS -->
 <!-- Should not be used multiple times on the same page -->
-<div class="bg-gray-800/60 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center user-profile-backdrop">
+<div id="js-user-profile"
+     class="bg-gray-800/60 w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center hidden">
   <div id="js-user-profile-container"
        class="bg-gray-900 rounded-3xl flex flex-col items-center justify-center p-4">
     <img id="js-user-profile-image"
-         src="user.display_avatar"
+         src="https://user.display_avatar"
          alt="user.username"
          class="size-20 aspect-square object-cover rounded-full mb-4" />
     <h1 id="js-user-profile-display-name"
@@ -18,7 +19,7 @@
     </div>
     <div class="hidden js-user-profile-me-only-div">
       <!-- Cannot use <a> tag here, because for some reason it messes up display logic -->
-      <button onclick="location.replace('{% url 'users:edit' %}');"
+      <button onclick="location.replace('HERE');"
               class="bg-gray-700 text-white rounded-xl py-1 px-4 mt-4">Edit Profile</button>
     </div>
   </div>

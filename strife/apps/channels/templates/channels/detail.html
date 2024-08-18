@@ -38,3 +38,10 @@
 {% block messages %}
   {% include "messages/list.html" with server=channel.server channel=channel %}
 {% endblock messages %}
+
+<!-- User Profile Popup -->
+
+{% block fullscreen %}
+  <!-- This is edit by the JS found in recv-handlers/servers.js -->
+  {% include "users/blank_profile.html" %}
+{% endblock fullscreen %}
