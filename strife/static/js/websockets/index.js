@@ -15,6 +15,8 @@ socket.onmessage = function (e) {
         attachmentHandler(data.message);
     } else if (data.type === 'member') {
         memberHandler(data.member);
+    } else if (data.type === 'user') {
+        userHandler(data.user);
     }
 }
 

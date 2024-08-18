@@ -4,3 +4,7 @@
 function memberHandler(member) {
     populatePopup(member);
 }
+
+function userHandler(user) {
+    populatePopup(user);
+}
