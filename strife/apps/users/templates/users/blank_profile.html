@@ -14,9 +14,19 @@
     <p id="js-user-profile-bio" class="text-gray-300 mt-4">user.bio</p>
     <div id="js-user-profile-roles-div"
          class="hidden js-user-profile-member-only-div">
-      <span class="text-gray-300 mt-1">Roles:</span>
-      <span id="js-user-profile-role-example" class="hidden">role.name</span>
-      <span id="js-user-profile-no-roles" class="text-gray-400 italic hidden">No roles</span>
+      <div class="flex flex-row items-center justify-center mt-1 gap-1">
+        <span class="text-gray-300">Roles:</span>
+        <span id="js-user-profile-role-example" class="hidden">role.name</span>
+        <span id="js-user-profile-no-roles" class="text-gray-400 italic hidden">No roles</span>
+      </div>
+      <label class="text-center text-sm flex flex-row items-center justify-center">
+        <select id="js-user-profile-roles-select"
+                class="bg-gray-700 text-gray-300 rounded-xl py-1 px-2 mt-1 text-sm"
+                onchange="sendRoleAdd(this);">
+          <option value="-1" class="hidden">Add a role</option>
+          {% for role in server.roles.all %}<option value="{{ role.id }}">{{ role.name }}</option>{% endfor %}
+        </select>
+      </label>
     </div>
     <div class="hidden js-user-profile-me-only-div">
       <!-- Cannot use <a> tag here, because for some reason it messes up display logic -->

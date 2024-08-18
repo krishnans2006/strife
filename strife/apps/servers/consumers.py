@@ -18,7 +18,8 @@ class ServerConsumer(GenericConsumer):
 
         # Register supported types
         self.supported_types_json["req_member"] = self.handle_req_member_payload
-        self.supported_types_json["change_roles"] = self.handle_change_roles_payload
+        self.supported_types_json["add_role"] = self.handle_add_role_payload
+        self.supported_types_json["remove_role"] = self.handle_remove_role_payload
 
     def handle_req_member_payload(self, payload):
         # Don't need to check permissions here; the user is already in the server
@@ -47,8 +48,8 @@ class ServerConsumer(GenericConsumer):
         member = self.server.members.get(id=member_id)
 
         # Get role info
-        new_roles = payload["role"]
-        role = self.server.roles.get(name=new_roles)
+        new_role_id = payload["role_id"]
+        role = self.server.roles.get(id=new_role_id)
 
         # Add the role
         member.roles.add(role)

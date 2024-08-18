@@ -1,4 +1,6 @@
-$('#js-user-profile').on('click', function (e) {
+const userProfile = $('#js-user-profile');
+
+userProfile.on('click', function (e) {
     // If it's the modal itself, do nothing
     if (e.target != this) {
         return;
@@ -11,13 +13,11 @@ $('#js-user-profile').on('click', function (e) {
 
 function populatePopup(user) {
     // Make sure element with id js-user-profile exists
-    const userProfile = $('#js-user-profile');
-
     if (userProfile.length < 0) {
         return;
     }
 
-    const container = $('#js-user-profile-container');
+    // const container = $('#js-user-profile-container');
     const image = $('#js-user-profile-image');
     const displayName = $('#js-user-profile-display-name');
     const username = $('#js-user-profile-username');
@@ -34,7 +34,7 @@ function populatePopup(user) {
     $('.js-user-profile-role').remove();
 
     if (user.is_serverized) {
-        $(".js-user-profile-member-only-div").removeClass("hidden");
+        $(".js-user-profile-member-only-div").removeClass("hidden").data('member-id', user.id);
 
         if (user.roles.length === 0) {
             $("#js-user-profile-no-roles").removeClass("hidden");
@@ -63,7 +63,6 @@ function updatePopupRoles(member) {
     }
 
     // Make sure there's a popup present
-    const userProfile = $('#js-user-profile');
     if (userProfile.length < 0) {
         return;
     }
@@ -82,7 +81,7 @@ function updatePopupRoles(member) {
     // Clear roles from previous popups
     $('.js-user-profile-role').remove();
 
-    $(".js-user-profile-member-only-div").removeClass("hidden");
+    $(".js-user-profile-member-only-div").removeClass("hidden").data('member-id', member.id);
 
     if (member.roles.length === 0) {
         $("#js-user-profile-no-roles").removeClass("hidden");
