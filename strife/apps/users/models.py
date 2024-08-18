@@ -79,6 +79,7 @@ class User(AbstractUser):
             "email": self.email,
             "bio": self.bio,
             "display_avatar": self.display_avatar,
+            "is_serverized": self.is_serverized,
         }
 
     def __str__(self):
