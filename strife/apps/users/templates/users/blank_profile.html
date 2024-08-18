@@ -12,9 +12,10 @@
         class="text-3xl text-gray-100 font-bold">user.display_name</h1>
     <h3 id="js-user-profile-username" class="text-lg text-gray-300">user.username</h3>
     <p id="js-user-profile-bio" class="text-gray-300 mt-4">user.bio</p>
-    <div class="hidden js-user-profile-member-only-div">
+    <div id="js-user-profile-roles-div"
+         class="hidden js-user-profile-member-only-div">
       <span class="text-gray-300 mt-1">Roles:</span>
-      <span class="js-user-profile-role hidden">role.name</span>
+      <span id="js-user-profile-role-example" class="hidden">role.name</span>
       <span id="js-user-profile-no-roles" class="text-gray-400 italic hidden">No roles</span>
     </div>
     <div class="hidden js-user-profile-me-only-div">

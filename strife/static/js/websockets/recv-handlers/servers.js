@@ -21,5 +21,20 @@ function memberHandler(member) {
     username.text(member.username);
     bio.text(member.bio);
 
+    // Clear roles from previous popups
+    $('.js-user-profile-role').remove();
+
+    if (member.is_serverized) {
+        $(".js-user-profile-member-only-div").removeClass("hidden");
+
+        if (member.roles.length === 0) {
+            $("#js-user-profile-no-roles").removeClass("hidden");
+        } else {
+            for (role of member.roles) {
+                $("#js-user-profile-role-example").clone().removeAttr("id").text(role.name).css("background-color", role.color).addClass("js-user-profile-role").appendTo("#js-user-profile-roles-div");
+            }
+        }
+    }
+
     userProfile.removeClass('hidden');
 }
