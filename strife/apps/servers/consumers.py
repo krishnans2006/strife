@@ -1,6 +1,8 @@
 import json
 
-from apps.home.consumers import GenericConsumer
+from strife.apps.home.consumers import GenericConsumer
+
+from .models import Server
 
 
 class ServerConsumer(GenericConsumer):
@@ -9,7 +11,8 @@ class ServerConsumer(GenericConsumer):
         self.server_id = self.scope["url_route"]["kwargs"]["server_id"]
         assert self.server_id
 
-        self.server = self.user.servers.get(id=self.server_id)
+        self.server = Server.objects.get(id=self.server_id)
+        assert self.server.members.filter(user=self.user).exists()
 
         # Register supported types
         self.supported_types_json["req_member"] = self.handle_req_member_payload
@@ -22,4 +25,11 @@ class ServerConsumer(GenericConsumer):
         member = self.server.members.get(id=member_id)
 
         # Send the member info
-        self.send(text_data=json.dumps(member.to_dict()))
+        self.send(
+            text_data=json.dumps(
+                {
+                    "type": "member",
+                    "member": member.to_dict(),
+                }
+            )
+        )

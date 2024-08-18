@@ -6,7 +6,8 @@
          class="cursor-pointer size-10 flex-none aspect-square object-cover rounded-full mt-1 user-icon-popup-link"
          src="{{ message.author.display_avatar }}"
          alt="{{ message.author.username }}"
-         data-user-id="{{ message.author.id }}" />
+         data-user-id="{{ message.author.id }}"
+         onclick="sendMemberRequest();" />
   </a>
   <div id="message-{{ message.id }}-child"
        class="grow text-gray-300 flex flex-col">
