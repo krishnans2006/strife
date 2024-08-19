@@ -70,6 +70,27 @@ function updatePopupRoles(member) {
     updatePopupServerized(member);
 }
 
+function getContrastingBW(hex) {
+    if (hex.indexOf('#') === 0) {
+        hex = hex.slice(1);
+    }
+    // convert 3-digit hex to 6-digits.
+    if (hex.length === 3) {
+        hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+    }
+    if (hex.length !== 6) {
+        throw new Error('Invalid HEX color.');
+    }
+    const r = parseInt(hex.slice(0, 2), 16),
+        g = parseInt(hex.slice(2, 4), 16),
+        b = parseInt(hex.slice(4, 6), 16);
+
+    // https://stackoverflow.com/a/3943023/11317931
+    return (r * 0.299 + g * 0.587 + b * 0.114) > 186
+        ? '#000000'  // too bright
+        : '#FFFFFF';  // too dark
+}
+
 // Only call if the user is serverized
 function updatePopupServerized(member) {
     $(".js-user-profile-member-only-div").removeClass("hidden").data('member-id', member.id);
@@ -92,6 +113,7 @@ function updatePopupServerized(member) {
                 .removeAttr("id")
                 .text(role.name)
                 .css("background-color", `#${role.color}`)
+                .css("color", getContrastingBW(role.color))
                 .addClass("js-user-profile-role")
                 .removeClass("hidden")
                 .appendTo("#js-user-profile-roles-div");
