@@ -13,6 +13,9 @@ function sendAttachments(message_id) {
             $.ajax({
                 url: `/servers/${SERVER_ID}/channels/${CHANNEL_ID}/messages/${message_id}/attachments/upload/`,
                 type: 'POST',
+                headers: {
+                    'X-CSRFToken': CSRF_TOKEN,
+                },
                 data: formData,
                 processData: false,
                 contentType: false,

@@ -52,7 +52,7 @@ class GenericConsumer(WebsocketConsumer):
             data_chunks = bytes_data[1:].split(b"!")
 
             if data_chunks[0] not in self.supported_types_bytes:
-                print("Unsupported command")
+                print("Unsupported command: " + data_chunks[0])
                 return
 
             # Dispatch the payload

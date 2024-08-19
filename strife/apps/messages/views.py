@@ -1,7 +1,7 @@
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 from django.core.files.images import ImageFile
-from django.http import FileResponse, HttpResponseForbidden
+from django.http import FileResponse, HttpResponse, HttpResponseForbidden
 
 from .models import Attachment, Message
 
@@ -37,6 +37,9 @@ def upload_attachment_view(request, server_id, channel_id, message_id):
             "message": message.to_dict(),
         },
     )
+
+    # The server successfully processed the request, and is not returning any content
+    return HttpResponse(status=204)
 
 
 def view_attachment_view(request, server_id, channel_id, message_id, attachment_id):
