@@ -155,24 +155,15 @@ class Member(models.Model):
         ]
 
         return {
-            "can_manage_server": any(
-                permission.can_manage_server for permission in all_permission_objs
-            ),
-            "can_manage_roles": any(
-                permission.can_manage_roles for permission in all_permission_objs
-            ),
-            "can_manage_channels": any(
-                permission.can_manage_channels for permission in all_permission_objs
-            ),
-            "can_manage_messages": any(
-                permission.can_manage_messages for permission in all_permission_objs
-            ),
-            "can_send_messages": any(
-                permission.can_send_messages for permission in all_permission_objs
-            ),
-            "can_send_attachments": any(
-                permission.can_send_attachments for permission in all_permission_objs
-            ),
+            perm: any(getattr(perm_obj, perm) for perm_obj in all_permission_objs)
+            for perm in (
+                "can_manage_server",
+                "can_manage_roles",
+                "can_manage_channels",
+                "can_manage_messages",
+                "can_send_messages",
+                "can_send_attachments",
+            )
         }
 
     @property
@@ -183,7 +174,17 @@ class Member(models.Model):
             *(role.permissions for role in self.roles.all()),
         ]
 
-        return f"{any(permission.can_manage_server for permission in all_permission_objs)}{any(permission.can_manage_roles for permission in all_permission_objs)}{any(permission.can_manage_channels for permission in all_permission_objs)}{any(permission.can_manage_messages for permission in all_permission_objs)}{any(permission.can_send_messages for permission in all_permission_objs)}{any(permission.can_send_attachments for permission in all_permission_objs)}"
+        return "".join(
+            "1" if any(getattr(perm_obj, perm) for perm_obj in all_permission_objs) else "0"
+            for perm in (
+                "can_manage_server",
+                "can_manage_roles",
+                "can_manage_channels",
+                "can_manage_messages",
+                "can_send_messages",
+                "can_send_attachments",
+            )
+        )
 
     @property
     def can_manage_server(self):
