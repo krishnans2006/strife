@@ -84,6 +84,7 @@ function updatePopupServerized(member) {
     if (member.roles.length === 0) {
         $("#js-user-profile-no-roles").removeClass("hidden");
     } else {
+        $("#js-user-profile-no-roles").addClass("hidden");
         for (const role of member.roles) {
             // Add the role to the popup
             $("#js-user-profile-role-example")
