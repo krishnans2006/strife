@@ -36,6 +36,8 @@ function populatePopup(user) {
     if (user.is_serverized) {
         $(".js-user-profile-member-only-div").removeClass("hidden").data('member-id', user.id);
 
+        // Logic for permission-based div visibility here
+
         if (user.roles.length === 0) {
             $("#js-user-profile-no-roles").removeClass("hidden");
         } else {
