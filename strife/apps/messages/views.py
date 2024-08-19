@@ -6,6 +6,32 @@ from django.http import FileResponse, HttpResponse, HttpResponseForbidden
 from .models import Attachment, Message
 
 
+def message_edit_view(request, server_id, channel_id, message_id):
+    message = Message.objects.get(id=message_id)
+
+    if (
+        message.author != request.user
+        or message.channel.id != channel_id
+        or message.channel.server.id != server_id
+    ):
+        return HttpResponseForbidden()
+
+    message.content = request.POST["content"]
+    message.save()
+
+    channel_layer = get_channel_layer()
+    group_name = f"chat_{channel_id}"
+    async_to_sync(channel_layer.group_send)(
+        group_name,
+        {
+            "type": "chat.message.edit",
+            "message": message.to_dict(),
+        },
+    )
+
+    return HttpResponse(status=204)
+
+
 def upload_attachment_view(request, server_id, channel_id, message_id):
     if not request.user.as_serverized(server_id).can_send_attachments:
         return HttpResponseForbidden()
