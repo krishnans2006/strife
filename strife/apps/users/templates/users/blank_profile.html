@@ -22,15 +22,9 @@
       </div>
       <label class="text-center text-sm flex flex-row items-center justify-center hidden js-user-profile-manage-roles-only-div">
         <select id="js-user-profile-roles-select"
-                class="bg-gray-700 text-gray-300 rounded-xl py-1 px-2 mt-1 text-sm"
+                class="bg-gray-700 text-gray-300 rounded-xl py-1 px-2 mt-1 text-sm {% if not server.roles.all %}hidden{% endif %}"
                 onchange="sendRoleAdd(this);">
-          <option value="-1" class="hidden">
-            {% if server.roles.all %}
-              Add a role
-            {% else %}
-              No roles can be added
-            {% endif %}
-          </option>
+          <option value="-1" class="hidden">Add a role</option>
           {% for role in server.roles.all %}
             <option id="js-user-profile-roles-select-role-{{ role.id }}"
                     value="{{ role.id }}">{{ role.name }}</option>

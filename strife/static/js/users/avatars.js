@@ -79,6 +79,8 @@ function updatePopupServerized(member) {
         $(".js-user-profile-manage-roles-only-div").removeClass("hidden");
     }
 
+    const roleSelect = $('#js-user-profile-roles-select');
+
     if (member.roles.length === 0) {
         $("#js-user-profile-no-roles").removeClass("hidden");
     } else {
@@ -95,5 +97,13 @@ function updatePopupServerized(member) {
             // Remove it from the dropdown to add roles
             $(`#js-user-profile-roles-select-role-${role.id}`).addClass("hidden");
         }
+
+    }
+
+    const numOptions = roleSelect.find("option").length;
+    const numHidden = roleSelect.find("option.hidden").length;
+
+    if (numOptions === numHidden) {
+        roleSelect.addClass("hidden");
     }
 }
