@@ -74,6 +74,7 @@ class User(AbstractUser):
     def to_dict(self):
         return {
             "id": self.id,
+            "user_id": self.id,
             "username": self.username,
             "display_name": self.display_name,
             "email": self.email,

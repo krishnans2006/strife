@@ -97,6 +97,7 @@ class Member(models.Model):
     def to_dict(self):
         return {
             "id": self.id,
+            "user_id": self.user.id,
             "username": self.username,
             "display_name": self.display_name,
             "email": self.email,

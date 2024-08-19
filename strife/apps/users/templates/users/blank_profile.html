@@ -37,7 +37,7 @@
     </div>
     <div class="hidden js-user-profile-me-only-div">
       <!-- Cannot use <a> tag here, because for some reason it messes up display logic -->
-      <button onclick="location.replace('HERE');"
+      <button onclick="location.replace('{% url 'users:edit' %}');"
               class="bg-gray-700 text-white rounded-xl py-1 px-4 mt-4">Edit Profile</button>
     </div>
   </div>

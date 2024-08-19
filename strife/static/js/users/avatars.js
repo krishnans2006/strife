@@ -37,6 +37,10 @@ function populatePopup(user) {
         updatePopupServerized(user);
     }
 
+    if (user.user_id === parseInt(USER_ID)) {
+        $('.js-user-profile-me-only-div').removeClass('hidden');
+    }
+
     userProfile.data('user-id', user.id);
     userProfile.removeClass('hidden');
 }
