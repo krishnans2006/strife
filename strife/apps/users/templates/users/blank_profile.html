@@ -29,7 +29,8 @@
           <option value="-1" class="hidden">Add a role</option>
           {% for role in server.roles.all %}
             <option id="js-user-profile-roles-select-role-{{ role.id }}"
-                    value="{{ role.id }}">{{ role.name }}</option>
+                    value="{{ role.id }}"
+                    class="js-user-profile-roles-select-role">{{ role.name }}</option>
           {% endfor %}
         </select>
       </label>

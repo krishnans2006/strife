@@ -106,6 +106,11 @@ function updatePopupServerized(member) {
         $("#js-user-profile-no-roles").removeClass("hidden");
     } else {
         $("#js-user-profile-no-roles").addClass("hidden");
+
+        // Show all roles in the dropdown
+        $(".js-user-profile-roles-select-role").removeClass("hidden");
+
+        // Then for every role the member already has
         for (const role of member.roles) {
             // Add the role to the popup
             $("#js-user-profile-role-example")
@@ -118,7 +123,7 @@ function updatePopupServerized(member) {
                 .addClass("js-user-profile-role")
                 .removeClass("hidden")
                 .appendTo("#js-user-profile-roles-div");
-            // Remove it from the dropdown to add roles
+            // Remove it from the dropdown
             $(`#js-user-profile-roles-select-role-${role.id}`).addClass("hidden");
         }
     }
@@ -128,5 +133,9 @@ function updatePopupServerized(member) {
 
     if (numOptions === numHidden) {
         roleSelect.addClass("hidden");
+    } else {
+        roleSelect.removeClass("hidden");
     }
+
+    roleSelect.val("-1");  // "Add a role"
 }
