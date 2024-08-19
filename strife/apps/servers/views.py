@@ -26,6 +26,9 @@ class ServerCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         new_member = Member(user=self.request.user, server=server)
         new_member.save()
 
+        new_member.permissions.set_as_owner()
+        new_member.permissions.save()
+
         server.owner = new_member
         server.save()
 

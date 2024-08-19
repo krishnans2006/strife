@@ -49,5 +49,15 @@ class Permissions(models.Model):
     def is_for_member(self):
         return hasattr(self, "member")
 
+    # Initializers
+    def set_as_owner(self):
+        self.can_manage_server = True
+        self.can_manage_roles = True
+        self.can_manage_channels = True
+        self.can_manage_messages = True
+
+        self.can_send_messages = True
+        self.can_send_attachments = True
+
     def __repr__(self):
         return "<Permissions object>"
