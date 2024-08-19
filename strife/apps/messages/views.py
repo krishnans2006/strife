@@ -45,6 +45,13 @@ def upload_attachment_view(request, server_id, channel_id, message_id):
 def view_attachment_view(request, server_id, channel_id, message_id, attachment_id):
     attachment = Attachment.objects.get(id=attachment_id)
 
+    if (
+        attachment.message.id != message_id
+        or attachment.message.channel.id != channel_id
+        or attachment.message.channel.server.id != server_id
+    ):
+        return HttpResponseForbidden()
+
     file_obj = open(attachment.file.path, "rb")
 
     return FileResponse(file_obj, filename=attachment.filename, as_attachment=False)
@@ -52,6 +59,13 @@ def view_attachment_view(request, server_id, channel_id, message_id, attachment_
 
 def download_attachment_view(request, server_id, channel_id, message_id, attachment_id):
     attachment = Attachment.objects.get(id=attachment_id)
+
+    if (
+        attachment.message.id != message_id
+        or attachment.message.channel.id != channel_id
+        or attachment.message.channel.server.id != server_id
+    ):
+        return HttpResponseForbidden()
 
     file_obj = open(attachment.file.path, "rb")
 
