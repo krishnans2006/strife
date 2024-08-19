@@ -97,7 +97,6 @@ function updatePopupServerized(member) {
             // Remove it from the dropdown to add roles
             $(`#js-user-profile-roles-select-role-${role.id}`).addClass("hidden");
         }
-
     }
 
     const numOptions = roleSelect.find("option").length;

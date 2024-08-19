@@ -18,7 +18,7 @@ socket.onmessage = function (e) {
     } else if (data.type === 'user') {
         userHandler(data.user);
     } else if (data.type === 'change_roles_res') {
-        changeRolesHandler(data);
+        changeRolesHandler(data.member);
     }
 }
 
