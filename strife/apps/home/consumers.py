@@ -80,6 +80,7 @@ class GenericConsumer(WebsocketConsumer):
             text_data=json.dumps(
                 {
                     "type": "member",
+                    "error": False,
                     "member": user.to_dict(),
                 }
             )

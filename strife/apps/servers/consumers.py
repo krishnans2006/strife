@@ -33,6 +33,7 @@ class ServerConsumer(GenericConsumer):
             text_data=json.dumps(
                 {
                     "type": "member",
+                    "error": False,
                     "member": member.to_dict(),
                 }
             )
@@ -41,6 +42,15 @@ class ServerConsumer(GenericConsumer):
     def handle_add_role_payload(self, payload):
         # Check permissions
         if not self.user.as_serverized(self.server_id).can_manage_roles:
+            self.send(
+                text_data=json.dumps(
+                    {
+                        "type": "change_roles_res",
+                        "error": True,
+                        "message": "You do not have permission to manage roles.",
+                    }
+                )
+            )
             return
 
         # Get member info
@@ -60,6 +70,7 @@ class ServerConsumer(GenericConsumer):
             text_data=json.dumps(
                 {
                     "type": "change_roles_res",
+                    "error": False,
                     "member": member.to_dict(),
                 }
             )
@@ -90,6 +101,7 @@ class ServerConsumer(GenericConsumer):
             text_data=json.dumps(
                 {
                     "type": "change_roles_res",
+                    "error": False,
                     "member": member.to_dict(),
                 }
             )

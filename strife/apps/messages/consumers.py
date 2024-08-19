@@ -78,9 +78,9 @@ class MessageConsumer(ServerConsumer):
     def chat_message(self, event):
         message = event["message"]
 
-        self.send(text_data=json.dumps({"type": "message", "message": message}))
+        self.send(text_data=json.dumps({"type": "message", "error": False, "message": message}))
 
     def chat_attachment(self, event):
         message = event["message"]
 
-        self.send(text_data=json.dumps({"type": "attachment", "message": message}))
+        self.send(text_data=json.dumps({"type": "attachment", "error": False, "message": message}))
