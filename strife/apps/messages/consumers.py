@@ -21,7 +21,6 @@ class MessageConsumer(ServerConsumer):
 
         # Register supported types
         self.supported_types_json["message"] = self.handle_message_payload
-        self.supported_types_bytes[b"file"] = self.handle_file_payload
 
         # Set group name
         self.group_name = f"chat_{self.channel_id}"
@@ -67,19 +66,13 @@ class MessageConsumer(ServerConsumer):
         )
 
         # Update websocket clients
-        async_to_sync(self.channel_layer.group_send)(
-            self.group_name,
-            {
-                "type": "chat.attachment",
-                "message": message.to_dict(),
-            },
-        )
 
     def chat_message(self, event):
         message = event["message"]
 
         self.send(text_data=json.dumps({"type": "message", "error": False, "message": message}))
 
+    # Triggered from views.py
     def chat_attachment(self, event):
         message = event["message"]
 
