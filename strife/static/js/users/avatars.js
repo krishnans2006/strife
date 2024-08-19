@@ -34,24 +34,7 @@ function populatePopup(user) {
     $('.js-user-profile-role').remove();
 
     if (user.is_serverized) {
-        $(".js-user-profile-member-only-div").removeClass("hidden").data('member-id', user.id);
-
-        // Logic for permission-based div visibility here
-
-        if (user.roles.length === 0) {
-            $("#js-user-profile-no-roles").removeClass("hidden");
-        } else {
-            for (const role of user.roles) {
-                $("#js-user-profile-role-example")
-                    .clone()
-                    .removeAttr("id")
-                    .text(role.name)
-                    .css("background-color", `#${role.color}`)
-                    .addClass("js-user-profile-role")
-                    .removeClass("hidden")
-                    .appendTo("#js-user-profile-roles-div");
-            }
-        }
+        updatePopupServerized(user);
     }
 
     userProfile.data('user-id', user.id);
@@ -84,12 +67,23 @@ function updatePopupRoles(member) {
     // Clear roles from previous popups
     $('.js-user-profile-role').remove();
 
+    updatePopupServerized(member);
+}
+
+// Only call if the user is serverized
+function updatePopupServerized(member) {
     $(".js-user-profile-member-only-div").removeClass("hidden").data('member-id', member.id);
+
+    // Logic for permission-based div visibility here
+    if (true) {
+        $(".js-user-profile-manage-roles-only-div").removeClass("hidden");
+    }
 
     if (member.roles.length === 0) {
         $("#js-user-profile-no-roles").removeClass("hidden");
     } else {
         for (const role of member.roles) {
+            // Add the role to the popup
             $("#js-user-profile-role-example")
                 .clone()
                 .removeAttr("id")
@@ -98,6 +92,8 @@ function updatePopupRoles(member) {
                 .addClass("js-user-profile-role")
                 .removeClass("hidden")
                 .appendTo("#js-user-profile-roles-div");
+            // Remove it from the dropdown to add roles
+            $(`#js-user-profile-roles-select-role-${role.id}`).addClass("hidden");
         }
     }
 }
