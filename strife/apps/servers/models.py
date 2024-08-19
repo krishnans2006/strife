@@ -147,6 +147,25 @@ class Member(models.Model):
 
     # Permissions
     @property
+    def permissions_dict(self):
+        all_permission_objs = [
+            self.server.permissions,
+            self.permissions,
+            *(role.permissions for role in self.roles.all()),
+        ]
+        return {
+            perm: any(getattr(perm_obj, perm) for perm_obj in all_permission_objs)
+            for perm in (
+                "can_manage_server",
+                "can_manage_roles",
+                "can_manage_channels",
+                "can_manage_messages",
+                "can_send_messages",
+                "can_send_attachments",
+            )
+        }
+
+    @property
     def can_manage_server(self):
         return any(
             (

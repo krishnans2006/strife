@@ -59,5 +59,16 @@ class Permissions(models.Model):
         self.can_send_messages = True
         self.can_send_attachments = True
 
+    # Serialization
+    def to_dict(self):
+        return {
+            "can_manage_server": self.can_manage_server,
+            "can_manage_roles": self.can_manage_roles,
+            "can_manage_channels": self.can_manage_channels,
+            "can_manage_messages": self.can_manage_messages,
+            "can_send_messages": self.can_send_messages,
+            "can_send_attachments": self.can_send_attachments,
+        }
+
     def __repr__(self):
         return "<Permissions object>"
