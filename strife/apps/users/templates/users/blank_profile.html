@@ -17,7 +17,9 @@
            class="flex flex-row items-center justify-center mt-1 gap-1">
         <span class="text-gray-300">Roles:</span>
         <span id="js-user-profile-role-example"
-              class="py-0.5 px-1 rounded-lg hidden">role.name</span>
+              class="py-0.5 px-1 rounded-lg hidden">
+          <button class="text-red-500 mx-1" onclick="sendRoleRemove(this);">X</button>
+        </span>
         <span id="js-user-profile-no-roles" class="text-gray-400 italic hidden">No roles</span>
       </div>
       <label class="text-center text-sm flex flex-row items-center justify-center hidden js-user-profile-manage-roles-only-div">

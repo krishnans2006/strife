@@ -58,8 +58,8 @@ class ServerConsumer(GenericConsumer):
         member = self.server.members.get(id=member_id)
 
         # Get role info
-        new_role_id = payload["role_id"]
-        role = self.server.roles.get(id=new_role_id)
+        role_id = payload["role_id"]
+        role = self.server.roles.get(id=role_id)
 
         # Add the role
         member.roles.add(role)
@@ -86,8 +86,8 @@ class ServerConsumer(GenericConsumer):
         member = self.server.members.get(id=member_id)
 
         # Get role info
-        old_roles = payload["role"]
-        role = self.server.roles.get(name=old_roles)
+        role_id = payload["role_id"]
+        role = self.server.roles.get(id=role_id)
 
         if member not in role.members.all():
             return

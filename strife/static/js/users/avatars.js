@@ -110,8 +110,9 @@ function updatePopupServerized(member) {
             // Add the role to the popup
             $("#js-user-profile-role-example")
                 .clone()
-                .removeAttr("id")
-                .text(role.name)
+                .attr("id", `js-user-profile-role-${role.id}`)
+                .data("role-id", role.id)
+                .prepend(role.name)
                 .css("background-color", `#${role.color}`)
                 .css("color", getContrastingBW(role.color))
                 .addClass("js-user-profile-role")
