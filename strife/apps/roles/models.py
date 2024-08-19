@@ -12,7 +12,7 @@ class Role(models.Model):
 
     server = models.ForeignKey(Server, on_delete=models.CASCADE, related_name="roles")
 
-    members = models.ManyToManyField(Member, related_name="roles")
+    members = models.ManyToManyField(Member, related_name="roles", blank=True)
 
     permissions = models.OneToOneField(Permissions, on_delete=models.CASCADE)
 
