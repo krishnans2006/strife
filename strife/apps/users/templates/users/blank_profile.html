@@ -12,14 +12,16 @@
         class="text-3xl text-gray-100 font-bold">user.display_name</h1>
     <h3 id="js-user-profile-username" class="text-lg text-gray-300">user.username</h3>
     <p id="js-user-profile-bio" class="text-gray-300 mt-4">user.bio</p>
-    <div id="js-user-profile-roles-div"
-         class="hidden js-user-profile-member-only-div">
-      <div class="flex flex-row items-center justify-center mt-1 gap-1">
+    <div class="hidden js-user-profile-member-only-div">
+      <div id="js-user-profile-roles-div"
+           class="flex flex-row items-center justify-center mt-1 gap-1">
         <span class="text-gray-300">Roles:</span>
-        <span id="js-user-profile-role-example" class="hidden">role.name</span>
+        <span id="js-user-profile-role-example"
+              class="py-0.5 px-1 rounded-lg hidden">role.name</span>
         <span id="js-user-profile-no-roles" class="text-gray-400 italic hidden">No roles</span>
       </div>
-      <label class="text-center text-sm flex flex-row items-center justify-center hidden js-user-profile-manage-roles-only-div">
+      <label class="text-center text-sm flex flex-row items-center justify-center js-user-profile-manage-roles-only-div">
+        <!-- Make this hidden once permissions are implemented -->
         <select id="js-user-profile-roles-select"
                 class="bg-gray-700 text-gray-300 rounded-xl py-1 px-2 mt-1 text-sm"
                 onchange="sendRoleAdd(this);">

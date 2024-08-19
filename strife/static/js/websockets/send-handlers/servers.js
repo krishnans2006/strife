@@ -13,8 +13,9 @@ function sendUserRequest(user_id) {
 }
 
 function sendRoleAdd(select_element) {
-    const role_id = select_element.val();
-    const member_id = select_element.parent().parent().data('member-id');
+    const element = $(select_element);
+    const role_id = element.val();
+    const member_id = element.parent().parent().data('member-id');
 
     socket.send(JSON.stringify({
         'type': 'add_role',

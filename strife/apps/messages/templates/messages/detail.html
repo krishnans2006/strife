@@ -4,14 +4,14 @@
   <a>
     <img id="message-{{ message.id }}-user-icon"
          class="cursor-pointer size-10 flex-none aspect-square object-cover rounded-full mt-1 user-icon-popup-link"
-         src="{{ message.author.display_avatar }}"
-         alt="{{ message.author.username }}"
-         data-user-id="{{ message.author.id }}"
-         onclick="sendMemberRequest({{ message.author.id }})" />
+         src="{{ message.serverized_author.display_avatar }}"
+         alt="{{ message.serverized_author.username }}"
+         data-user-id="{{ message.serverized_author.id }}"
+         onclick="sendMemberRequest({{ message.serverized_author.id }})" />
   </a>
   <div id="message-{{ message.id }}-child"
        class="grow text-gray-300 flex flex-col">
-    <h4 class="text-lg font-bold">{{ message.author.username }}</h4>
+    <h4 class="text-lg font-bold">{{ message.serverized_author.username }}</h4>
     <p>{{ message.content }}</p>
     {% if message.attachments.exists %}
       <div id="message-{{ message.id }}-attachments"

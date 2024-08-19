@@ -41,13 +41,14 @@ function populatePopup(user) {
         if (user.roles.length === 0) {
             $("#js-user-profile-no-roles").removeClass("hidden");
         } else {
-            for (role of user.roles) {
+            for (const role of user.roles) {
                 $("#js-user-profile-role-example")
                     .clone()
                     .removeAttr("id")
                     .text(role.name)
-                    .css("background-color", role.color)
+                    .css("background-color", `#${role.color}`)
                     .addClass("js-user-profile-role")
+                    .removeClass("hidden")
                     .appendTo("#js-user-profile-roles-div");
             }
         }
@@ -88,13 +89,14 @@ function updatePopupRoles(member) {
     if (member.roles.length === 0) {
         $("#js-user-profile-no-roles").removeClass("hidden");
     } else {
-        for (role of member.roles) {
+        for (const role of member.roles) {
             $("#js-user-profile-role-example")
                 .clone()
                 .removeAttr("id")
                 .text(role.name)
-                .css("background-color", role.color)
+                .css("background-color", `#${role.color}`)
                 .addClass("js-user-profile-role")
+                .removeClass("hidden")
                 .appendTo("#js-user-profile-roles-div");
         }
     }
