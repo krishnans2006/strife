@@ -12,8 +12,10 @@
   <div id="message-{{ message.id }}-child"
        class="grow text-gray-300 flex flex-col">
     <h4 class="text-lg font-bold">{{ message.serverized_author.username }}</h4>
-    <p class="inline">{{ message.content }}</p>
-    {% if message.is_edited %}<p class="text-xs text-gray-500 inline ml-0.5">(edited)</p>{% endif %}
+    <p>
+      {{ message.content }}
+      {% if message.is_edited %}<span class="text-xs text-gray-400 inline ml-0.5">(edited)</span>{% endif %}
+    </p>
     {% if message.attachments.exists %}
       <div id="message-{{ message.id }}-attachments"
            class="flex flex-row gap-3.5">
