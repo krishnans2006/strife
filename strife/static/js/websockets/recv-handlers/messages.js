@@ -49,3 +49,10 @@ function attachmentHandler(message) {
             `;
     }
 }
+
+function messageEditHandler(message) {
+    const messageDiv = $(`#message-${message.id}-child`)[0];
+
+    const textContainer = messageDiv.find('p')[0];
+    textContainer.innerHTML = message.content;
+}

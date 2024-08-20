@@ -73,6 +73,13 @@ class MessageConsumer(ServerConsumer):
         self.send(text_data=json.dumps({"type": "message", "error": False, "message": message}))
 
     # Triggered from views.py
+    def chat_message_edit(self, event):
+        message = event["message"]
+
+        self.send(
+            text_data=json.dumps({"type": "message_edit", "error": False, "message": message})
+        )
+
     def chat_attachment(self, event):
         message = event["message"]
 

@@ -3,6 +3,11 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path(
+        "<int:message_id>/edit/",
+        views.message_edit_view,
+        name="edit_message",
+    ),
     # Must be changed in static/js/websockets/send-handlers/messages.js
     path(
         "<int:message_id>/attachments/upload/",

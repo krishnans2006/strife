@@ -13,6 +13,8 @@ socket.onmessage = function (e) {
         messageHandler(data.message);
     } else if (data.type === 'attachment') {
         attachmentHandler(data.message);
+    } else if (data.type === 'message_edit') {
+        messageEditHandler(data.message);
     } else if (data.type === 'member') {
         memberHandler(data.member);
     } else if (data.type === 'user') {
