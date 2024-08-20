@@ -5,7 +5,7 @@ from .models import Attachment, Message
 
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ("id", "author", "channel", "created_at")
+    list_display = ("id", "author", "channel", "created_at", "is_edited")
     ordering = ("created_at",)
     search_fields = ("content",)
     autocomplete_fields = ("author", "channel")

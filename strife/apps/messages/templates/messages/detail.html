@@ -13,6 +13,7 @@
        class="grow text-gray-300 flex flex-col">
     <h4 class="text-lg font-bold">{{ message.serverized_author.username }}</h4>
     <p>{{ message.content }}</p>
+    {% if message.is_edited %}<p class="text-xs text-gray-500 ml-0.5">(edited)</p>{% endif %}
     {% if message.attachments.exists %}
       <div id="message-{{ message.id }}-attachments"
            class="flex flex-row gap-3.5">

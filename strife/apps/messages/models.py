@@ -25,15 +25,20 @@ class Message(models.Model):
 
     content = models.CharField(max_length=2048)
 
+    is_edited = models.BooleanField(default=False)
+
     created_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.author} - {self.content[:32]}"
 
-    @property
-    def is_edited(self):
-        return self.edited_at != self.created_at
+    def save(self, *args, **kwargs):
+        # Update is_edited on edits
+        if self.id:
+            self.is_edited = True
+
+        super().save(*args, **kwargs)
 
     @property
     def serverized_author(self):
