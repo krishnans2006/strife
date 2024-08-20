@@ -1,6 +1,6 @@
 <!-- Any updates here should also be done to messages/list.html's socket.onmessage -->
 <div id="message-{{ message.id }}"
-     class="w-full px-5 py-1 justify-center flex flex-row gap-3.5 flex-none">
+     class="w-full px-5 py-1 justify-center flex flex-row gap-3.5 flex-none hover:bg-gray-500">
   <a>
     <img id="message-{{ message.id }}-user-icon"
          class="cursor-pointer size-10 flex-none aspect-square object-cover rounded-full mt-1 user-icon-popup-link"
@@ -11,11 +11,21 @@
   </a>
   <div id="message-{{ message.id }}-child"
        class="grow text-gray-300 flex flex-col">
-    <h4 class="text-lg font-bold">{{ message.serverized_author.username }}</h4>
-    <p>
-      {{ message.content }}
-      {% if message.is_edited %}<span class="text-xs text-gray-400 inline ml-0.5">(edited)</span>{% endif %}
-    </p>
+    <div class="flex flex-row">
+      <div class="flex flex-col w-full">
+        <h4 class="text-lg font-bold">{{ message.serverized_author.username }}</h4>
+        <p>
+          {{ message.content }}
+          {% if message.is_edited %}<span class="text-xs text-gray-400 inline ml-0.5">(edited)</span>{% endif %}
+        </p>
+      </div>
+      <div id="message-{{ message.id }}-buttons" class="flex flex-row ml-auto">
+        <button class="size-7 flex-none aspect-square object-cover rounded-3xl bg-gray-700 text-white cursor-pointer"
+                onclick="editMessage({{ message.id }})">
+          <span class="text-lg">✏️</span>
+        </button>
+      </div>
+    </div>
     {% if message.attachments.exists %}
       <div id="message-{{ message.id }}-attachments"
            class="flex flex-row gap-3.5">
