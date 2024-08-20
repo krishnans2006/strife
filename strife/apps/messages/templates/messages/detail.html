@@ -1,6 +1,8 @@
 <!-- Any updates here should also be done to messages/list.html's socket.onmessage -->
 <div id="message-{{ message.id }}"
-     class="w-full px-5 py-1 justify-center flex flex-row gap-3.5 flex-none hover:bg-gray-500">
+     class="w-full px-5 py-1 my-1 justify-center flex flex-row gap-3.5 flex-none hover:bg-gray-500 relative"
+     onmouseover="showMessageButtons({{ message.id }})"
+     onmouseout="hideMessageButtons({{ message.id }})">
   <a>
     <img id="message-{{ message.id }}-user-icon"
          class="cursor-pointer size-10 flex-none aspect-square object-cover rounded-full mt-1 user-icon-popup-link"
