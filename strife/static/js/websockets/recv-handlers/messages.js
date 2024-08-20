@@ -9,14 +9,14 @@ function messageHandler(message) {
             <a>
               <img id="message-${message.ID}-user-icon"
                    class="cursor-pointer size-10 flex-none aspect-square object-cover rounded-full mt-1 user-icon-popup-link"
-                   src="${message.serverized_author.display_avatar}"
-                   alt="${message.serverized_author.username}"
-                   data-user-id="${message.serverized_author.id}"
-                   onclick="sendMemberRequest(${message.serverized_author.id})">
+                   src="${message.author.display_avatar}"
+                   alt="${message.author.username}"
+                   data-user-id="${message.member.id}"
+                   onclick="sendMemberRequest(${message.member.id})">
             </a>
             <div id="message-${message.id}-child"
                  class="grow text-gray-300 flex flex-col">
-              <h4 class="text-lg font-bold">${message.serverized_author.username}</h4>
+              <h4 class="text-lg font-bold">${message.author.username}</h4>
               <p>${message.content}</p>
 
               ${message.attachments.length > 0 ? `
