@@ -31,8 +31,8 @@
   </div>
   {% if message.serverized_author.id == member.id %}
     <div id="message-{{ message.id }}-buttons"
-         class="flex flex-row absolute border-2 border-gray-600 right-3 -top-2 hidden">
-      <button class="size-7 flex-none aspect-square object-cover rounded-md bg-gray-500 text-white cursor-pointer"
+         class="flex flex-row absolute bg-gray-500 rounded-lg p-1 right-3 -top-6 hidden">
+      <button class="size-7 flex-none aspect-square rounded-md bg-gray-600 text-white cursor-pointer"
               onclick="editMessage({{ message.id }})">
         <span class="text-md">✏️</span>
       </button>
