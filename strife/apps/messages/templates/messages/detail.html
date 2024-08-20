@@ -11,21 +11,11 @@
   </a>
   <div id="message-{{ message.id }}-child"
        class="grow text-gray-300 flex flex-col">
-    <div class="flex flex-row">
-      <div class="flex flex-col w-full">
-        <h4 class="text-lg font-bold">{{ message.serverized_author.username }}</h4>
-        <p>
-          {{ message.content }}
-          {% if message.is_edited %}<span class="text-xs text-gray-400 inline ml-0.5">(edited)</span>{% endif %}
-        </p>
-      </div>
-      <div id="message-{{ message.id }}-buttons" class="flex flex-row ml-auto">
-        <button class="size-7 flex-none aspect-square object-cover rounded-3xl bg-gray-700 text-white cursor-pointer"
-                onclick="editMessage({{ message.id }})">
-          <span class="text-lg">✏️</span>
-        </button>
-      </div>
-    </div>
+    <h4 class="text-lg font-bold">{{ message.serverized_author.username }}</h4>
+    <p>
+      {{ message.content }}
+      {% if message.is_edited %}<span class="text-xs text-gray-400 inline ml-0.5">(edited)</span>{% endif %}
+    </p>
     {% if message.attachments.exists %}
       <div id="message-{{ message.id }}-attachments"
            class="flex flex-row gap-3.5">
@@ -37,4 +27,13 @@
       </div>
     {% endif %}
   </div>
+  {% if message.serverized_author.id == member.id %}
+    <div id="message-{{ message.id }}-buttons"
+         class="flex flex-row absolute border-2 border-gray-600 right-3 -top-2 hidden">
+      <button class="size-7 flex-none aspect-square object-cover rounded-md bg-gray-500 text-white cursor-pointer"
+              onclick="editMessage({{ message.id }})">
+        <span class="text-md">✏️</span>
+      </button>
+    </div>
+  {% endif %}
 </div>
