@@ -3,6 +3,29 @@
 A Discord clone, written in Django.
 
 
+## Features
+
+- Create Servers, channels, and roles
+- Control user permissions
+- Send/receive messages in real-time (no refreshing required!)
+- Upload attachments, send emoji, etc.
+- Customize your user profile
+
+
+### In Progress
+
+- Reactions
+- Message edits/deletions
+
+### Future Plans
+
+- Message replies
+- Markdown support
+- Custom emoji
+- Online/status indicators
+- Direct messages
+
+
 ## Setup
 
 ### 1. Clone the repository
@@ -24,11 +47,20 @@ poetry install
 poetry run python manage.py migrate
 ```
 
-### 4. Run the server
+### 4. Set up live reload for development
+
+```bash
+poetry run python manage.py tailwind install
+```
+
+### 5. Run the server
 
 ```bash
 poetry run python manage.py runserver
+poetry run python manage.py tailwind start
 ```
+
+(In two separate terminals at once).
 
 
 ## File Structure
